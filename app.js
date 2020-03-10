@@ -57,6 +57,12 @@ app.post('/api/addUser', async ( req,res )=>{
     
 });
 
+app.post('/api/auth', async( req, res ) => {
+    console.log(req.body);
+    res.json({response: 'OK'});
+});
+
+
 app.delete('/api/deleteUser',async ( req,res )=>{
     // console.log('api deleteUser called...');
     // console.log(req.body);

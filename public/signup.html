@@ -10,8 +10,7 @@
 </head>
 <script>
 $(document).ready( async function(){
-          // check if editing or new
-            $('#submitUserBtn').click( async function(event){
+          $('#submitUserBtn').click( async function(event){
                 event.preventDefault();
                 //alert("hi");
                 // disable save button
@@ -38,7 +37,7 @@ $(document).ready( async function(){
                 if( apiResult.response == 'OK' ){
                     // registration worked! redirect to the main page (listing thumbnails)
                     alert("user created");
-                    location.href = 'login.html';
+                    window.location.href = '/login.html';
                 }
 
             })

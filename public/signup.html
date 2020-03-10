@@ -5,9 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <title>Hatter - Signup</title>
 </head>
+<script>
+$(document).ready( async function(){
+          // check if editing or new
+            $('#submitUserBtn').click( async function(event){
+                event.preventDefault();
+                //alert("hi");
+                // disable save button
+                // $('#submitUserBtn').prop('disabled', true);
+                // build our save object
+
+                const username= $('#inputUsername').val();
+                const email = $('#inputEmail').val();
+                const password = $('#inputPassword').val();
+                const location = $('#inputLocation').val();
+
+            
+
+                const myUser = {
+                        name: username,
+                        email: email,
+                        password: password
+                   };
+
+                
+                let apiResult = await $.post( '/api/addUser', myUser );
+                
+                //alert( apiResult );
+                if( apiResult.response == 'OK' ){
+                    // registration worked! redirect to the main page (listing thumbnails)
+                    alert("user created");
+                    location.href = 'login.html';
+                }
+
+            })
+        })
+
+</script>
 <body>
 
     <div class="welcome">
@@ -47,7 +84,7 @@
                 
             </div>  
         
-            <button type="submit" class="btn btn-primary">Create Account</button>
+            <button id='submitUserBtn' type="submit" class="btn btn-primary">Create Account</button>
 
           </form>
 

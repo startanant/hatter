@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const orm = require('./orm');
+const bcrypt = require ('bcrypt');
 const app = express();
 
 // parse application/x-www-form-urlencoded
@@ -33,13 +34,27 @@ app.delete('/api/deleteHatt',async ( req, res )=>{
     // res.end(JSON.stringify({response:"OK"}))
 })
 
+const saltRounds = 10;
+
 app.post('/api/addUser', async ( req,res )=>{
     //console.log('api addUser called...');
     //console.log(req.body);
-    const result = await orm.addUser(req.body);
+    //const result = await orm.addUser(req.body);
     // console.log('result from addUser:',result);
-    res.json({response:"OK",id:result.insertId});
+    //res.json({response:"OK",id:result.insertId});
     // res.end(JSON.stringify({response:"OK",id:result.insertId}));
+    const result = await bcrypt.hash(req.body.password, saltRounds, function(err,hash){
+        orm.addUser({name:req.body.name,
+            email:req.body.email,
+            password:hash
+        }).then (function(data){
+            console.log(hash);
+            if (data){
+                res.json({response:"OK",id:data.insertId});
+            }
+        })
+    })
+    
 });
 
 app.delete('/api/deleteUser',async ( req,res )=>{

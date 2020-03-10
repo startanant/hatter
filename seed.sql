@@ -33,11 +33,11 @@ CREATE TABLE `hatter`.`followers` (
 INSERT INTO `hatter` .`followers` (user,follower) values (1,2),(1,3),(1,4),(2,1),(1,1),(2,3),(3,1),(3,2),(3,4),(4,2),(4,3);
 
 CREATE TABLE `hatter`.`comments` (
-id INT NOT NULL AUTO_INCREMENT,
-hatt_id INT NOT NULL,
-user_id INT NOT NULL,
-comment VARCHAR(255) NOT NULL,
-comment_time DATETIME NULL DEFAULT current_timestamp(),
+`id` INT NOT NULL AUTO_INCREMENT,
+`hatt_id` INT NOT NULL,
+`user_id` INT NOT NULL,
+`comment` VARCHAR(255) NOT NULL,
+`comment_time` DATETIME NULL DEFAULT current_timestamp(),
 PRIMARY KEY(id));
 
 INSERT INTO comments (hatt_id,user_id,comment) values (1,2,'Hello to you too!'),(1,3,'I dont care!'),(6,1,'You can sign a song!'),(3,3,'I am a pro at JS!');

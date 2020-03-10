@@ -28,9 +28,10 @@ app.delete('/api/deleteHatt',async ( req, res )=>{
 
 app.post('/api/addUser', async ( req,res )=>{
     console.log('api addUser called...');
-    console.log(req.body);
+    // console.log(req.body);
     const result = await orm.addUser(req.body);
-    res.end(JSON.stringify({response:"user added"}));
+    // console.log('result from addUser:',result);
+    res.end(JSON.stringify({response:"user added",id:result.insertId}));
 });
 
 app.delete('/api/deleteUser',async ( req,res )=>{
@@ -39,6 +40,29 @@ app.delete('/api/deleteUser',async ( req,res )=>{
     const result = await orm.deleteUser(req.body);
     res.end(JSON.stringify({response:"user deleted"}));
 });
+
+app.post('/api/addComment', async ( req, res)=>{
+    console.log('api addComment called...');
+    console.log(req.body);
+    const result = await orm.addComment(req.body);
+    console.log('result from add comment',result);
+    res.end(JSON.stringify({response:"comment added",id:result.insertId}));
+})
+
+app.delete('/api/deleteComment', async ( req, res )=>{
+    console.log(`api deleteComment called...`);
+    console.log(req.body);
+    const result = await orm.deleteComment(req.body);
+    res.end(JSON.stringify({response:"comment deleted"}));
+})
+
+app.get('/api/getUserHatts', async ( req, res)=>{
+    console.log(`api getUserHatts called ...`);
+    console.log(req.body);
+    const result = await orm.getUserHatts(req.body);
+    res.json(result);
+})
+
 
 // connection.query('select * from hatts',function(error,results,fields){
 //     console.log(results);

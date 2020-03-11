@@ -155,7 +155,7 @@ app.get('/api/getNoOfCommentsPerHatt', async ( req, res) => {
 
 app.get('/api/getTop5Followed',async (req,res) => {
     console.log('calling api for getTop5Followed');
-    const result = await orm.getTop5Followed();
+    const result = await orm.getTop10Followed();
     res.json(result);
 })
 

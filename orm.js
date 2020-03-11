@@ -112,14 +112,17 @@ async function getNoOfCommentsPerHatt(){
     return result;
 }
 
-async function getTop5Followed(){
-    result = await db.query('select a.user, b.name, count(*) as num from followers a left join users b on a.user=b.id group by a.user order by num desc limit 5;')
+async function getTop10Followed(){
+    result = await db.query('select a.user, b.name, count(*) as num from followers a left join users b on a.user=b.id group by a.user order by num desc limit 10;')
     return result;
 }
 
 async function addFollower(data){
     console.log('logging data for addFollower orm function',data);
-    result = await db.query(`insert into followers (user,follower) values (?,?)`,[data.user,data.follower]);
+    // result = await db.query(`insert into followers (user,follower) values (?,?)`,[data.user,data.follower]);
+    let query = `insert into followers (user, follower) select ${data.user},${data.follower} from dual where not exists (select * from followers where user=${data.user} and follower=${data.follower})`;
+    console.log(query);
+    result =  await db.query(`insert into followers (user, follower) select ${data.user},${data.follower} from dual where not exists (select * from followers where user=${data.user} and follower=${data.follower})`);
     return result;
 }
 
@@ -134,6 +137,6 @@ module.exports = {
     getUserHatts,
     getRecentHatts,
     getNoOfCommentsPerHatt,
-    getTop5Followed,
+    getTop10Followed,
     addFollower
 }

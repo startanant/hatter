@@ -153,7 +153,7 @@
         async function populateFollowSection(){
             $.get('/api/getTop5Followed')
             .then(result => {
-                console.log(result);
+                // console.log(result);
                 let content = '';
                     result.forEach(element=>{
                         content += `<div class="card card-follow">
@@ -163,8 +163,8 @@
                                     <h4 class="followAccount">${element.name}</h4>
                                 </div>
                                 <div class="col-4">
-                                    <button id="followBTn" data-id="${element.id}" type="submit"
-                                        class="btn btn-sm btn-secondary onclick="follow(event)">Follow</button>
+                                    <button id="followBTn" data-id="${element.user}" data-name="${element.name}" type="submit"
+                                        class="btn btn-sm btn-secondary" onClick="follow(event);">Follow</button>
                                 </div>
                             </div>
                         </div>
@@ -179,6 +179,22 @@
             })
         }
 
+        function follow(event){
+            // console.log('btn follow clicked');
+            // console.log(event.target.dataset.id);
+            postData = {
+                user:localStorage.getItem('userId'),
+                follower:event.target.dataset.id
+            }
+            // console.log(postData);
+            $.post('/api/addFollower',postData)
+            .then(result => {
+                alert(`You are now following ${event.target.dataset.name}`);
+            })
+            .catch(error=>{
+                alert('Error! Please try again later!')
+            })
+        }
 
 
         $(document).ready(function(){

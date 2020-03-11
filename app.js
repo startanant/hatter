@@ -98,6 +98,12 @@ app.delete('/api/deleteUser',async ( req,res )=>{
     // res.end(JSON.stringify({response:"OK"}));
 });
 
+app.post('/api/addFollower',async ( req,res)=>{
+    console.log('logging addFollower API', req.body);
+    const result = await orm.addFollower(req.body);
+    res.json({response:"OK"});
+})
+
 app.post('/api/addComment', async ( req, res)=>{
     // console.log('api addComment called...');
     // console.log(req.body);

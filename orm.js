@@ -117,6 +117,12 @@ async function getTop5Followed(){
     return result;
 }
 
+async function addFollower(data){
+    console.log('logging data for addFollower orm function',data);
+    result = await db.query(`insert into followers (user,follower) values (?,?)`,[data.user,data.follower]);
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -128,5 +134,6 @@ module.exports = {
     getUserHatts,
     getRecentHatts,
     getNoOfCommentsPerHatt,
-    getTop5Followed
+    getTop5Followed,
+    addFollower
 }

@@ -14,18 +14,17 @@
 
     <title>Hatter - Home</title>
     <script>
-        function logOut(){  
-            localStorage.clear();
-            location.href = '/login.html';
-        }
+        // function logOut(){  
+        //     localStorage.clear();
+        //     location.href = '/login.html';
+        // }
 
-        window.onload = function() {
-            // if(!localStorage.getItem("userId")){
-            //     location.href = '/login.html';
-            // }
-            location.href = '/login.html';
-        };
-
+        // window.onload = function() {
+        //     // if(!localStorage.getItem("userId")){
+        //     //     location.href = '/login.html';
+        //     // }
+        //     location.href = '/login.html';
+        // };
     </script>
 </head>
 <body>
@@ -36,7 +35,7 @@
 
     <div class="container-fluid">
         <div class="row row-main">
-          <div class="section-profile col-3">
+          <div class="section-profile col-lg-3 col-md-4">
             <div class="wrapper-profile">
                 Profile Section
 
@@ -48,15 +47,16 @@
                     <h2>dreamTeam</h2>
                 </div>
 
-                <div class="metrics">
-                    <div class="row row-metrics-headings">
-                        <div class="followingMetric col-6">Following</div>
-                        <div class="followingMetric col-6">Hatts Sent</div>
+                <div class="row metrics">
+                    <div class="metrics-following col-lg-6 col-md-12">
+                        <div class="followingMetric">Following</div>
+                        <div class="followingMetric">250</div>
                     </div>
-                    <div class="row row-metrics">
-                        <div id="followingNum" class="followingMetric col-6">250</div>
-                        <div id="hattsSentNum" class="followingMetric col-6">25</div>
+                    <div class="metrics-hattsSent col-lg-6 col-md-12">
+                        <div class="followingMetric">Hatts Sent</div>
+                        <div class="followingMetric">25</div>
                     </div>
+
                 </div>
 
                 <div class="viewHatts">
@@ -71,41 +71,64 @@
             </div>
           </div>
 
-          <div class="section-feed col-6">
+          <div class="section-feed col-lg-6 col-md-8">
             Hatter Feed Section
             <div class="wrapper">
-                <div class="card">
+                <div class="card card-post">
                     <div class="card-body">
-                        <h5 class="card-title">hatterUsername</h5>
-                        <p class="card-text">This is where the post text goes.</p>
-                        <h6 class="card-subtitle mb-2">Comments (0)</h6>
-                        <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                        <h4 class="card-subtitle mb-2">10 m</h4>
+                        <div class="row">
+                            <div class="postPicContainer col-2">
+                                <div class="postPic"></div>
+                            </div>
+                            <div class="cardContent col-10">
+                                <h5 class="card-title">hatterUsername</h5>
+                                <p class="card-text">This is where the post text goes.</p>
+                                <h6 class="card-subtitle mb-2">Comments (0)</h6>
+                                <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
+                                <h4 class="card-subtitle mb-2">10 m</h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
+
+                <div class="card card-post">
                     <div class="card-body">
-                        <h5 class="card-title">hatterUsername</h5>
-                        <p class="card-text">This is where the post text goes.</p>
-                        <h6 class="card-subtitle mb-2">Comments (0)</h6>
-                        <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                        <h4 class="card-subtitle mb-2">44 m</h4>
+                        <div class="row">
+                            <div class="postPicContainer col-2">
+                                <div class="postPic"></div>
+                            </div>
+                            <div class="cardContent col-10">
+                                <h5 class="card-title">hatterUsername</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                <h6 class="card-subtitle mb-2">Comments (0)</h6>
+                                <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
+                                <h4 class="card-subtitle mb-2">10 m</h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
+
+                <div class="card card-post">
                     <div class="card-body">
-                        <h5 class="card-title">hatterUsername</h5>
-                        <p class="card-text">This is where the post text goes.</p>
-                        <h6 class="card-subtitle mb-2">Comments (0)</h6>
-                        <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                        <h4 class="card-subtitle mb-2">2 hr</h4>
+                        <div class="row">
+                            <div class="postPicContainer col-2">
+                                <div class="postPic"></div>
+                            </div>
+                            <div class="cardContent col-10">
+                                <h5 class="card-title">hatterUsername</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                <h6 class="card-subtitle mb-2">Comments (0)</h6>
+                                <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
+                                <h4 class="card-subtitle mb-2">10 m</h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
             </div>
           </div>
 
-          <div class="section-follow col-3">
+          <div class="section-follow col-lg-3 col-md-offset-4">
             Follow Section
             <div class="wrapper">
                 <div class="card card-follow">
@@ -137,10 +160,10 @@
                 <div class="card card-follow">
                     <div class="card-body">
                         <div class="row row-follow">
-                            <div class="col-8">
+                            <div class=" followUsername col-8">
                                 <h4 class="followAccount">followAccount</h4>
                             </div>
-                            <div class="col-4">
+                            <div class=" followBtn col-4">
                                 <button type="submit" class="btn btn-sm btn-secondary">Follow</button>
                             </div>
                         </div>

@@ -62,7 +62,6 @@ h1 {
 }
 
 .profilePic {
-    
     background-color: slategray;
     margin: 30px 20px 10px 20px;
     border-radius: 50%;
@@ -76,22 +75,25 @@ h1 {
 }
 
 .metrics {
-    height: 100px;
+    /* min-height: 100px; */
     margin: 10px 20px 10px 20px;
+    padding: 2px;
 }
 
-.row-metrics-headings {
-    height: 20px;
+.metrics-following {
+    /* min-height: 60px; */
+    /* line-height: 60px; */
     font-size: 24px;
 }
 
-
-.row-metrics {
-    height: 20px;
-    color: snow;
+.metrics-hattsSent {
+    /* min-height: 60px; */
+    /* line-height: 60px; */
     font-size: 24px;
-    margin-top: 10px;
+
 }
+
+
 
 .viewHatts {
     margin: 10px 20px 5px 20px;
@@ -105,14 +107,32 @@ h1 {
     margin: 30px 20px 10px 20px;
 }
 
-.card {
-    margin: 20px 10px 0px 10px;
+.card-post {
+    margin: 20px 10px 5px 10px;
     min-height: 200px;
+}
+
+.postPicContainer {
+    /* background-color: skyblue; */
+}
+
+.postPic {
+    background-color: slategray;
+    margin: 0px 0px 0px 15px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    text-align: center;
+}
+
+.cardContent {
+    /* background-color: slategrey; */
 }
 
 .card-follow {
     margin: 5px 10px 0px 10px; 
-    min-height: 30px;
+   
 }
 
 .row-follow {
@@ -123,3 +143,11 @@ h1 {
 .section-follow {
     background-color: cornflowerblue;
 }
+
+@media only screen and (max-width: ) {
+
+.header{
+    background-color: red;
+}
+
+ }

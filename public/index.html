@@ -11,6 +11,7 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous">
     </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
 
     <title>Hatter - Home</title>
     <script>
@@ -156,13 +157,15 @@
             recentHatts.forEach(element => {
             // console.log(element.hatt_id);
             // console.log(commentsPerHatt.get(element.hatt_id));
+            // let day = moment(element.tweet_time);
+            // console.log(moment(element.tweet_time).startOf('day').fromNow());
             content += `<div class="card">
                     <div class="card-body">
                         <h5 class="card-title">${element.name}</h5>
                         <p class="card-text">${element.text}</p>
                         <h6 class="card-subtitle mb-2">Comments (${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0})</h6>
                         <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                        <h4 class="card-subtitle mb-2">${element.tweet_time}</h4>
+                        <h4 class="card-subtitle mb-2">${moment(element.tweet_time).startOf('day').fromNow()}</h4>
                     </div>
                 </div>`
             

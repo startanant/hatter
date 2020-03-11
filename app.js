@@ -4,14 +4,20 @@ const multer  = require('multer');
 const { uuid } = require('uuidv4');
 
 const path = require('path');
-
+let filepath;
+let fileNameExt;
+let uploadFolder = 'public/uploads/';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/uploads/')
   },
   filename: function (req, file, cb) {
     console.log("File= ", file);
-    cb(null, uuid() + path.extname(file.originalname)) //Appending extension
+    
+    fileNameExt = uuid() + path.extname(file.originalname);
+    filepath = uploadFolder+fileNameExt;
+    console.log(filepath);
+    cb(null, fileNameExt) //Appending extension
   }
 });
 
@@ -61,7 +67,7 @@ app.post('/api/addUser', upload.single('avatar'), async ( req,res )=>{
     //console.log('api addUser called...');
     console.log("File = ", req.file);
     console.log("Body: ", req.body);
-    console.log("Body: ", req.body.myUser);
+    //console.log("Body: ", req.body.myUser);
     //const result = await orm.addUser(req.body);
     // console.log('result from addUser:',result);
     //res.json({response:"OK",id:result.insertId});
@@ -69,7 +75,9 @@ app.post('/api/addUser', upload.single('avatar'), async ( req,res )=>{
     const result = await bcrypt.hash(req.body.password, saltRounds, function(err,hash){
         orm.addUser({name:req.body.name,
             email:req.body.email,
-            password:hash
+            password:hash,
+            location: req.body.location,
+            picture_path: filepath
         }).then (function(data){
             console.log(hash);
             if (data != 'ER_DUP_ENTRY'){

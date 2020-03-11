@@ -35,10 +35,16 @@
     </script>
 </head>
 <body>
-
-    <div class="header">
-        <h2>Header</h2>
-    </div>
+    <nav class="sticky-top navbar navbar-dark bg-dark">
+        <a class="navbar-brand h1" href="#">
+            <img src="./assets/Lightning.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            Hatter
+        </a>
+        <form class="form-inline my-2 my-lg-0">
+            <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+    </nav>
 
     <div class="container-fluid">
         <div class="row row-main">
@@ -69,7 +75,7 @@
                     <button id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">View Hatts</button>
                 </div>
                 <div class="logout">
-                    <button id="logoutBtn" type="submit" class="btn btn-sm btn-secondary">Account</button>
+                    <button id="logoutBtn" type="submit" class="btn btn-sm btn-secondary">Logout</button>
                 </div>
                 <div class="createPost">
                     <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-lg btn-primary">Create Post</button>
@@ -80,6 +86,7 @@
           <div class="section-feed col-lg-6 col-md-8">
             Hatter Feed Section
             <div class="wrapper">
+
                 <div class="card card-post">
                     <div class="card-body">
                         <div class="row">
@@ -130,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
           </div>
 

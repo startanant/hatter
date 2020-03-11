@@ -17,100 +17,78 @@
 <script>
 $(document).ready( async function(){
   let file;
-          //file change function
-          $(':file').on('change', function () {
-            //alert('hello');
-            file = this.files[0];
 
-            if (file.size > 1024 * 5 * 1000) {
-            alert('max upload size is 1k');
-            $(':file').val('');
+  //file size validation
+  $(':file').on('change', function () {
+    file = this.files[0];
+    if (file.size > 1024 * 5 * 1000) {
+      alert('max upload size is 1k');
+      $(':file').val('');
+    }
+  });
+
+  $('#submitUserBtn').click( async function(event) {
+    event.preventDefault();
+    
+    const username= $('#inputUsername').val();
+    const email = $('#inputEmail').val();
+    const password = $('#inputPassword').val();
+    const location = $('#inputLocation').val();
+  
+    if (username == '' || email == '' || password == '') {
+      alert('missing fields!');
+      return false;
+    }
+
+    let fd = new FormData();
+    fd.append('name', username);
+    fd.append('email', email);
+    fd.append('password', password);
+    fd.append('avatar', file);
+
+
+    //let apiResult = await $.post( '/api/addUser', myUser );
+
+    let apiResult = await $.ajax({
+          // Your server script to process the upload
+          url: '/api/addUser',
+          type: 'POST',
+
+          // Form data
+          data: fd,
+
+          // Tell jQuery not to process data or worry about content-type
+          // You *must* include these options!
+          cache: false,
+          contentType: false,
+          processData: false,
+
+          // Custom XMLHttpRequest
+          xhr: function () {
+            var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) {
+              // For handling the progress of the upload
+              myXhr.upload.addEventListener('progress', function (e) {
+                if (e.lengthComputable) {
+                  $('progress').attr({
+                    value: e.loaded,
+                    max: e.total,
+                  });
+                }
+              }, false);
+            }
+            return myXhr;
           }
-          });
-
-          $('#submitUserBtn').click( async function(event){
-          
-          
-          
-
-          // Also see .name, .type
-          
-                event.preventDefault();
-                //alert("hi");
-                // disable save button
-                // $('#submitUserBtn').prop('disabled', true);
-                // build our save object
-
-                const username= $('#inputUsername').val();
-                const email = $('#inputEmail').val();
-                const password = $('#inputPassword').val();
-                const location = $('#inputLocation').val();
-                //const file = $('#file')[0].files[0];
-
-                if (username == '' || email == '' || password == ''){
-                  alert('missing fields!');
-                  return false;
-                }
-
-                const myUser = {
-                        name: username,
-                        email: email,
-                        password: password
-                   };
-                
-                let fd = new FormData();
-                fd.append('name', username);
-                fd.append('email', email);
-                fd.append('password', password);
-
-                fd.append('avatar', file);
-                
-                
-                //let apiResult = await $.post( '/api/addUser', myUser );
-
-                let apiResult = await $.ajax({
-                          // Your server script to process the upload
-                          url: '/api/addUser',
-                          type: 'POST',
-
-                          // Form data
-                          data: fd,
-
-                          // Tell jQuery not to process data or worry about content-type
-                          // You *must* include these options!
-                          cache: false,
-                          contentType: false,
-                          processData: false,
-
-                          // Custom XMLHttpRequest
-                          xhr: function () {
-                            var myXhr = $.ajaxSettings.xhr();
-                            if (myXhr.upload) {
-                              // For handling the progress of the upload
-                              myXhr.upload.addEventListener('progress', function (e) {
-                                if (e.lengthComputable) {
-                                  $('progress').attr({
-                                    value: e.loaded,
-                                    max: e.total,
-                                  });
-                                }
-                              }, false);
-                            }
-                            return myXhr;
-                          }
-                          });
-                
-                //alert( apiResult );
-                if( apiResult.response == 'OK' ){
-                    // registration worked! redirect to the main page (listing thumbnails)
-                    alert("user created");
-                    window.location.href = '/login.html';
-                } else {
-                  alert("email already exists!");
-                }
-
-            })
-        })
+    });
+    if( apiResult.response == 'OK' ) {
+      // registration worked! redirect to the main page (listing thumbnails)
+      alert("user created");
+      window.location.href = '/login.html';
+    } else {
+      alert("email already exists!");
+    }
+  });
+});
 
 </script>
 <body>

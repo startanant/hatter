@@ -27,7 +27,7 @@
 
                 const auth = await $.post("/api/auth", loginInfo);
                 if(auth.response == 'OK') {
-                    alert("login successful")
+                    // alert("login successful")
                     console.log(auth.user.id);
                     localStorage.setItem("userId", auth.user.id);
                     localStorage.setItem("username", auth.user.name);

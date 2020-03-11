@@ -40,8 +40,8 @@ app.delete('/api/deleteHatt',async ( req, res )=>{
 const saltRounds = 10;
 
 app.post('/api/addUser', async ( req,res )=>{
-    //console.log('api addUser called...');
-    //console.log(req.body);
+    // console.log('api addUser called...');
+    // console.log(req.body);
     //const result = await orm.addUser(req.body);
     // console.log('result from addUser:',result);
     //res.json({response:"OK",id:result.insertId});
@@ -51,7 +51,7 @@ app.post('/api/addUser', async ( req,res )=>{
             email:req.body.email,
             password:hash
         }).then (function(data){
-            console.log(hash);
+            // console.log(hash);
             if (data != 'ER_DUP_ENTRY'){
                 res.json({response:"OK",id:data.insertId});
             }

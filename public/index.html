@@ -118,7 +118,7 @@
             $.get('/api/getRecentHatts')
                 .then(response => {
                     recentHatts = response;
-                    // console.log(recentHatts);
+                    console.log(recentHatts);
                     $.get('/api/getNoOfCommentsPerHatt')
                         .then(result => {
                             // console.log(result);
@@ -138,7 +138,7 @@
                             <p class="card-text">${element.text}</p>
                             <h6 class="card-subtitle mb-2">Comments (${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0})</h6>
                             <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                            <h4 class="card-subtitle mb-2">${moment(element.tweet_time).startOf('day').fromNow()}</h4>
+                            <h4 class="card-subtitle mb-2">${moment(element.tweet_time).startOf('hour').fromNow()}</h4>
                         </div>
                     </div>`
                             });

@@ -20,10 +20,7 @@
         }
 
         window.onload = function() {
-            // if(!localStorage.getItem("userId")){
-            //     location.href = '/login.html';
-            // }
-            location.href = '/login.html';
+            !localStorage.key('userID')?location.href = '/login.html':false;
         };
 
     </script>

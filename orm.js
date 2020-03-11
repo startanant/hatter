@@ -7,12 +7,24 @@ class Database {
     }
     query( sql, args=[] ) {
         return new Promise( ( resolve, reject ) => {
-            this.connection.query( sql, args, ( err, rows ) => {
-                if ( err )
-                    return reject( err );
-                resolve( rows );
+            
+            this.connection.query( sql, args, ( error, results,fields ) => {
+                if ( error ) {
+                    resolve (error.code);
+                } else
+                //     console.log('returning error!');
+                //     return reject( err );
+                resolve( results );
             } );
-        } );
+        
+        // catch (error){
+        //     throw (error);
+        //     // console.log('logging error from catch...',error);
+        //     reject (error);
+        // }
+        } ).catch(error=>{
+            console.log(error.code);
+        });
     }
     close() {
         return new Promise( ( resolve, reject ) => {
@@ -49,7 +61,10 @@ async function deleteHatt(data){
 
 async function addUser(data){
     // console.log(`adding user: ${data}`);
-    result = await db.query(`insert into users (name,email,password) values (?,?,?)`,[data.name,data.email,data.password]);
+    const result = await db.query(`insert into users (name,email,password) values (?,?,?)`,[data.name,data.email,data.password]);
+    // if (result == 'ER_DUP_ENTRY'){
+    //     console.log('duplicated email id!');
+    // }
     return result;
 }
 

@@ -52,9 +52,10 @@ app.post('/api/addUser', async ( req,res )=>{
             password:hash
         }).then (function(data){
             console.log(hash);
-            if (data){
+            if (data != 'ER_DUP_ENTRY'){
                 res.json({response:"OK",id:data.insertId});
             }
+            else res.json({response:"DUPLICATED USER"});
         })
     })
     

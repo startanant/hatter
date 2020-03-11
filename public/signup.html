@@ -22,7 +22,10 @@ $(document).ready( async function(){
                 const password = $('#inputPassword').val();
                 const location = $('#inputLocation').val();
 
-            
+                if (username == '' || email == '' || password == ''){
+                  alert('missing fields!');
+                  return false;
+                }
 
                 const myUser = {
                         name: username,
@@ -38,6 +41,8 @@ $(document).ready( async function(){
                     // registration worked! redirect to the main page (listing thumbnails)
                     alert("user created");
                     window.location.href = '/login.html';
+                } else {
+                  alert("email already exists!");
                 }
 
             })

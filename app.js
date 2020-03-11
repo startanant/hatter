@@ -119,6 +119,12 @@ app.get('/api/getNoOfCommentsPerHatt', async ( req, res) => {
     res.json(result);
 })
 
+app.get('/api/getTop5Followed',async (req,res) => {
+    console.log('calling api for getTop5Followed');
+    const result = await orm.getTop5Followed();
+    res.json(result);
+})
+
 
 
 app.delete('/api/deleteComment', async ( req, res )=>{

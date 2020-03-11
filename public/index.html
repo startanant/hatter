@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
 
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
     </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
 
     <title>Hatter - Home</title>
     <script>
-        function logOut(){  
+        function logOut() {
             localStorage.clear();
             location.href = '/login.html';
         }
 
-        window.onload = function() {
-            !localStorage.key('userID')?location.href = '/login.html':false;
+        window.onload = function () {
+            !localStorage.key('userID') ? location.href = '/login.html' : false;
         };
-
     </script>
 </head>
+
 <body>
 
     <div class="header">
@@ -34,154 +33,161 @@
 
     <div class="container-fluid">
         <div class="row row-main">
-          <div class="section-profile col-3">
-            <div class="wrapper-profile">
-                Profile Section
+            <div class="section-profile col-3">
+                <div class="wrapper-profile">
+                    Profile Section
 
-                <div class="profilePicContainer">
-                    <div class="profilePic"></div>
-                </div>
-                
-                <div class="username">
-                    <h2>dreamTeam</h2>
-                </div>
-
-                <div class="metrics">
-                    <div class="row row-metrics-headings">
-                        <div class="followingMetric col-6">Following</div>
-                        <div class="followingMetric col-6">Hatts Sent</div>
+                    <div class="profilePicContainer">
+                        <div class="profilePic"></div>
                     </div>
-                    <div class="row row-metrics">
-                        <div id="followingNum" class="followingMetric col-6">250</div>
-                        <div id="hattsSentNum" class="followingMetric col-6">25</div>
-                    </div>
-                </div>
 
-                <div class="viewHatts">
-                    <button id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">View Hatts</button>
-                </div>
-                <div class="viewAccount">
-                    <button id="viewAccountBtn" type="submit" class="btn btn-sm btn-secondary">Account</button>
-                </div>
-                <div class="createPost">
-                    <button id="createPostBtn" type="submit" class="btn btn-lg btn-primary">Create Post</button>
+                    <div class="username">
+                        <h2>dreamTeam</h2>
+                    </div>
+
+                    <div class="metrics">
+                        <div class="row row-metrics-headings">
+                            <div class="followingMetric col-6">Following</div>
+                            <div class="followingMetric col-6">Hatts Sent</div>
+                        </div>
+                        <div class="row row-metrics">
+                            <div id="followingNum" class="followingMetric col-6">250</div>
+                            <div id="hattsSentNum" class="followingMetric col-6">25</div>
+                        </div>
+                    </div>
+
+                    <div class="viewHatts">
+                        <button id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">View Hatts</button>
+                    </div>
+                    <div class="viewAccount">
+                        <button id="viewAccountBtn" type="submit" class="btn btn-sm btn-secondary">Account</button>
+                    </div>
+                    <div class="createPost">
+                        <button id="createPostBtn" type="submit" class="btn btn-lg btn-primary">Create Post</button>
+                    </div>
                 </div>
             </div>
-          </div>
 
-          <div class="section-feed col-6">
-            <!-- Hatter Feed Section -->
-            <div id = "feedSectionWrapper" class="wrapper">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">hatterUsername</h5>
-                        <p class="card-text">This is where the post text goes.</p>
-                        <h6 class="card-subtitle mb-2">Comments (0)</h6>
-                        <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                        <h4 class="card-subtitle mb-2">10 m</h4>
+            <div class="section-feed col-6">
+                <!-- Hatter Feed Section -->
+                <div id="feedSectionWrapper" class="wrapper">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">hatterUsername</h5>
+                            <p class="card-text">This is where the post text goes.</p>
+                            <h6 class="card-subtitle mb-2">Comments (0)</h6>
+                            <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
+                            <h4 class="card-subtitle mb-2">10 m</h4>
+                        </div>
                     </div>
-                </div>
-                
-                
-            </div>
-            <!-- Hatter Feed Section -->
-          </div>
 
-          <div class="section-follow col-3">
-            Follow Section
-            <div class="wrapper">
-                <div class="card card-follow">
-                    <div class="card-body">
-                        <div class="row row-follow">
-                            <div class="col-8">
-                                <h4 class="followAccount">followAccount</h4>
-                            </div>
-                            <div class="col-4">
-                                <button id="followBTn" type="submit" class="btn btn-sm btn-secondary">Follow</button>
+
+                </div>
+                <!-- Hatter Feed Section -->
+            </div>
+
+            <div  class="section-follow col-3">
+                <!-- Follow Section -->
+                <div id="followSection" class="wrapper">
+                    <div class="card card-follow">
+                        <div class="card-body">
+                            <div class="row row-follow">
+                                <div class="col-8">
+                                    <h4 class="followAccount">followAccount</h4>
+                                </div>
+                                <div class="col-4">
+                                    <button id="followBTn" type="submit"
+                                        class="btn btn-sm btn-secondary">Follow</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="card card-follow">
-                    <div class="card-body">
-                        <div class="row row-follow">
-                            <div class="col-8">
-                                <h4 class="followAccount">followAccount</h4>
-                            </div>
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-sm btn-secondary">Follow</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
-                <div class="card card-follow">
-                    <div class="card-body">
-                        <div class="row row-follow">
-                            <div class="col-8">
-                                <h4 class="followAccount">followAccount</h4>
-                            </div>
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-sm btn-secondary">Follow</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                
             </div>
-          </div>
         </div>
-      </div>
-      
-<script>
-    //populating hatts section
-    let recentHatts = '';
-    let commentsPerHatt = new Map();
-    let content = ''
-    $.get('/api/getRecentHatts')
-    .then(response => {
-        recentHatts = response;
-        
-        // console.log(recentHatts);
-        $.get('/api/getNoOfCommentsPerHatt')
-        .then(result =>{
-            // console.log(result);
-            result.forEach(element => {
-                commentsPerHatt.set(element.hatt_id,element.num);
-            });
-            // console.log(recentHatts);
-            // console.log(commentsPerHatt.get(1));
+    </div>
 
-            recentHatts.forEach(element => {
-            // console.log(element.hatt_id);
-            // console.log(commentsPerHatt.get(element.hatt_id));
-            // let day = moment(element.tweet_time);
-            // console.log(moment(element.tweet_time).startOf('day').fromNow());
-            content += `<div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">${element.name}</h5>
-                        <p class="card-text">${element.text}</p>
-                        <h6 class="card-subtitle mb-2">Comments (${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0})</h6>
-                        <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                        <h4 class="card-subtitle mb-2">${moment(element.tweet_time).startOf('day').fromNow()}</h4>
-                    </div>
-                </div>`
-            
-        });
-        // console.log(content);
-        $('#feedSectionWrapper').html('');
-        $('#feedSectionWrapper').html(content);
+    <script>
+        //populating hatts section
 
+        async function populateHatts(){
+            let recentHatts = '';
+            let commentsPerHatt = new Map();
+            let content = ''
+            $.get('/api/getRecentHatts')
+                .then(response => {
+                    recentHatts = response;
+                    // console.log(recentHatts);
+                    $.get('/api/getNoOfCommentsPerHatt')
+                        .then(result => {
+                            // console.log(result);
+                            result.forEach(element => {
+                                commentsPerHatt.set(element.hatt_id, element.num);
+                            });
+                            // console.log(recentHatts);
+                            // console.log(commentsPerHatt.get(1));
+                            recentHatts.forEach(element => {
+                                // console.log(element.hatt_id);
+                                // console.log(commentsPerHatt.get(element.hatt_id));
+                                // let day = moment(element.tweet_time);
+                                // console.log(moment(element.tweet_time).startOf('day').fromNow());
+                                content += `<div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${element.name}</h5>
+                            <p class="card-text">${element.text}</p>
+                            <h6 class="card-subtitle mb-2">Comments (${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0})</h6>
+                            <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
+                            <h4 class="card-subtitle mb-2">${moment(element.tweet_time).startOf('day').fromNow()}</h4>
+                        </div>
+                    </div>`
+                            });
+                            // console.log(content);
+                            $('#feedSectionWrapper').html('');
+                            $('#feedSectionWrapper').html(content);
+                        })
+                })
+
+        }
+
+        async function populateFollowSection(){
+            $.get('/api/getTop5Followed')
+            .then(result => {
+                console.log(result);
+                let content = '';
+                    result.forEach(element=>{
+                        content += `<div class="card card-follow">
+                        <div class="card-body">
+                            <div class="row row-follow">
+                                <div class="col-8">
+                                    <h4 class="followAccount">${element.name}</h4>
+                                </div>
+                                <div class="col-4">
+                                    <button id="followBTn" data-id="${element.id}" type="submit"
+                                        class="btn btn-sm btn-secondary onclick="follow(event)">Follow</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+                    })
+                    $('#followSection').html('');
+                    $('#followSection').html(content)
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
+
+
+
+        $(document).ready(function(){
+            populateHatts();
+            populateFollowSection();
         })
-        
-        
+    </script>
 
-    })
 
-</script>
-
-    
 </body>
+
 </html>

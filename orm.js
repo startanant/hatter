@@ -112,6 +112,11 @@ async function getNoOfCommentsPerHatt(){
     return result;
 }
 
+async function getTop5Followed(){
+    result = await db.query('select a.user, b.name, count(*) as num from followers a left join users b on a.user=b.id group by a.user order by num desc limit 5;')
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -122,5 +127,6 @@ module.exports = {
     deleteComment,
     getUserHatts,
     getRecentHatts,
-    getNoOfCommentsPerHatt
+    getNoOfCommentsPerHatt,
+    getTop5Followed
 }

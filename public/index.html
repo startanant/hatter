@@ -69,8 +69,8 @@
           </div>
 
           <div class="section-feed col-6">
-            Hatter Feed Section
-            <div class="wrapper">
+            <!-- Hatter Feed Section -->
+            <div id = "feedSectionWrapper" class="wrapper">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">hatterUsername</h5>
@@ -80,26 +80,10 @@
                         <h4 class="card-subtitle mb-2">10 m</h4>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">hatterUsername</h5>
-                        <p class="card-text">This is where the post text goes.</p>
-                        <h6 class="card-subtitle mb-2">Comments (0)</h6>
-                        <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                        <h4 class="card-subtitle mb-2">44 m</h4>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">hatterUsername</h5>
-                        <p class="card-text">This is where the post text goes.</p>
-                        <h6 class="card-subtitle mb-2">Comments (0)</h6>
-                        <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                        <h4 class="card-subtitle mb-2">2 hr</h4>
-                    </div>
-                </div>
+                
                 
             </div>
+            <!-- Hatter Feed Section -->
           </div>
 
           <div class="section-follow col-3">
@@ -150,6 +134,34 @@
         </div>
       </div>
       
+<script>
+    //populating hatts section
+    $.get('/api/getRecentHatts')
+    .then(response => {
+        // let name = '';
+        // let text = '';
+        // let hatttime = '';
+        // let card = 
+        let content = ''
+        response.forEach(element => {
+            content += `<div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">${element.name}</h5>
+                        <p class="card-text">${element.text}</p>
+                        <h6 class="card-subtitle mb-2">Comments (0)</h6>
+                        <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
+                        <h4 class="card-subtitle mb-2">${element.tweet_time}</h4>
+                    </div>
+                </div>`
+            
+        });
+        // console.log(content);
+        $('#feedSectionWrapper').html('');
+        $('#feedSectionWrapper').html(content);
+
+    })
+
+</script>
 
     
 </body>

@@ -107,6 +107,12 @@ app.post('/api/addComment', async ( req, res)=>{
     // res.end(JSON.stringify({response:"OK",id:result.insertId}));
 })
 
+app.get ('/api/getRecentHatts', async ( req,res ) => {
+    console.log('call to getRecentHatts api...');
+    const result = await orm.getRecentHatts(req.body);
+    res.json(result);
+})
+
 app.delete('/api/deleteComment', async ( req, res )=>{
     // console.log(`api deleteComment called...`);
     // console.log(req.body);

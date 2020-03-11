@@ -102,6 +102,11 @@ async function getUserHatts(data){
     return result;
 }
 
+async function getRecentHatts(data){
+    result = await db.query('select a.id,a.user_id,a.text,a.tweet_time,b.name from hatts a left join users b on a.user_id = b.id order by tweet_time asc');
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -110,5 +115,6 @@ module.exports = {
     deleteUser,
     addComment,
     deleteComment,
-    getUserHatts
+    getUserHatts,
+    getRecentHatts
 }

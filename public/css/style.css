@@ -112,8 +112,6 @@ h1 {
     min-height: 200px;
 }
 
-
-
 .postPic {
     background-color: slategray;
     margin: 0px 0px 0px 15px;
@@ -124,17 +122,20 @@ h1 {
     text-align: center;
 }
 
-
-
 .card-follow {
     margin: 5px 10px 0px 10px; 
-   
 }
 
-.row-follow {
-    min-height: 15px;
-}
 
+.followPic {
+    background-color: slategray;
+    margin: 0px 0px 0px 15px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    text-align: center;
+}
 
 .section-follow {
     background-color: cornflowerblue;

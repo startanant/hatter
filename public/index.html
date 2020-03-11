@@ -32,8 +32,6 @@
         //     location.href = '/login.html';
         // };
 
-       
-
     </script>
 </head>
 <body>
@@ -65,14 +63,13 @@
                         <div class="followingMetric">Hatts Sent</div>
                         <div class="followingMetric">25</div>
                     </div>
-
                 </div>
 
                 <div class="viewHatts">
                     <button id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">View Hatts</button>
                 </div>
-                <div class="viewAccount">
-                    <button id="viewAccountBtn" type="submit" class="btn btn-sm btn-secondary">Account</button>
+                <div class="logout">
+                    <button id="logoutBtn" type="submit" class="btn btn-sm btn-secondary">Account</button>
                 </div>
                 <div class="createPost">
                     <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-lg btn-primary">Create Post</button>
@@ -142,51 +139,43 @@
             <div class="wrapper">
                 <div class="card card-follow">
                     <div class="card-body">
-
-                        <div class="row row-follow">
-                            <div class="followPicContainer"></div>
-                            
-                            
-                            
+                        <div class="row row-follow-main">
+                            <div class="followPicContainer col-4">
+                                <div class="followPic"></div>
+                            </div>
                             <div class="col-8">
                                 <h4 class="followAccount">followAccount</h4>
-                            </div>
-
-
-                            <div class="col-4">
                                 <button id="followBTn" type="submit" class="btn btn-sm btn-secondary">Follow</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="card card-follow">
                     <div class="card-body">
-                        <div class="row row-follow">
+                        <div class="row row-follow-main">
+                            <div class="followPicContainer col-4">
+                                <div class="followPic"></div>
+                            </div>
                             <div class="col-8">
                                 <h4 class="followAccount">followAccount</h4>
-                            </div>
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-sm btn-secondary">Follow</button>
+                                <button id="followBTn" type="submit" class="btn btn-sm btn-secondary">Follow</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="card card-follow">
                     <div class="card-body">
-                        <div class="row row-follow">
-                            <div class=" followUsername col-8">
-                                <h4 class="followAccount">followAccount</h4>
+                        <div class="row row-follow-main">
+                            <div class="followPicContainer col-4">
+                                <div class="followPic"></div>
                             </div>
-                            <div class=" followBtn col-4">
-                                <button type="submit" class="btn btn-sm btn-secondary">Follow</button>
+                            <div class="col-8">
+                                <h4 class="followAccount">followAccount</h4>
+                                <button id="followBTn" type="submit" class="btn btn-sm btn-secondary">Follow</button>
                             </div>
                         </div>
                     </div>
                 </div>
-    
             </div>
           </div>
         </div>

@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"> -->
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
     <link rel="stylesheet" href="./css/style.css">
 
     <script
@@ -25,6 +31,9 @@
         //     // }
         //     location.href = '/login.html';
         // };
+
+       
+
     </script>
 </head>
 <body>
@@ -66,7 +75,7 @@
                     <button id="viewAccountBtn" type="submit" class="btn btn-sm btn-secondary">Account</button>
                 </div>
                 <div class="createPost">
-                    <button id="createPostBtn" type="submit" class="btn btn-lg btn-primary">Create Post</button>
+                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-lg btn-primary">Create Post</button>
                 </div>
             </div>
           </div>
@@ -174,8 +183,42 @@
             </div>
           </div>
         </div>
+
+        <div id="postModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Modal body text goes here. Write your post.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">POST</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
       </div>
+
       
+
+
+    <script>
+        
+
+        $('#createPostBtn').on('click', function(ev){
+            ev.preventDefault()
+            console.log("modal click working")
+            $('#postModal').modal("show")
+        })
+
+    </script>
 
     
 </body>

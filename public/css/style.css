@@ -112,9 +112,7 @@ h1 {
     min-height: 200px;
 }
 
-.postPicContainer {
-    /* background-color: skyblue; */
-}
+
 
 .postPic {
     background-color: slategray;
@@ -126,9 +124,7 @@ h1 {
     text-align: center;
 }
 
-.cardContent {
-    /* background-color: slategrey; */
-}
+
 
 .card-follow {
     margin: 5px 10px 0px 10px; 
@@ -144,10 +140,5 @@ h1 {
     background-color: cornflowerblue;
 }
 
-@media only screen and (max-width: ) {
 
-.header{
-    background-color: red;
-}
-
- }
+ 

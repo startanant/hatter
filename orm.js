@@ -61,7 +61,7 @@ async function deleteHatt(data){
 
 async function addUser(data){
     // console.log(`adding user: ${data}`);
-    const result = await db.query(`insert into users (name,email,password) values (?,?,?)`,[data.name,data.email,data.password]);
+    const result = await db.query(`insert into users (name,email,password,location,picture_path) values (?,?,?,?,?)`,[data.name,data.email,data.password,data.location,data.picture_path]);
     // if (result == 'ER_DUP_ENTRY'){
     //     console.log('duplicated email id!');
     // }

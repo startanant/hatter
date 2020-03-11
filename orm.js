@@ -107,6 +107,11 @@ async function getRecentHatts(data){
     return result;
 }
 
+async function getNoOfCommentsPerHatt(){
+    result = await db.query('select hatt_id,count(*) as num from comments group by hatt_id');
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -116,5 +121,6 @@ module.exports = {
     addComment,
     deleteComment,
     getUserHatts,
-    getRecentHatts
+    getRecentHatts,
+    getNoOfCommentsPerHatt
 }

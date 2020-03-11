@@ -113,6 +113,14 @@ app.get ('/api/getRecentHatts', async ( req,res ) => {
     res.json(result);
 })
 
+app.get('/api/getNoOfCommentsPerHatt', async ( req, res) => {
+    console.log('calling api for getNoOfCommentsPerHatt');
+    const result = await orm.getNoOfCommentsPerHatt();
+    res.json(result);
+})
+
+
+
 app.delete('/api/deleteComment', async ( req, res )=>{
     // console.log(`api deleteComment called...`);
     // console.log(req.body);

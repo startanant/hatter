@@ -136,19 +136,31 @@
       
 <script>
     //populating hatts section
+    let recentHatts = '';
+    let commentsPerHatt = new Map();
+    let content = ''
     $.get('/api/getRecentHatts')
     .then(response => {
-        // let name = '';
-        // let text = '';
-        // let hatttime = '';
-        // let card = 
-        let content = ''
-        response.forEach(element => {
+        recentHatts = response;
+        
+        // console.log(recentHatts);
+        $.get('/api/getNoOfCommentsPerHatt')
+        .then(result =>{
+            // console.log(result);
+            result.forEach(element => {
+                commentsPerHatt.set(element.hatt_id,element.num);
+            });
+            // console.log(recentHatts);
+            // console.log(commentsPerHatt.get(1));
+
+            recentHatts.forEach(element => {
+            // console.log(element.hatt_id);
+            // console.log(commentsPerHatt.get(element.hatt_id));
             content += `<div class="card">
                     <div class="card-body">
                         <h5 class="card-title">${element.name}</h5>
                         <p class="card-text">${element.text}</p>
-                        <h6 class="card-subtitle mb-2">Comments (0)</h6>
+                        <h6 class="card-subtitle mb-2">Comments (${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0})</h6>
                         <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
                         <h4 class="card-subtitle mb-2">${element.tweet_time}</h4>
                     </div>
@@ -158,6 +170,10 @@
         // console.log(content);
         $('#feedSectionWrapper').html('');
         $('#feedSectionWrapper').html(content);
+
+        })
+        
+        
 
     })
 

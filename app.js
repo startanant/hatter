@@ -1,17 +1,35 @@
 require('dotenv').config(); // --> process.env
 
+const multer  = require('multer');
+const { uuid } = require('uuidv4');
+
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/')
+  },
+  filename: function (req, file, cb) {
+    console.log("File= ", file);
+    cb(null, uuid() + path.extname(file.originalname)) //Appending extension
+  }
+});
+
+const upload = multer({ storage });
+//const upload = multer({ dest: 'public/uploads/' })
+
 const express = require('express');
-const bodyParser = require('body-parser')
+//const bodyParser = require('body-parser')
 
 const orm = require('./orm');
 const bcrypt = require ('bcrypt');
 const app = express();
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }))
  
 // parse application/json
-app.use(bodyParser.json())
+app.use(express.json())
 
 
 app.use(express.static('public'));
@@ -39,9 +57,11 @@ app.delete('/api/deleteHatt',async ( req, res )=>{
 
 const saltRounds = 10;
 
-app.post('/api/addUser', async ( req,res )=>{
+app.post('/api/addUser', upload.single('avatar'), async ( req,res )=>{
     //console.log('api addUser called...');
-    //console.log(req.body);
+    console.log("File = ", req.file);
+    console.log("Body: ", req.body);
+    console.log("Body: ", req.body.myUser);
     //const result = await orm.addUser(req.body);
     // console.log('result from addUser:',result);
     //res.json({response:"OK",id:result.insertId});

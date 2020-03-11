@@ -59,7 +59,30 @@ app.post('/api/addUser', async ( req,res )=>{
 
 app.post('/api/auth', async( req, res ) => {
     console.log(req.body);
-    res.json({response: 'OK'});
+    const user = await orm.authUser(req.body);
+    //console.log(user[0].id);
+    
+    
+    if (user[0]) {
+        bcrypt.compare(req.body.password, user[0].password, function(err, result) {
+            if (result == true) {
+                const userInfo = {
+                    id: user[0].id,
+                    name: user[0].name,
+                    email: user[0].email,
+                    password: user[0].password,
+                    location: user[0].location,
+                    picture_path: user[0].picture_path
+                };
+                res.json({response:"OK", user: userInfo});
+            } else {
+                res.json({response: "Incorrect password. Try again?"});
+            }
+        })
+    } else {
+        res.json({response: "Email not found. Try again?"});
+    }
+    
 });
 
 

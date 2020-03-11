@@ -53,6 +53,14 @@ async function addUser(data){
     return result;
 }
 
+async function authUser(data){
+    const query = `select * from users where email="${data.email}"`;
+    console.log(query);
+    const result = await db.query(query);
+    console.log(result);
+    return result;
+}
+
 async function deleteUser(data){
     // console.log(`deleting: ${data}`);
     result = await db.query(`delete from users where id=?`,[data.id]);
@@ -83,6 +91,7 @@ module.exports = {
     addHatt,
     deleteHatt,
     addUser,
+    authUser,
     deleteUser,
     addComment,
     deleteComment,

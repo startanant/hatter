@@ -12,6 +12,36 @@
         crossorigin="anonymous">
     </script>
 
+    
+    <script>
+        $(document).ready( async function(){
+            $('#submitUserBtn').click( async function(event){
+                event.preventDefault();
+                const email = $('#loginEmail').val();
+                const password = $('#loginPassword').val();
+
+                const loginInfo = {
+                    email: email,
+                    password: password
+                };
+
+                const auth = await $.post("/api/auth", loginInfo);
+                if(auth.response == 'OK') {
+                    alert("login successful")
+                    console.log(auth.user.id);
+                    localStorage.setItem("userId", auth.user.id);
+                    localStorage.setItem("username", auth.user.name);
+                    window.location.href = '/success.html';
+                } else {
+                    alert(auth.response);
+                }
+                
+                
+
+
+            });
+        });
+    </script>
     <title>Hatter - Login</title>
 </head>
 <body>
@@ -37,13 +67,14 @@
               <input type="password" class="form-control" id="loginPassword" placeholder="Enter Password">
             </div>
 
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button id='submitUserBtn' type="submit" class="btn btn-primary">Login</button>
 
           </form>
 
           <div class="login-footer">
             <h2>Don't have a Hatter account?</h2>
-            <button id="signupBtn" type="submit" class="btn btn-secondary">Sign Up</button>
+            <!-- <button id="signupBtn" type="submit" class="btn btn-secondary">Sign Up</button> -->
+            <a href="signup.html" class="btn btn-secondary" role="button">Sign Up</a>
         </div>
 
     </div>

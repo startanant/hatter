@@ -1,0 +1,12 @@
+<script>
+    window.onload = function() {
+        var userId = localStorage.getItem('userId');
+        var username = localStorage.getItem('username');
+        document.getElementById('output').innerHTML = 'Login successful! Welcome to Hatter, ' + username +'. <p>Your details <br>name: ' + username +' <br>userId: ' + userId + ' <br>are saved to localStorage.</p>'
+    }
+    </script>
+
+
+<body>
+    <h1><p id="output"></p></h1>
+</body>

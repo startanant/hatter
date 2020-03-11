@@ -6,10 +6,12 @@ CREATE TABLE `hatter`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(70) NOT NULL,
   `location` VARCHAR(45) NULL DEFAULT NULL,
   `picture_path` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
+
+ALTER TABLE users ADD CONSTRAINT unique_email UNIQUE KEY(email);
   
 INSERT INTO users (name,email,password) values ('przemek','przemek@przemek','przemek'),('anant','anant@anant','anant'),('james','james@james','james'),('serop','serop@serop','serop');
 

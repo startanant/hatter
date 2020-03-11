@@ -13,6 +13,20 @@
     </script>
 
     <title>Hatter - Home</title>
+    <script>
+        function logOut(){  
+            localStorage.clear();
+            location.href = '/login.html';
+        }
+
+        window.onload = function() {
+            // if(!localStorage.getItem("userId")){
+            //     location.href = '/login.html';
+            // }
+            location.href = '/login.html';
+        };
+
+    </script>
 </head>
 <body>
 

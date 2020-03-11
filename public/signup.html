@@ -14,6 +14,47 @@
 
     <title>Hatter - Signup</title>
 </head>
+<script>
+$(document).ready( async function(){
+          $('#submitUserBtn').click( async function(event){
+                event.preventDefault();
+                //alert("hi");
+                // disable save button
+                // $('#submitUserBtn').prop('disabled', true);
+                // build our save object
+
+                const username= $('#inputUsername').val();
+                const email = $('#inputEmail').val();
+                const password = $('#inputPassword').val();
+                const location = $('#inputLocation').val();
+
+                if (username == '' || email == '' || password == ''){
+                  alert('missing fields!');
+                  return false;
+                }
+
+                const myUser = {
+                        name: username,
+                        email: email,
+                        password: password
+                   };
+
+                
+                let apiResult = await $.post( '/api/addUser', myUser );
+                
+                //alert( apiResult );
+                if( apiResult.response == 'OK' ){
+                    // registration worked! redirect to the main page (listing thumbnails)
+                    alert("user created");
+                    window.location.href = '/login.html';
+                } else {
+                  alert("email already exists!");
+                }
+
+            })
+        })
+
+</script>
 <body>
 
     <div class="welcome">
@@ -53,7 +94,7 @@
                 
             </div>  
         
-            <button type="submit" class="btn btn-primary">Create Account</button>
+            <button id='submitUserBtn' type="submit" class="btn btn-primary">Create Account</button>
 
           </form>
 

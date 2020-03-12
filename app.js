@@ -100,6 +100,7 @@ app.post('/api/auth', async( req, res ) => {
         bcrypt.compare(req.body.password, user[0].password, async function(err, result) {
             if (result == true) {
                 const followers = await orm.getFollowers(user[0].id);
+                const following = await orm.getFollowing(user[0].id);
                 //console.log("followers:", followers);
                 
                 const userInfo = {
@@ -109,7 +110,8 @@ app.post('/api/auth', async( req, res ) => {
                     password: user[0].password,
                     location: user[0].location,
                     picture_path: user[0].picture_path,
-                    followers: followers[0].numOfFollowers
+                    followers: followers[0].numOfFollowers,
+                    following: following[0].numFollowing
                 };
                 res.json({response:"OK", user: userInfo});
             } else {

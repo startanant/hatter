@@ -109,7 +109,8 @@
           <div class="section-profile col-lg-3 col-md-4">
             <div class="wrapper-profile">
                 <div class="profilePicContainer">
-                    <div class="profilePic"></div>
+                    <div class="profilePic" id="profilePic">
+                     </div>
                 </div>
                 <div class="username">
                     <h2>dreamTeam</h2>
@@ -316,10 +317,14 @@
                     console.log(auth.user.id);
                     localStorage.setItem("userId", auth.user.id);
                     localStorage.setItem("username", auth.user.name);
+                    localStorage.setItem("followers", auth.user.followers);
+                    localStorage.setItem("following", auth.user.following);
                     // window.location.href = '/index.html';
                     populateHatts();
                     populateFollowSection();
                     getProfilePic();
+                    setFollowers();
+                    setFollowing();
                 } else {
                     alert(auth.response);
                 }
@@ -327,6 +332,16 @@
         
     
         //populating hatts section
+
+        function setFollowers() {
+            const followers = localStorage.getItem('followers');
+            document.getElementById('followersNum').innerHTML = followers;
+        }
+
+        function setFollowing() {
+            const following = localStorage.getItem('following');
+            document.getElementById('followingNum').innerHTML = following;
+        }
 
         async function populateHatts(){
             let recentHatts = '';
@@ -452,7 +467,9 @@
             console.log(profileImage);
                 if(profileImage.response == 'OK') {
                     //alert("call successful")
-                    $("#profilePic").attr("src",profileImage.path);
+                    //$("#profilePic").attr("src",profileImage.path); 
+                    document.getElementById("profilePic").style.backgroundImage = 'url('+profileImage.path+')';
+                    document.getElementById("profilePic").style.backgroundPosition = 'center';
                 } else {
                     alert(profileImage.response);
                 }

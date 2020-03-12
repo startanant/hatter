@@ -22,10 +22,8 @@ h1 {
 }
 
 .row-main {
-    height: 800px;
+    min-height: 800px;
 }
-
-
 
 .section-profile {
     background-color: cornflowerblue;
@@ -33,6 +31,12 @@ h1 {
 
 .section-feed {
     background-color: royalblue;
+    padding-top: 20px;
+}
+
+.section-follow {
+    background-color: cornflowerblue;
+    padding-top: 30px;
 }
 
 .wrapper {
@@ -101,6 +105,10 @@ h1 {
     min-height: 200px;
 }
 
+.card-body {
+    padding-top: 20px;
+}
+
 
 .postPic {
     background-color: slategray;
@@ -112,10 +120,25 @@ h1 {
     text-align: center;
 }
 
+.titleContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.card-title {
+    margin-right: 30px;
+}
+
+.timeSince {
+    padding-top: 3px;
+}
+
 
 
 .row-post {
-    min-height: 50px;
+    margin-top: 20px;
+    min-height: 30px;
 }
 
 .commentsContainer {
@@ -125,9 +148,8 @@ h1 {
     flex-direction: row;
 }
 
-
 .hattsOffContainer {
-    line-height: 50px;
+    line-height: 30px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -159,9 +181,7 @@ h1 {
     text-align: center;
 }
 
-.section-follow {
-    background-color: cornflowerblue;
-}
+
 
 
  

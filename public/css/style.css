@@ -97,13 +97,18 @@ h1 {
 .metrics-following {
     /* min-height: 60px; */
     /* line-height: 60px; */
-    font-size: 24px;
+    font-size: 16px;
+}
+.metrics-followers {
+    /* min-height: 60px; */
+    /* line-height: 60px; */
+    font-size: 16px;
 }
 
 .metrics-hattsSent {
     /* min-height: 60px; */
     /* line-height: 60px; */
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .viewHatts {

@@ -6,7 +6,7 @@ const { uuid } = require('uuidv4');
 const path = require('path');
 let filepath;
 let fileNameExt;
-let uploadFolder = 'public/uploads/';
+let uploadFolder = 'uploads/';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/uploads/')
@@ -176,6 +176,13 @@ app.get('/api/getUserHatts', async ( req, res)=>{
     res.json(result);
 })
 
+app.get('/api/getProfilePic/:userId', async ( req, res)=>{
+    console.log(`api getProfilePic called ...`);
+    console.log(req.params.userId);
+    const result = await orm.getProfilePic(req.params.userId);
+    // res.json({response:"OK", path: 'uploads/02ad92f3-272c-434a-a9cb-6d6abf55cec3.jpg'});
+    res.json({response:"OK", path: result[0].picture_path});
+})
 
 // connection.query('select * from hatts',function(error,results,fields){
 //     console.log(results);

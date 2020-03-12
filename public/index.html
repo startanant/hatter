@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    
     <link rel="stylesheet" href="./css/style.css">
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
     </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
 
     <title>Hatter - Home</title>
@@ -21,7 +23,9 @@
 
         window.onload = function () {
             !localStorage.key('userID') ? location.href = '/login.html' : false;
-        };
+        };  
+
+       
     </script>
 </head>
 
@@ -38,7 +42,10 @@
                     Profile Section
 
                     <div class="profilePicContainer">
-                        <div class="profilePic"></div>
+                        <div class="profilePic">
+                            <!-- <img id="profilePic" src="uploads/02ad92f3-272c-434a-a9cb-6d6abf55cec3.jpg" class="img-circle" alt="" width="150" height="150"> -->
+                            <img id="profilePic" src="" class="img-circle" alt="" width="150" height="150">
+                        </div>
                     </div>
 
                     <div class="username">
@@ -179,6 +186,19 @@
             })
         }
 
+        async function getProfilePic() {
+            const userId = localStorage.getItem('userId');
+            console.log("u ", userId);
+            const profileImage = await $.get(`/api/getProfilePic/${userId}`);
+            console.log(profileImage);
+                if(profileImage.response == 'OK') {
+                    //alert("call successful")
+                    $("#profilePic").attr("src",profileImage.path);
+                } else {
+                    alert(profileImage.response);
+                }
+        }
+
         function follow(event){
             // console.log('btn follow clicked');
             // console.log(event.target.dataset.id);
@@ -200,6 +220,7 @@
         $(document).ready(function(){
             populateHatts();
             populateFollowSection();
+            getProfilePic();
         })
     </script>
 

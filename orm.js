@@ -126,6 +126,16 @@ async function addFollower(data){
     return result;
 }
 
+async function getProfilePic(data){
+    console.log('logging data for getProfilePic orm function', data);
+    // result = await db.query(`insert into followers (user,follower) values (?,?)`,[data.user,data.follower]);
+    let query = `select picture_path from users where id=${data}`;
+    console.log(query);
+    result =  await db.query(query);
+    console.log(result);
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -138,5 +148,6 @@ module.exports = {
     getRecentHatts,
     getNoOfCommentsPerHatt,
     getTop10Followed,
-    addFollower
+    addFollower,
+    getProfilePic
 }

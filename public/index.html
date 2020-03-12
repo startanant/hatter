@@ -21,10 +21,10 @@
 
     <title>Hatter - Home</title>
     <script>
-        function logOut() {
-            localStorage.clear();
-            location.href = '/login.html';
-        }
+        // function logOut() {
+        //     localStorage.clear();
+        //     location.href = '/index.html';
+        // }
 
         // window.onload = function() {
         //     // if(!localStorage.getItem("userId")){
@@ -32,9 +32,9 @@
         //     // }
         //     location.href = '/index.html';
         // };
-        window.onload = function () {
-            // !localStorage.key('userID') ? location.href = '/index.html' : false;
-        };  
+        // window.onload = function () {
+        //     // !localStorage.key('userID') ? location.href = '/index.html' : false;
+        // };  
 
        
     </script>
@@ -299,6 +299,11 @@
         $('#postModal').on('shown.bs.modal', function () {
             $('#createPostBtn').trigger('focus')
         }) 
+
+        $("#logoutBtn").click( function() {
+            localStorage.clear();
+            location.href = '/index.html';
+        });
 
         $("#loginBtn").click(async function(event){
                 event.preventDefault();

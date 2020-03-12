@@ -2,12 +2,34 @@ h1 {
     color: black;
 }
 
+#loginHeader {
+    height: 20vh;
+}
 
-.welcome {
+#welcome {
     width: 100%;
     text-align: center;
-    height: 100px;
+    height: 80vh;
+    background-color: grey; 
+    padding: 200px;  
 }
+
+.welcome-heading {
+    font-size: 50px;
+    color: white;
+}
+
+
+/* need to add media query */
+/* @ media screen {
+    #loginHeader {
+        height: 100vh;
+    }
+
+    #welcome {
+        display: none;
+    }
+} */
 
 .login {
     width: 600px;
@@ -16,18 +38,13 @@ h1 {
     height: auto;
 }
 
-#loginHeader {
-    height: 500px;
-}
-
 .inlineForm {
     width: auto;
     margin-top: 50px;
     margin-left: 30px;
+    margin-bottom: 30px;
     
 }
-
-
 
 .container{
     min-height: 800px;

@@ -54,7 +54,7 @@ app.post('/api/addHatt',async ( req,res)=>{
 })
 
 app.delete('/api/deleteHatt',async ( req, res )=>{
-    // console.log(req.body);
+    console.log('calling delete hatt api',req.body);
     const result = await orm.deleteHatt(req.body);
     // res.json.end(JSON.stringify({response:"deleted"}))
     res.json({response:"OK"});

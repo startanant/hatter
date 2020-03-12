@@ -132,7 +132,7 @@
                     
                 </div>
                 <div class="viewHatts">
-                    <button id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">View Hatts</button>
+                    <button onclick="renderUserHatts()" id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">View Hatts</button>
                 </div>
                 <div class="logout">
                     <button id="logoutBtn" type="submit" class="btn btn-sm btn-secondary">Logout</button>
@@ -557,14 +557,20 @@
                 </div>`;
             })
             // console.log(content);
+            $('#feedSectionWrapper').html('');
+            $('#feedSectionWrapper').html(content);
 
         }
         async function deleteHatt(event){
-            let hattid = event.target.dataset.hattId;
+            let hattid = event.target.dataset.hattid;
             let deleteData = {
                 id:hattid
             }
-            let result = await $.delete('/api/deleteHatt',deleteData);
+            console.log(deleteData);
+            let result = await $.ajax({
+                url:'/api/deleteHatt',
+                type:'DELETE',
+                data:deleteData});
             renderUserHatts();
         }
 
@@ -577,7 +583,7 @@
         //     getProfilePic();
         //     }
         // })
-        renderUserHatts();
+        // renderUserHatts();
     </script>
 
 

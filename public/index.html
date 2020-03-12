@@ -21,30 +21,25 @@
 
     <title>Hatter - Home</title>
     <script>
-        // function logOut() {
-        //     localStorage.clear();
-        //     location.href = '/login.html';
-        // }
+        function logOut() {
+            localStorage.clear();
+            location.href = '/login.html';
+        }
 
-        // window.onload = function() {
-        //     // if(!localStorage.getItem("userId")){
-        //     //     location.href = '/login.html';
-        //     // }
-        //     location.href = '/login.html';
-        // };
-        // window.onload = function () {
-        //     !localStorage.key('userID') ? location.href = '/login.html' : false;
-        // };  
-
-       
+        window.onload = function() {
+            // if(!localStorage.getItem("userId")){
+            //     location.href = '/login.html';
+            // }
+            location.href = '/login.html';
+        };
+        window.onload = function () {
+            !localStorage.key('userID') ? location.href = '/login.html' : false;
+        };   
     </script>
 </head>
 
 <body>
     <div id="loginHeader">
-        <div class="welcome">
-            <h1>Welcome to Hatter</h1>
-        </div>
         <div class="login">
             <div class="login-header">
                 <h2>Login to Hatter</h2>
@@ -65,6 +60,34 @@
                 <!-- <button id="signupBtn" type="submit" class="btn btn-secondary">Sign Up</button> -->
                 <a href="signup.html" class="btn btn-secondary" role="button">Sign Up</a>
             </div>
+        </div>
+        <div class="inlineForm">
+            <div class="row row-login">
+                <div class="col-8">
+                    <form>
+                        <div class="login-title">
+                            <h2>Login to Hatter</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <input type="email" class="form-control" id="loginEmail" placeholder="email">
+                            </div>
+                            <div class="col-5">
+                                <input type="password" class="form-control" id="loginPassword" placeholder="password">
+                            </div>
+                            <div class="col-2">
+                                <button id='loginBtn' type="submit" class="btn btn-primary">Login</button>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+                <div class="signupContainer col-4">
+                    <h2>Don't have a Hatter account?</h2>
+                <!-- <button id="signupBtn" type="submit" class="btn btn-secondary">Sign Up</button> -->
+                    <a href="signup.html" class="btn btn-secondary" role="button">Sign Up</a>
+                </div>
+            </div>
+
         </div>
     </div>
     

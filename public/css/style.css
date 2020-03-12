@@ -20,6 +20,15 @@ h1 {
     height: 500px;
 }
 
+.inlineForm {
+    width: auto;
+    margin-top: 50px;
+    margin-left: 30px;
+    
+}
+
+
+
 .container{
     min-height: 800px;
     width: 100%;

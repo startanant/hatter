@@ -146,6 +146,16 @@ async function getFollowers(data){
     return result;
 }
 
+async function getFollowing(data){
+    console.log('logging data for getFollowing orm function', data);
+    // result = await db.query(`insert into followers (user,follower) values (?,?)`,[data.user,data.follower]);
+    let query = `select follower, count(*) as numFollowing from followers where follower=${data}`;
+    console.log(query);
+    result =  await db.query(query);
+    console.log(result);
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -160,5 +170,6 @@ module.exports = {
     getTop10Followed,
     addFollower,
     getProfilePic,
-    getFollowers
+    getFollowers,
+    getFollowing
 }

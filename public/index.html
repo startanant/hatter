@@ -318,11 +318,13 @@
                     localStorage.setItem("userId", auth.user.id);
                     localStorage.setItem("username", auth.user.name);
                     localStorage.setItem("followers", auth.user.followers);
+                    localStorage.setItem("following", auth.user.following);
                     // window.location.href = '/index.html';
                     populateHatts();
                     populateFollowSection();
                     getProfilePic();
                     setFollowers();
+                    setFollowing();
                 } else {
                     alert(auth.response);
                 }
@@ -334,7 +336,11 @@
         function setFollowers() {
             const followers = localStorage.getItem('followers');
             document.getElementById('followersNum').innerHTML = followers;
+        }
 
+        function setFollowing() {
+            const following = localStorage.getItem('following');
+            document.getElementById('followingNum').innerHTML = following;
         }
 
         async function populateHatts(){

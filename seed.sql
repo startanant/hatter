@@ -27,10 +27,14 @@ CREATE TABLE `hatter`.`hatts` (
   INSERT INTO hatts (user_id,text) VALUES (1,'helo world!'),(1,'welcome to hatter app!'),(2,'JavaScript is trending up in developers world!'),(3,'Cold warning for Toronto!'),
 (4,'Bite me!'),(3,'World hates me! What to do???'),(2,'I need my schema names right!!! ;)');
 
-CREATE TABLE `hatter`.`followers` (
-  `user` INT NOT NULL,
-  `follower` INT NOT NULL
-  );
+CREATE TABLE `followers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `follower` int(11) NOT NULL,
+  `time` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
+
   
 INSERT INTO `hatter` .`followers` (user,follower) values (1,2),(1,3),(1,4),(2,1),(1,1),(2,3),(3,1),(3,2),(3,4),(4,2),(4,3);
 

@@ -61,7 +61,7 @@ async function deleteHatt(data){
 
 async function addUser(data){
     // console.log(`adding user: ${data}`);
-    const result = await db.query(`insert into users (name,email,password) values (?,?,?)`,[data.name,data.email,data.password]);
+    const result = await db.query(`insert into users (name,email,password,location,picture_path) values (?,?,?,?,?)`,[data.name,data.email,data.password,data.location,data.picture_path]);
     // if (result == 'ER_DUP_ENTRY'){
     //     console.log('duplicated email id!');
     // }
@@ -102,6 +102,40 @@ async function getUserHatts(data){
     return result;
 }
 
+async function getRecentHatts(data){
+    result = await db.query('select a.id,a.user_id,a.text,a.tweet_time,b.name from hatts a left join users b on a.user_id = b.id order by tweet_time desc');
+    return result;
+}
+
+async function getNoOfCommentsPerHatt(){
+    result = await db.query('select hatt_id,count(*) as num from comments group by hatt_id');
+    return result;
+}
+
+async function getTop10Followed(){
+    result = await db.query('select a.user, b.name, count(*) as num from followers a left join users b on a.user=b.id group by a.user order by num desc limit 10;')
+    return result;
+}
+
+async function addFollower(data){
+    console.log('logging data for addFollower orm function',data);
+    // result = await db.query(`insert into followers (user,follower) values (?,?)`,[data.user,data.follower]);
+    let query = `insert into followers (user, follower) select ${data.user},${data.follower} from dual where not exists (select * from followers where user=${data.user} and follower=${data.follower})`;
+    console.log(query);
+    result =  await db.query(`insert into followers (user, follower) select ${data.user},${data.follower} from dual where not exists (select * from followers where user=${data.user} and follower=${data.follower})`);
+    return result;
+}
+
+async function getProfilePic(data){
+    console.log('logging data for getProfilePic orm function', data);
+    // result = await db.query(`insert into followers (user,follower) values (?,?)`,[data.user,data.follower]);
+    let query = `select picture_path from users where id=${data}`;
+    console.log(query);
+    result =  await db.query(query);
+    console.log(result);
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -110,5 +144,10 @@ module.exports = {
     deleteUser,
     addComment,
     deleteComment,
-    getUserHatts
+    getUserHatts,
+    getRecentHatts,
+    getNoOfCommentsPerHatt,
+    getTop10Followed,
+    addFollower,
+    getProfilePic
 }

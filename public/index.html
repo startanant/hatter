@@ -402,6 +402,7 @@
 
 
         $(document).ready(function(){
+            document.getElementById("followerNum").innerHTML = localStorage.getItem('followers');
             populateHatts();
             populateFollowSection();
             getProfilePic();

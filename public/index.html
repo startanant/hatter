@@ -20,18 +20,17 @@
 
     <title>Hatter - Home</title>
     <script>
-        // function logOut(){  
-        //     localStorage.clear();
-        //     location.href = '/login.html';
-        // }
+        function logOut(){  
+            localStorage.clear();
+            location.href = '/login.html';
+        }
 
-        // window.onload = function() {
-        //     // if(!localStorage.getItem("userId")){
-        //     //     location.href = '/login.html';
-        //     // }
-        //     location.href = '/login.html';
-        // };
-
+        window.onload = function() {
+            // if(!localStorage.getItem("userId")){
+            //     location.href = '/login.html';
+            // }
+            location.href = '/login.html';
+        };
     </script>
 </head>
 <body>
@@ -52,7 +51,7 @@
                   <label for="loginPassword">Password</label>
                   <input type="password" class="form-control" id="loginPassword" placeholder="Enter Password">
                 </div>
-                <button id='submitUserBtn' type="submit" class="btn btn-primary">Login</button>
+                <button id='loginBtn' type="submit" class="btn btn-primary">Login</button>
             </form>
             <div class="login-footer">
                 <h2>Don't have a Hatter account?</h2>
@@ -73,7 +72,6 @@
         </form>
     </nav>
     
-
     <div class="container-fluid">
         <div class="row row-main">
           <div class="section-profile col-lg-3 col-md-4">
@@ -81,11 +79,9 @@
                 <div class="profilePicContainer">
                     <div class="profilePic"></div>
                 </div>
-                
                 <div class="username">
                     <h2>dreamTeam</h2>
                 </div>
-
                 <div class="row metrics">
                     <div class="metrics-following col-lg-6 col-md-12">
                         <div class="followingMetric">Following</div>
@@ -96,7 +92,6 @@
                         <div class="followingMetric">25</div>
                     </div>
                 </div>
-
                 <div class="viewHatts">
                     <button id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">View Hatts</button>
                 </div>
@@ -148,110 +143,11 @@
                     </div>
                 </div>
 
-                <div class="card card-post">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="postPicContainer col-lg-2 col-sm-12">
-                                <div class="postPic"></div>
-                            </div>
-                            <div class="cardContent col-lg-10 col-sm-12">
-                                <div class="row">
-                                    <div class="titleContainer">
-                                        <h5 class="card-title">mrHat</h5>
-                                        <h6 class="timeSince">38 m</h6>
-                                    </div>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
-                                </div>
-                                <div class="row row-post">
-                                    <div class="commentsContainer">
-                                        <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
-                                            <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
-                                        </a>
-                                        <div class="counter">
-                                            <h5 id="commentsNum">4</h5>
-                                        </div>
-                                    </div>
-                                    <div class="hattsOffContainer">
-                                        <a class="image" href="" id="hattsOffIcon">
-                                            <img src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
-                                        </a>
-                                        <div class="counter">
-                                            <h5 id="hattsOffNum">25</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card card-post">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="postPicContainer col-lg-2 col-sm-12">
-                                <div class="postPic"></div>
-                            </div>
-                            <div class="cardContent col-lg-10 col-sm-12">
-                                <div class="row">
-                                    <div class="titleContainer">
-                                        <h5 class="card-title">hatterUsername</h5>
-                                        <h6 class="timeSince">2 hr</h6>
-                                    </div>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
-                                </div>
-                                <div class="row row-post">
-                                    <div class="commentsContainer">
-                                        <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
-                                            <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
-                                        </a>
-                                        <div class="counter">
-                                            <h5 id="commentsNum">4</h5>
-                                        </div>
-                                    </div>
-                                    <div class="hattsOffContainer">
-                                        <a class="image" href="" id="hattsOffIcon">
-                                            <img src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
-                                        </a>
-                                        <div class="counter">
-                                            <h5 id="hattsOffNum">25</h5>
-                                        </div>
-                                    </div>
-                                </div>   
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
           </div>
 
           <div class="section-follow col-lg-3 col-md-offset-4">
             <div class="wrapper">
-                <div class="card card-follow">
-                    <div class="card-body">
-                        <div class="row row-follow-main">
-                            <div class="followPicContainer col-4">
-                                <div class="followPic"></div>
-                            </div>
-                            <div class="col-8">
-                                <h4 class="followAccount">followAccount</h4>
-                                <button id="followBTn" type="submit" class="btn btn-sm btn-secondary">Follow</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card card-follow">
-                    <div class="card-body">
-                        <div class="row row-follow-main">
-                            <div class="followPicContainer col-4">
-                                <div class="followPic"></div>
-                            </div>
-                            <div class="col-8">
-                                <h4 class="followAccount">followAccount</h4>
-                                <button id="followBTn" type="submit" class="btn btn-sm btn-secondary">Follow</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="card card-follow">
                     <div class="card-body">
                         <div class="row row-follow-main">
@@ -314,8 +210,8 @@
             $('#createPostBtn').trigger('focus')
         }) 
 
-        $("#submitUserBtn").click(function(){
-            console.log("button clicked")
+        $("#loginBtn").click(function(event){
+            event.preventDefault()
             $("#loginHeader").hide();
         });
     </script>

@@ -16,13 +16,9 @@ h1 {
     height: auto;
 }
 
-.header {
-    width: 100%;
-    height: 100px;
-    background-color: cadetblue;
+#loginHeader {
+    height: 500px;
 }
-
-
 
 .container{
     min-height: 800px;
@@ -30,10 +26,8 @@ h1 {
 }
 
 .row-main {
-    height: 800px;
+    min-height: 800px;
 }
-
-
 
 .section-profile {
     background-color: cornflowerblue;
@@ -41,6 +35,17 @@ h1 {
 
 .section-feed {
     background-color: royalblue;
+    padding-top: 20px;
+}
+
+.section-follow {
+    background-color: cornflowerblue;
+    padding-top: 30px;
+}
+
+.card {
+    border-radius: 20px;
+    box-shadow: 3px 3px lightsteelblue;
 }
 
 .wrapper {
@@ -62,7 +67,6 @@ h1 {
 }
 
 .profilePic {
-    
     background-color: slategray;
     margin: 30px 20px 10px 20px;
     border-radius: 50%;
@@ -76,28 +80,28 @@ h1 {
 }
 
 .metrics {
-    height: 100px;
+    /* min-height: 100px; */
     margin: 10px 20px 10px 20px;
+    padding: 2px;
 }
 
-.row-metrics-headings {
-    height: 20px;
+.metrics-following {
+    /* min-height: 60px; */
+    /* line-height: 60px; */
     font-size: 24px;
 }
 
-
-.row-metrics {
-    height: 20px;
-    color: snow;
+.metrics-hattsSent {
+    /* min-height: 60px; */
+    /* line-height: 60px; */
     font-size: 24px;
-    margin-top: 10px;
 }
 
 .viewHatts {
     margin: 10px 20px 5px 20px;
 }
 
-.viewAccount {
+.logout {
     margin: 5px 20px 10px 20px;
 }
 
@@ -105,21 +109,88 @@ h1 {
     margin: 30px 20px 10px 20px;
 }
 
-.card {
-    margin: 20px 10px 0px 10px;
+.card-post {
+    margin: 20px 10px 5px 10px;
     min-height: 200px;
+}
+
+.card-body {
+    padding-top: 20px;
+}
+
+
+.postPic {
+    background-color: slategray;
+    margin: 0px 0px 0px 15px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    text-align: center;
+}
+
+.titleContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.card-title {
+    margin-right: 30px;
+}
+
+.timeSince {
+    padding-top: 3px;
+}
+
+
+
+.row-post {
+    margin-top: 20px;
+    min-height: 30px;
+}
+
+.commentsContainer {
+    line-height: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.hattsOffContainer {
+    line-height: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.image {
+    margin-right: 5px;
+    height: 30px;
+}
+
+.counter {
+    margin-right: 20px;
+    height: 30px;
+    line-height: 30px;
 }
 
 .card-follow {
     margin: 5px 10px 0px 10px; 
-    min-height: 30px;
-}
-
-.row-follow {
-    min-height: 15px;
 }
 
 
-.section-follow {
-    background-color: cornflowerblue;
+.followPic {
+    background-color: slategray;
+    margin: 0px 0px 0px 15px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    text-align: center;
 }
+
+
+
+
+ 

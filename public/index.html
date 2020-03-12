@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"> -->
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
     <link rel="stylesheet" href="./css/style.css">
 
@@ -21,6 +26,12 @@
             location.href = '/login.html';
         }
 
+        window.onload = function() {
+            // if(!localStorage.getItem("userId")){
+            //     location.href = '/login.html';
+            // }
+            location.href = '/login.html';
+        };
         window.onload = function () {
             !localStorage.key('userID') ? location.href = '/login.html' : false;
         };  
@@ -30,13 +41,187 @@
 </head>
 
 <body>
-
-    <div class="header">
-        <h2>Header</h2>
+    <div id="loginHeader">
+        <div class="welcome">
+            <h1>Welcome to Hatter</h1>
+        </div>
+        <div class="login">
+            <div class="login-header">
+                <h2>Login to Hatter</h2>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="loginPassword">Password</label>
+                  <input type="password" class="form-control" id="loginPassword" placeholder="Enter Password">
+                </div>
+                <button id='loginBtn' type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <div class="login-footer">
+                <h2>Don't have a Hatter account?</h2>
+                <!-- <button id="signupBtn" type="submit" class="btn btn-secondary">Sign Up</button> -->
+                <a href="signup.html" class="btn btn-secondary" role="button">Sign Up</a>
+            </div>
+        </div>
     </div>
-
+    
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+        <a class="navbar-brand h1" href="#">
+            <img src="./assets/Lightning.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            Hatter
+        </a>
+        <form class="form-inline my-2 my-lg-0">
+            <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+    
     <div class="container-fluid">
         <div class="row row-main">
+          <div class="section-profile col-lg-3 col-md-4">
+            <div class="wrapper-profile">
+                <div class="profilePicContainer">
+                    <div class="profilePic"></div>
+                </div>
+                <div class="username">
+                    <h2>dreamTeam</h2>
+                </div>
+                <div class="row metrics">
+                    <div class="metrics-following col-lg-6 col-md-12">
+                        <div class="followingMetric">Following</div>
+                        <div class="followingMetric">250</div>
+                    </div>
+                    <div class="metrics-hattsSent col-lg-6 col-md-12">
+                        <div class="followingMetric">Hatts Sent</div>
+                        <div class="followingMetric">25</div>
+                    </div>
+                </div>
+                <div class="viewHatts">
+                    <button id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">View Hatts</button>
+                </div>
+                <div class="logout">
+                    <button id="logoutBtn" type="submit" class="btn btn-sm btn-secondary">Logout</button>
+                </div>
+                <div class="createPost">
+                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-lg btn-primary">Create Post</button>
+                </div>
+            </div>
+          </div>
+
+          <div class="section-feed col-lg-6 col-md-8">
+            <div class="wrapper">
+                <div class="card card-post">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="postPicContainer col-lg-2 col-sm-12">
+                                <div class="postPic"></div>
+                            </div>
+                            <div class="cardContent col-lg-10 col-sm-12">
+                                <div class="row">
+                                    <div class="titleContainer">
+                                        <h5 class="card-title">hatterUsername</h5>
+                                        <h6 class="timeSince">10 m</h6>
+                                    </div>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                </div>
+                                <div class="row row-post">
+                                    <div class="commentsContainer">
+                                        <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                                            <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                        </a>
+                                        <div class="counter">
+                                            <h5 id="commentsNum">4</h5>
+                                        </div>
+                                    </div>
+                                    <div class="hattsOffContainer">
+                                        <a class="image" href="" id="hattsOffIcon">
+                                            <img src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                        </a>
+                                        <div class="counter">
+                                            <h5 id="hattsOffNum">25</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+
+          <div class="section-follow col-lg-3 col-md-offset-4">
+            <div class="wrapper">
+                <div class="card card-follow">
+                    <div class="card-body">
+                        <div class="row row-follow-main">
+                            <div class="followPicContainer col-4">
+                                <div class="followPic"></div>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="followAccount">followAccount</h4>
+                                <button id="followBTn" type="submit" class="btn btn-sm btn-secondary">Follow</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="postModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Create post</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <textarea class="form-control" rows="5" id="postForm"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="postModalBtn" class="btn btn-primary" data-dismiss="modal">POST</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div id="commentModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add comment</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <label id="commentTo" for="form-control">@hatterUser</label>
+                  <textarea class="form-control" rows="5" id="postForm"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="postModalBtn" class="btn btn-primary" data-dismiss="modal">POST</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+      </div>
+    <script>
+        $('#postModal').on('shown.bs.modal', function () {
+            $('#createPostBtn').trigger('focus')
+        }) 
+
+        $("#loginBtn").click(function(event){
+            event.preventDefault()
+            $("#loginHeader").hide();
+        });
+    </script>
             <div class="section-profile col-3">
                 <div class="wrapper-profile">
                     Profile Section

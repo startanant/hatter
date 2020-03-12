@@ -98,7 +98,7 @@ async function deleteComment(data){
 
 async function getUserHatts(data){
     // console.log(' getting user hatts from db ... ');
-    result = await db.query('select * from hatts where user_id=?',[data.user_id]);
+    result = await db.query('select a.id,a.user_id,b.name ,a.text,a.tweet_time from hatts a left join users b on a.user_id = b.id where a.user_id = ?;',[data.user_id]);
     return result;
 }
 
@@ -146,6 +146,22 @@ async function getFollowers(data){
     return result;
 }
 
+async function getFollowing(data){
+    console.log('logging data for getFollowing orm function', data);
+    // result = await db.query(`insert into followers (user,follower) values (?,?)`,[data.user,data.follower]);
+    let query = `select follower, count(*) as numFollowing from followers where follower=${data}`;
+    console.log(query);
+    result =  await db.query(query);
+    console.log(result);
+    return result;
+}
+
+async function getHatts(data){
+    // console.log(' getting user hatts from db ... ');
+    result = await db.query(`select user_id, count(*) as numOfHatts from hatts where user_id=${data}`);
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -160,5 +176,7 @@ module.exports = {
     getTop10Followed,
     addFollower,
     getProfilePic,
-    getFollowers
+    getFollowers,
+    getFollowing,
+    getHatts
 }

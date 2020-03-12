@@ -54,7 +54,7 @@ app.post('/api/addHatt',async ( req,res)=>{
 })
 
 app.delete('/api/deleteHatt',async ( req, res )=>{
-    // console.log(req.body);
+    console.log('calling delete hatt api',req.body);
     const result = await orm.deleteHatt(req.body);
     // res.json.end(JSON.stringify({response:"deleted"}))
     res.json({response:"OK"});
@@ -100,6 +100,8 @@ app.post('/api/auth', async( req, res ) => {
         bcrypt.compare(req.body.password, user[0].password, async function(err, result) {
             if (result == true) {
                 const followers = await orm.getFollowers(user[0].id);
+                const following = await orm.getFollowing(user[0].id);
+                const hatts = await orm.getHatts(user[0].id);
                 //console.log("followers:", followers);
                 
                 const userInfo = {
@@ -109,7 +111,9 @@ app.post('/api/auth', async( req, res ) => {
                     password: user[0].password,
                     location: user[0].location,
                     picture_path: user[0].picture_path,
-                    followers: followers[0].numOfFollowers
+                    followers: followers[0].numOfFollowers,
+                    following: following[0].numFollowing,
+                    hatts: hatts[0].numOfHatts
                 };
                 res.json({response:"OK", user: userInfo});
             } else {
@@ -174,9 +178,9 @@ app.delete('/api/deleteComment', async ( req, res )=>{
     // res.end(JSON.stringify({response:"OK"}));
 })
 
-app.get('/api/getUserHatts', async ( req, res)=>{
-    // console.log(`api getUserHatts called ...`);
-    // console.log(req.body);
+app.post('/api/getUserHatts', async ( req, res)=>{
+    console.log(`api getUserHatts called ...`);
+    console.log(req.body);
     const result = await orm.getUserHatts(req.body);
     res.json(result);
 })

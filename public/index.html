@@ -242,15 +242,15 @@
                     localStorage.setItem("userId", auth.user.id);
                     localStorage.setItem("username", auth.user.name);
                     // window.location.href = '/index.html';
+                    populateHatts();
+                    populateFollowSection();
+                    getProfilePic();
                 } else {
                     alert(auth.response);
                 }
             })
         
-    </script>
- 
-
-    <script>
+    
         //populating hatts section
 
         async function populateHatts(){
@@ -401,12 +401,14 @@
         }
 
 
-        $(document).ready(function(){
-            document.getElementById("followerNum").innerHTML = localStorage.getItem('followers');
-            populateHatts();
-            populateFollowSection();
-            getProfilePic();
-        })
+        // $(document).ready(function(){
+        //     if (localStorage.key('userId')){
+        //     $("#loginHeader").hide();
+        //     populateHatts();
+        //     populateFollowSection();
+        //     getProfilePic();
+        //     }
+        // })
     </script>
 
 

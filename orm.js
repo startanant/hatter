@@ -118,10 +118,10 @@ async function getTop10Followed(){
 }
 
 async function addFollower(data){
-    console.log('logging data for addFollower orm function',data);
+    // console.log('logging data for addFollower orm function',data);
     // result = await db.query(`insert into followers (user,follower) values (?,?)`,[data.user,data.follower]);
-    let query = `insert into followers (user, follower) select ${data.user},${data.follower} from dual where not exists (select * from followers where user=${data.user} and follower=${data.follower})`;
-    console.log(query);
+    // let query = `insert into followers (user, follower) select ${data.user},${data.follower} from dual where not exists (select * from followers where user=${data.user} and follower=${data.follower})`;
+    // console.log(query);
     result =  await db.query(`insert into followers (user, follower) select ${data.user},${data.follower} from dual where not exists (select * from followers where user=${data.user} and follower=${data.follower})`);
     return result;
 }

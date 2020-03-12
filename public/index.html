@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="row row-post">
                                     <div class="commentsContainer">
-                                        <a class="image" href="" id="commentsIcon">
+                                        <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
                                             <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                         </a>
                                         <div class="counter">
@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="row row-post">
                                     <div class="commentsContainer">
-                                        <a class="image" href="" id="commentsIcon">
+                                        <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
                                             <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                         </a>
                                         <div class="counter">
@@ -173,7 +173,7 @@
                                 </div>
                                 <div class="row row-post">
                                     <div class="commentsContainer">
-                                        <a class="image" href="" id="commentsIcon">
+                                        <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
                                             <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                         </a>
                                         <div class="counter">
@@ -242,7 +242,7 @@
         </div>
 
         <div id="postModal" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Create post</h5>
@@ -251,33 +251,40 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                 
-                  <textarea class="form-control" rows="5" id="comment"></textarea>
+                  <textarea class="form-control" rows="5" id="postForm"></textarea>
                 </div>
                 <div class="modal-footer">
                   <button type="button" id="postModalBtn" class="btn btn-primary" data-dismiss="modal">POST</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
-          </div>
+        </div>
+
+        <div id="commentModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add comment</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <label id="commentTo" for="form-control">@hatterUser</label>
+                  <textarea class="form-control" rows="5" id="postForm"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="postModalBtn" class="btn btn-primary" data-dismiss="modal">POST</button>
+                </div>
+              </div>
+            </div>
+        </div>
 
       </div>
-
-      
-
-
     <script>
-        
-
-        // $('#createPostBtn').on('click', function(ev){
-        //     ev.preventDefault()
-        //     console.log("modal click working")
-        //     $('#postModal').modal("show")
-        // })
-
+        $('#postModal').on('shown.bs.modal', function () {
+            $('#createPostBtn').trigger('focus')
+        }) 
     </script>
-
-    
 </body>
 </html>

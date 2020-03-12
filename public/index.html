@@ -109,7 +109,8 @@
           <div class="section-profile col-lg-3 col-md-4">
             <div class="wrapper-profile">
                 <div class="profilePicContainer">
-                    <div class="profilePic"></div>
+                    <div class="profilePic" id="profilePic">
+                     </div>
                 </div>
                 <div class="username">
                     <h2>dreamTeam</h2>
@@ -452,7 +453,9 @@
             console.log(profileImage);
                 if(profileImage.response == 'OK') {
                     //alert("call successful")
-                    $("#profilePic").attr("src",profileImage.path);
+                    //$("#profilePic").attr("src",profileImage.path); 
+                    document.getElementById("profilePic").style.backgroundImage = 'url('+profileImage.path+')';
+                    document.getElementById("profilePic").style.backgroundPosition = 'center';
                 } else {
                     alert(profileImage.response);
                 }

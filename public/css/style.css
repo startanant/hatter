@@ -143,11 +143,17 @@ h1 {
     padding-top: 3px;
 }
 
-
-
 .row-post {
     margin-top: 20px;
     min-height: 30px;
+}
+
+.row-content {
+    margin-bottom: 18px;
+}
+
+.row-metrics {
+    margin-bottom: 18px;
 }
 
 .commentsContainer {
@@ -174,20 +180,6 @@ h1 {
     height: 30px;
     line-height: 30px;
 }
-
-.card-delete {
-    background-color: lightblue;
-}
-
-.row-post {
-    background-color: salmon;
-}
-
-.delete-button {
-    margin-left: 100px;
-}
-
-
 
 
 

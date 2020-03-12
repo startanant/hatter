@@ -39,6 +39,11 @@ h1 {
     padding-top: 30px;
 }
 
+.card {
+    border-radius: 20px;
+    box-shadow: 3px 3px lightsteelblue;
+}
+
 .wrapper {
     display: flex;
     flex-wrap: wrap;

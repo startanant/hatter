@@ -175,6 +175,22 @@ h1 {
     line-height: 30px;
 }
 
+.card-delete {
+    background-color: lightblue;
+}
+
+.row-post {
+    background-color: salmon;
+}
+
+.delete-button {
+    margin-left: 100px;
+}
+
+
+
+
+
 .card-follow {
     margin: 5px 10px 0px 10px; 
 }

@@ -315,13 +315,6 @@
             $("#main").hide();
         });
 
-         $('#loginBtnNew').click(function (event){
-            event.preventDefault();
-            $("#loginHeader").hide();
-            $("#welcome").hide();
-            $("#main").show();
-        });
-
         $("#logoutBtn").click( function() {
             localStorage.clear();
             location.href = '/index.html';
@@ -341,6 +334,8 @@
                 if(auth.response == 'OK') {
                     // alert("login successful")
                     $("#loginHeader").hide();
+                    $("#welcome").hide();
+                    $("#main").show();
                     console.log(auth.user.id);
                     localStorage.setItem("userId", auth.user.id);
                     localStorage.setItem("username", auth.user.name);

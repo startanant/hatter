@@ -335,7 +335,7 @@
             $.get('/api/getRecentHatts')
                 .then(response => {
                     recentHatts = response;
-                    console.log(recentHatts);
+                    // console.log(recentHatts);
                     $.get('/api/getNoOfCommentsPerHatt')
                         .then(result => {
                             // console.log(result);
@@ -474,6 +474,76 @@
                 alert('Error! Please try again later!')
             })
         }
+        async function renderUserHatts(){
+            // let userId = localStorage.getItem('userId');
+            let userId=1;
+            let getData = {
+                user_id:userId
+            }
+            // console.log(getData);
+            let commentsPerHatt = new Map();
+            let result = await $.get('/api/getNoOfCommentsPerHatt');
+            result.forEach(element => {
+                                commentsPerHatt.set(element.hatt_id, element.num);
+            })
+            console.log(commentsPerHatt);
+            result = await $.post('/api/getUserHatts',getData);
+            console.log(result);
+            let content = '';
+            result.forEach(element=>{
+                content += `<div class="card card-post card-delete">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="postPicContainer col-lg-2 col-sm-12">
+                                <div class="postPic"></div>
+                            </div>
+                            <div class="cardContent col-lg-10 col-sm-12">
+                                <div class="row">
+                                    <div class="titleContainer">
+                                        <h5 class="card-title">${element.name}</h5>
+                                        <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
+                                    </div>
+                                </div>
+                                <div class="row row-content">
+                                    <p class="card-text">${element.text}</p>
+                                </div>
+                                <div class="row row-metrics">
+                                    <div class="commentsContainer">
+                                        <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                                            <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                        </a>
+                                        <div class="counter">
+                                            <h5 id="commentsNum">${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="hattsOffContainer">
+                                        <a class="image" href="" id="hattsOffIcon">
+                                            <img src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                        </a>
+                                        <div class="counter">
+                                            <h5 id="hattsOffNum">25</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-delete">
+                                    <button onclick="deleteHatt(event)" data-hattId="${element.id}"  id="deleteBtn" type="button" class="btn btn-outline-dark btn-sm">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            })
+            // console.log(content);
+
+        }
+        async function deleteHatt(event){
+            let hattid = event.target.dataset.hattId;
+            let deleteData = {
+                id:hattid
+            }
+            let result = await $.delete('/api/deleteHatt',deleteData);
+            renderUserHatts();
+        }
 
 
         // $(document).ready(function(){
@@ -484,6 +554,7 @@
         //     getProfilePic();
         //     }
         // })
+        renderUserHatts();
     </script>
 
 

@@ -174,9 +174,9 @@ app.delete('/api/deleteComment', async ( req, res )=>{
     // res.end(JSON.stringify({response:"OK"}));
 })
 
-app.get('/api/getUserHatts', async ( req, res)=>{
-    // console.log(`api getUserHatts called ...`);
-    // console.log(req.body);
+app.post('/api/getUserHatts', async ( req, res)=>{
+    console.log(`api getUserHatts called ...`);
+    console.log(req.body);
     const result = await orm.getUserHatts(req.body);
     res.json(result);
 })

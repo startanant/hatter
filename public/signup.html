@@ -21,7 +21,7 @@ $(document).ready( async function(){
   //file size validation
   $(':file').on('change', function () {
     file = this.files[0];
-    if (file.size > 1024 * 5 * 1000) {
+    if (file.size > 1024 * 1 * 1000) {
       alert('max upload size is 1k');
       $(':file').val('');
     }

@@ -35,7 +35,34 @@
     </script>
 </head>
 <body>
-    <nav class="sticky-top navbar navbar-dark bg-dark">
+    <div id="loginHeader">
+        <div class="welcome">
+            <h1>Welcome to Hatter</h1>
+        </div>
+        <div class="login">
+            <div class="login-header">
+                <h2>Login to Hatter</h2>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="loginPassword">Password</label>
+                  <input type="password" class="form-control" id="loginPassword" placeholder="Enter Password">
+                </div>
+                <button id='submitUserBtn' type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <div class="login-footer">
+                <h2>Don't have a Hatter account?</h2>
+                <!-- <button id="signupBtn" type="submit" class="btn btn-secondary">Sign Up</button> -->
+                <a href="signup.html" class="btn btn-secondary" role="button">Sign Up</a>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="navbar sticky-top navbar-dark bg-dark">
         <a class="navbar-brand h1" href="#">
             <img src="./assets/Lightning.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             Hatter
@@ -43,8 +70,9 @@
         <form class="form-inline my-2 my-lg-0">
             <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-          </form>
+        </form>
     </nav>
+    
 
     <div class="container-fluid">
         <div class="row row-main">
@@ -285,6 +313,11 @@
         $('#postModal').on('shown.bs.modal', function () {
             $('#createPostBtn').trigger('focus')
         }) 
+
+        $("#submitUserBtn").click(function(){
+            console.log("button clicked")
+            $("#loginHeader").hide();
+        });
     </script>
 </body>
 </html>

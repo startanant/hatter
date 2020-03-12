@@ -16,6 +16,10 @@ h1 {
     height: auto;
 }
 
+#loginHeader {
+    height: 500px;
+}
+
 .container{
     min-height: 800px;
     width: 100%;

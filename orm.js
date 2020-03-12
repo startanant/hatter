@@ -156,6 +156,12 @@ async function getFollowing(data){
     return result;
 }
 
+async function getHatts(data){
+    // console.log(' getting user hatts from db ... ');
+    result = await db.query(`select user_id, count(*) as numOfHatts from hatts where user_id=${data}`);
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -171,5 +177,6 @@ module.exports = {
     addFollower,
     getProfilePic,
     getFollowers,
-    getFollowing
+    getFollowing,
+    getHatts
 }

@@ -101,6 +101,7 @@ app.post('/api/auth', async( req, res ) => {
             if (result == true) {
                 const followers = await orm.getFollowers(user[0].id);
                 const following = await orm.getFollowing(user[0].id);
+                const hatts = await orm.getHatts(user[0].id);
                 //console.log("followers:", followers);
                 
                 const userInfo = {
@@ -111,7 +112,8 @@ app.post('/api/auth', async( req, res ) => {
                     location: user[0].location,
                     picture_path: user[0].picture_path,
                     followers: followers[0].numOfFollowers,
-                    following: following[0].numFollowing
+                    following: following[0].numFollowing,
+                    hatts: hatts[0].numOfHatts
                 };
                 res.json({response:"OK", user: userInfo});
             } else {

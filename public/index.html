@@ -26,14 +26,14 @@
             location.href = '/login.html';
         }
 
-        window.onload = function() {
-            // if(!localStorage.getItem("userId")){
-            //     location.href = '/login.html';
-            // }
-            location.href = '/login.html';
-        };
+        // window.onload = function() {
+        //     // if(!localStorage.getItem("userId")){
+        //     //     location.href = '/login.html';
+        //     // }
+        //     location.href = '/index.html';
+        // };
         window.onload = function () {
-            !localStorage.key('userID') ? location.href = '/login.html' : false;
+            // !localStorage.key('userID') ? location.href = '/index.html' : false;
         };  
 
        
@@ -110,15 +110,19 @@
                 </div>
             </div>
           </div>
-
+          <!-- main cards -->
           <div class="section-feed col-lg-6 col-md-8">
-            <div class="wrapper">
+            <div id="feedSectionWrapper" class="wrapper">
+                <!-- container for hatt -->
                 <div class="card card-post">
                     <div class="card-body">
                         <div class="row">
+                            <!-- hatt starts picture -->
                             <div class="postPicContainer col-lg-2 col-sm-12">
                                 <div class="postPic"></div>
                             </div>
+                            <!-- pciture ends -->
+                            <!-- hatt contents -->
                             <div class="cardContent col-lg-10 col-sm-12">
                                 <div class="row">
                                     <div class="titleContainer">
@@ -149,12 +153,14 @@
                         </div>
                     </div>
                 </div>
+                <!-- end of container for hatt -->
 
             </div>
           </div>
 
           <div class="section-follow col-lg-3 col-md-offset-4">
-            <div class="wrapper">
+            <div id="followSection" class="wrapper">
+                <!-- card follow starts -->
                 <div class="card card-follow">
                     <div class="card-body">
                         <div class="row row-follow-main">
@@ -168,6 +174,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- card follow end -->
             </div>
           </div>
         </div>
@@ -217,88 +224,31 @@
             $('#createPostBtn').trigger('focus')
         }) 
 
-        $("#loginBtn").click(function(event){
-            event.preventDefault()
-            $("#loginHeader").hide();
-        });
+        $("#loginBtn").click(async function(event){
+                event.preventDefault();
+                const email = $('#loginEmail').val();
+                const password = $('#loginPassword').val();
+
+                const loginInfo = {
+                    email: email,
+                    password: password
+                };
+
+                const auth = await $.post("/api/auth", loginInfo);
+                if(auth.response == 'OK') {
+                    // alert("login successful")
+                    $("#loginHeader").hide();
+                    console.log(auth.user.id);
+                    localStorage.setItem("userId", auth.user.id);
+                    localStorage.setItem("username", auth.user.name);
+                    // window.location.href = '/index.html';
+                } else {
+                    alert(auth.response);
+                }
+            })
+        
     </script>
-            <div class="section-profile col-3">
-                <div class="wrapper-profile">
-                    Profile Section
-
-                    <div class="profilePicContainer">
-                        <div class="profilePic">
-                            <!-- <img id="profilePic" src="uploads/02ad92f3-272c-434a-a9cb-6d6abf55cec3.jpg" class="img-circle" alt="" width="150" height="150"> -->
-                            <img id="profilePic" src="" class="img-circle" alt="" width="150" height="150">
-                        </div>
-                    </div>
-
-                    <div class="username">
-                        <h2>dreamTeam</h2>
-                    </div>
-
-                    <div class="metrics">
-                        <div class="row row-metrics-headings">
-                            <div class="followingMetric col-6">Following</div>
-                            <div class="followingMetric col-6">Hatts Sent</div>
-                        </div>
-                        <div class="row row-metrics">
-                            <div id="followingNum" class="followingMetric col-6">250</div>
-                            <div id="hattsSentNum" class="followingMetric col-6">25</div>
-                        </div>
-                    </div>
-
-                    <div class="viewHatts">
-                        <button id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">View Hatts</button>
-                    </div>
-                    <div class="viewAccount">
-                        <button id="viewAccountBtn" type="submit" class="btn btn-sm btn-secondary">Account</button>
-                    </div>
-                    <div class="createPost">
-                        <button id="createPostBtn" type="submit" class="btn btn-lg btn-primary">Create Post</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-feed col-6">
-                <!-- Hatter Feed Section -->
-                <div id="feedSectionWrapper" class="wrapper">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">hatterUsername</h5>
-                            <p class="card-text">This is where the post text goes.</p>
-                            <h6 class="card-subtitle mb-2">Comments (0)</h6>
-                            <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                            <h4 class="card-subtitle mb-2">10 m</h4>
-                        </div>
-                    </div>
-
-
-                </div>
-                <!-- Hatter Feed Section -->
-            </div>
-
-            <div  class="section-follow col-3">
-                <!-- Follow Section -->
-                <div id="followSection" class="wrapper">
-                    <div class="card card-follow">
-                        <div class="card-body">
-                            <div class="row row-follow">
-                                <div class="col-8">
-                                    <h4 class="followAccount">followAccount</h4>
-                                </div>
-                                <div class="col-4">
-                                    <button id="followBTn" type="submit"
-                                        class="btn btn-sm btn-secondary">Follow</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+ 
 
     <script>
         //populating hatts section
@@ -324,15 +274,50 @@
                                 // console.log(commentsPerHatt.get(element.hatt_id));
                                 // let day = moment(element.tweet_time);
                                 // console.log(moment(element.tweet_time).startOf('day').fromNow());
-                                content += `<div data-userid="${element.user_id}" class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">${element.name}</h5>
-                            <p class="card-text">${element.text}</p>
-                            <h6 class="card-subtitle mb-2">Comments (${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0})</h6>
-                            <h6 class="card-subtitle mb-2">Hatts Off (0)</h6>
-                            <h4 class="card-subtitle mb-2">${moment(element.tweet_time).startOf('minute').fromNow()}</h4>
+                                content += `<div data-userid="${element.user_id}" class="card card-post">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- hatt starts picture -->
+                            <div class="postPicContainer col-lg-2 col-sm-12">
+                                <div class="postPic"></div>
+                            </div>
+                            <!-- pciture ends -->
+                            <!-- hatt contents -->
+                            <div class="cardContent col-lg-10 col-sm-12">
+                                <div class="row">
+                                    <div class="titleContainer">
+                                        <h5 class="card-title">${element.name}</h5>
+                                        <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="card-text">
+                                    <p>${element.text}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row row-metrics">
+                                    <div class="commentsContainer">
+                                        <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                                            <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                        </a>
+                                        <div class="counter">
+                                            <h5 id="commentsNum">${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="hattsOffContainer">
+                                        <a class="image" href="" id="hattsOffIcon">
+                                            <img src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                        </a>
+                                        <div class="counter">
+                                            <h5 id="hattsOffNum">25</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>`
+                    </div>
+                </div>`
                             });
                             // console.log(content);
                             $('#feedSectionWrapper').html('');
@@ -348,19 +333,33 @@
                 // console.log(result);
                 let content = '';
                     result.forEach(element=>{
-                        content += `<div class="card card-follow">
-                        <div class="card-body">
-                            <div class="row row-follow">
-                                <div class="col-8">
-                                    <h4 class="followAccount">${element.name}</h4>
-                                </div>
-                                <div class="col-4">
-                                    <button id="followBTn" data-id="${element.user}" data-name="${element.name}" type="submit"
-                                        class="btn btn-sm btn-secondary" onClick="follow(event);">Follow</button>
-                                </div>
+                    //     content += `<div class="card card-follow">
+                    //     <div class="card-body">
+                    //         <div class="row row-follow">
+                    //             <div class="col-8">
+                    //                 <h4 class="followAccount">${element.name}</h4>
+                    //             </div>
+                    //             <div class="col-4">
+                    //                 <button id="followBTn" data-id="${element.user}" data-name="${element.name}" type="submit"
+                    //                     class="btn btn-sm btn-secondary" onClick="follow(event);">Follow</button>
+                    //             </div>
+                    //         </div>
+                    //     </div>
+                    // </div>`
+
+                    content += `<div class="card card-follow">
+                    <div class="card-body">
+                        <div class="row row-follow-main">
+                            <div class="followPicContainer col-4">
+                                <div class="followPic"></div>
+                            </div>
+                            <div class="col-8">
+                                <label class="followAccount">${element.name}</label>
+                                <button id="followBTn" data-id="${element.user}" data-name="${element.name}" type="submit" class="btn btn-sm btn-secondary" onClick="follow(event);">Follow</button>
                             </div>
                         </div>
-                    </div>`
+                    </div>
+                </div>`
                     })
                     $('#followSection').html('');
                     $('#followSection').html(content)

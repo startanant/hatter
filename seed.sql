@@ -49,6 +49,10 @@ PRIMARY KEY(id));
 INSERT INTO comments (hatt_id,user_id,comment) values (1,2,'Hello to you too!'),(1,3,'I dont care!'),(6,1,'You can sign a song!'),(3,3,'I am a pro at JS!');
 
 -- ### queries ####
+-- QUERIES FOR LEFT SECTION
+---select user_id, count(*) as numOfHatts from hatts where user_id=3;
+---select user, count(*) as numOfFollowers from followers where user=3;
+---select follower, count(*) as numFollowing from followers where follower=3;
 
 -- SELECT users.id,users.name, hatts.text from users LEFT JOIN hatts ON users.id = hatts.user_id; 
 

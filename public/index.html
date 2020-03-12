@@ -317,10 +317,12 @@
                     console.log(auth.user.id);
                     localStorage.setItem("userId", auth.user.id);
                     localStorage.setItem("username", auth.user.name);
+                    localStorage.setItem("followers", auth.user.followers);
                     // window.location.href = '/index.html';
                     populateHatts();
                     populateFollowSection();
                     getProfilePic();
+                    setFollowers();
                 } else {
                     alert(auth.response);
                 }
@@ -328,6 +330,12 @@
         
     
         //populating hatts section
+
+        function setFollowers() {
+            const followers = localStorage.getItem('followers');
+            document.getElementById('followersNum').innerHTML = followers;
+
+        }
 
         async function populateHatts(){
             let recentHatts = '';

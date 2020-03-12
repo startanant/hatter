@@ -239,11 +239,13 @@
 
                     <div class="metrics">
                         <div class="row row-metrics-headings">
-                            <div class="followingMetric col-6">Following</div>
-                            <div class="followingMetric col-6">Hatts Sent</div>
+                            <div class="followingMetric col-4">Followers</div>
+                            <div class="followingMetric col-4">Following</div>
+                            <div class="followingMetric col-4">Hatts Sent</div
                         </div>
                         <div class="row row-metrics">
                             <div id="followingNum" class="followingMetric col-6">250</div>
+                            <div id="followerNum" class="followingMetric col-6">25</div>
                             <div id="hattsSentNum" class="followingMetric col-6">25</div>
                         </div>
                     </div>
@@ -403,6 +405,7 @@
 
 
         $(document).ready(function(){
+            document.getElementById("followerNum").innerHTML = localStorage.getItem('followers');
             populateHatts();
             populateFollowSection();
             getProfilePic();

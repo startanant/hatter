@@ -213,7 +213,7 @@ h1 {
 
 .card-post {
     margin: 20px 10px 5px 10px;
-    min-height: 200px;
+    padding-top: 10px;
 }
 
 .card-body {

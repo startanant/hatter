@@ -162,6 +162,18 @@ async function getHatts(data){
     return result;
 }
 
+async function getSingleHatt(data){
+    // console.log(' getting user hatts from db ... ');
+    result = await db.query(`select a.id,a.user_id,a.text,a.tweet_time,b.name from hatts a left join users b on a.user_id=b.id where a.id=${data.id}`);
+    return result;
+}
+
+async function getComments(data){
+    // console.log(' getting user hatts from db ... ');
+    result = await db.query(`select a.user_id,a.comment,a.comment_time,b.name from comments a left join users b on a.user_id = b.id where hatt_id=${data.id}`);
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -178,5 +190,7 @@ module.exports = {
     getProfilePic,
     getFollowers,
     getFollowing,
-    getHatts
+    getHatts,
+    getComments,
+    getSingleHatt
 }

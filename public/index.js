@@ -128,6 +128,7 @@ $("#loginBtn").click(async function(event){
             setFollowers();
             setFollowing();
             setHatts();
+            setUsername();
         } else {
             alert(auth.response);
         }
@@ -159,6 +160,7 @@ async function updateLocalStorage(){
         setFollowers();
         setFollowing();
         setHatts();
+        setUsername();
     } else {
         alert(auth.response);
     }
@@ -166,6 +168,11 @@ async function updateLocalStorage(){
 }
 
 //populating hatts section
+
+function setUsername() {
+    const username = localStorage.getItem('username');
+    document.getElementById('username').innerHTML = username;
+}
 
 function setFollowers() {
     const followers = localStorage.getItem('followers');

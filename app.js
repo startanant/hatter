@@ -153,6 +153,33 @@ app.post('/api/update', async( req, res ) => {
     }
 });
 
+app.post('/api/search', async( req, res ) => {
+    console.log('calling api/search');
+    const searchResult = await orm.searchTerm(req.body);
+    //console.log("result:\n ", searchResult)
+    let resultsArray = [];
+    if(searchResult[0]) {
+        searchResult.forEach( result => {
+            //console.log(username);
+            let resultObj = {
+                id: result.id,
+                user_id: result.user_id,
+                text: result.text,
+                attachement: result.attachement,
+                tweet_time: result.tweet_time,
+                username: result.name,
+                comments: result.commentCount
+            };
+            console.log(resultObj);
+            resultsArray.push(resultObj)
+        });
+        console.log("final:", resultsArray);
+        res.json({response:"OK", searchResults: resultsArray});
+    } else {
+        res.json({response:"No results found"});
+    }
+});
+
 
 app.delete('/api/deleteUser',async ( req,res )=>{
     // console.log('api deleteUser called...');
@@ -196,14 +223,15 @@ app.get('/api/getTop5Followed',async (req,res) => {
 })
 
 app.post('/api/getComments', async (req,res)=>{
+    console.log('calling api get comments',req.body);
     const result = await orm.getComments(req.body);
     res.json(result);
 })
 
 app.post('/api/getSingleHatt', async (req,res) => {
+    console.log('calling api getsinglehatt...');
     const result = await orm.getSingleHatt(req.body);
     res.json(result);
-
 })
 
 app.delete('/api/deleteComment', async ( req, res )=>{

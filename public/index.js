@@ -10,6 +10,83 @@ $("#logoutBtn").click( function() {
     location.href = '/index.html';
 });
 
+$("#searchBtn").click(async function(event){
+    alert("search");
+    event.preventDefault();
+    const searchTerm = $('#searchBar').val();
+    alert(searchTerm);
+
+    const search = await $.post("/api/search", {searchTerm})
+    console.log(search);
+    if (search.response == 'OK') {
+        console.log('search ok');
+        renderSearchResults(search.searchResults)
+    } else {
+        console.log('search not found');
+        alert(search.response);
+    }
+});
+
+function renderSearchResults(hatts) {
+    alert("rendering search results");
+    let content = '';
+    hatts.forEach(element => {
+        // console.log(element.hatt_id);
+        // console.log(commentsPerHatt.get(element.hatt_id));
+        // let day = moment(element.tweet_time);
+        // console.log(moment(element.tweet_time).startOf('day').fromNow());
+    content += `<div data-userid="${element.user_id}" class="card card-post">
+    <div class="card-body">
+    <div class="row">
+    <!-- hatt starts picture -->
+    <div class="postPicContainer col-lg-2 col-sm-12">
+        <div class="postPic"></div>
+    </div>
+    <!-- pciture ends -->
+    <!-- hatt contents -->
+    <div class="cardContent col-lg-10 col-sm-12">
+        <div class="row">
+            <div class="titleContainer">
+                <h5 class="card-title">${element.username}</h5>
+                <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card-text">
+            <p>${element.text}</p>
+            </div>
+        </div>
+        
+        <div class="row row-metrics">
+            <div class="commentsContainer">
+                <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                    <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                </a>
+                <div class="counter">
+                    <h5 id="commentsNum">${element.comments}</h5>
+                </div>
+            </div>
+            <div class="hattsOffContainer">
+                <a class="image" href="" id="hattsOffIcon">
+                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                </a>
+                <div class="counter">
+                    <h5 id="hattsOffNum">25</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>`
+    });
+    // console.log(content);
+    $('#feedSectionWrapper').html('');
+    $('#feedSectionWrapper').html(content);
+
+    
+}
+
 $("#loginBtn").click(async function(event){
         event.preventDefault();
         const email = $('#loginEmail').val();

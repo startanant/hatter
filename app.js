@@ -169,8 +169,8 @@ app.post('/api/addFollower',async ( req,res)=>{
 })
 
 app.post('/api/addComment', async ( req, res)=>{
-    // console.log('api addComment called...');
-    // console.log(req.body);
+    console.log('api addComment called...');
+    console.log(req.body);
     const result = await orm.addComment(req.body);
     // console.log('result from add comment',result);
     res.json({response:"OK",id:result.insertId});

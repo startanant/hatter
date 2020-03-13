@@ -30,6 +30,7 @@ $("#loginBtn").click(async function(event){
             console.log(auth.user.id);
             localStorage.setItem("userId", auth.user.id);
             localStorage.setItem("username", auth.user.name);
+            localStorage.setItem("email", auth.user.email);
             localStorage.setItem("followers", auth.user.followers);
             localStorage.setItem("following", auth.user.following);
             localStorage.setItem("hatts", auth.user.hatts);
@@ -45,6 +46,37 @@ $("#loginBtn").click(async function(event){
         }
     })
 
+window.onload = function() {
+    updateLocalStorage();
+};
+
+async function updateLocalStorage(){
+    const email = localStorage.getItem('email');
+    const update = await $.post("/api/update", {email});
+    console.log(update);
+    if(update.response == 'OK') {
+        // alert("login successful")
+        $("#loginHeader").hide();
+        $("#welcome").hide();
+        $("#main").show();
+        console.log(update.user.id);
+        localStorage.setItem("username", update.user.name);
+        localStorage.setItem("email", update.user.email);
+        localStorage.setItem("followers", update.user.followers);
+        localStorage.setItem("following", update.user.following);
+        localStorage.setItem("hatts", update.user.hatts);
+        // window.location.href = '/index.html';
+        populateHatts();
+        populateFollowSection();
+        getProfilePic();
+        setFollowers();
+        setFollowing();
+        setHatts();
+    } else {
+        alert(auth.response);
+    }
+
+}
 
 //populating hatts section
 
@@ -204,6 +236,7 @@ function follow(event){
     // console.log(postData);
     $.post('/api/addFollower',postData)
     .then(result => {
+        updateLocalStorage();
         alert(`You are now following ${event.target.dataset.name}`);
     })
     .catch(error=>{
@@ -316,6 +349,8 @@ async function deleteHatt(event){
         type:'DELETE',
         data:deleteData});
     renderUserHatts();
+    updateLocalStorage();
+
 }
 
 
@@ -330,6 +365,7 @@ async function createHatt(event){
     console.log(postData);
     const result = await $.post('/api/addHatt',postData);
     console.log(result);
+    updateLocalStorage();
 
     // $('#postForm')
 }

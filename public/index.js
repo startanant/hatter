@@ -142,29 +142,16 @@ async function populateFollowSection(){
         // console.log(result);
         let content = '';
             result.forEach(element=>{
-            //     content += `<div class="card card-follow">
-            //     <div class="card-body">
-            //         <div class="row row-follow">
-            //             <div class="col-8">
-            //                 <h4 class="followAccount">${element.name}</h4>
-            //             </div>
-            //             <div class="col-4">
-            //                 <button id="followBTn" data-id="${element.user}" data-name="${element.name}" type="submit"
-            //                     class="btn btn-sm btn-secondary" onClick="follow(event);">Follow</button>
-            //             </div>
-            //         </div>
-            //     </div>
-            // </div>`
-
             content += `<div class="card card-follow">
             <div class="card-body">
                 <div class="row row-follow-main">
-                    <div class="followPicContainer col-4">
+                    <div class="followPicContainer col-3">
                         <div class="followPic"></div>
                     </div>
-                    <div class="col-8">
-                        <label class="followAccount">${element.name}</label>
-                        <button id="followBTn" data-id="${element.user}" data-name="${element.name}" type="submit" class="btn btn-sm btn-secondary" onClick="follow(event);">Follow</button>
+                    <div class="col-9">
+                        <h5 class="followAccount">${element.name}<span id="followBTn" data-id="${element.user}" data-name="${element.name}"class="badge badge-pill badge-primary" onClick="follow(event);">follow</span></h5>
+                       <!-- confirm that new follow button works -->
+                        <!-- <button id="followBTn" type="submit" class="btn btn-sm btn-outline-secondary">Follow</button> -->
                     </div>
                 </div>
             </div>

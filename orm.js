@@ -76,6 +76,21 @@ async function authUser(data){
     return result;
 }
 
+async function searchTerm(data){
+    //const query = `select * from hatts where text LIKE "%${data.searchTerm}%"`;
+    const query = `select t.id, t.user_id, t.text,t.attachement,t.tweet_time, u.name , count(distinct c.id) AS commentCount
+    from hatts t 
+    left join users u on t.user_id=u.id 
+    left join comments c on t.id = c.hatt_id 
+    where t.text like '%${data.searchTerm}%' 
+    group by t.id
+    order by t.tweet_time DESC;`
+    //console.log(query);
+    const result = await db.query(query);
+    //console.log(result);
+    return result;
+}
+
 async function deleteUser(data){
     // console.log(`deleting: ${data}`);
     result = await db.query(`delete from users where id=?`,[data.id]);
@@ -162,6 +177,26 @@ async function getHatts(data){
     return result;
 }
 
+async function getSingleHatt(data){
+    // console.log(' getting user hatts from db ... ');
+    result = await db.query(`select a.id,a.user_id,a.text,a.tweet_time,b.name from hatts a left join users b on a.user_id=b.id where a.id=${data.id}`);
+    return result;
+}
+
+async function getComments(data){
+    // console.log(' getting user hatts from db ... ');
+    result = await db.query(`select a.user_id,a.comment,a.comment_time,b.name from comments a left join users b on a.user_id = b.id where hatt_id=${data.id}`);
+    return result;
+}
+
+async function getNamefromUserID(data){
+    //console.log(' getting name from userid ... ');
+    let query = `select name from users where id=${data}`;
+    result = await db.query(query);
+    //console.log(result);
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -178,5 +213,9 @@ module.exports = {
     getProfilePic,
     getFollowers,
     getFollowing,
-    getHatts
+    getHatts,
+    getComments,
+    getSingleHatt,
+    searchTerm,
+    getNamefromUserID
 }

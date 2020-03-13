@@ -10,6 +10,94 @@ $("#logoutBtn").click( function() {
     location.href = '/index.html';
 });
 
+$("#searchBtn").click(async function(event){
+    //alert("search");
+    event.preventDefault();
+    const searchTerm = $('#searchBar').val();
+    //alert(searchTerm);
+
+    const search = await $.post("/api/search", {searchTerm})
+    console.log(search);
+    if (search.response == 'OK') {
+        //console.log('search ok');
+        renderSearchResults(search.searchResults)
+    } else {
+        console.log('search not found');
+        console.log(search.response);
+        let content = '';
+        content += `<div id="noHatts" class="card card-body card-noHatts">
+            <div class="row row-noHatts">
+            <div class="noHatts-heading col-7">No results found for search term "${searchTerm}".</div>
+            <div class="noHatts-button col-5">
+                 <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-sm btn-primary">Create Hatt</button>
+            </div>
+            </div>
+            </div>`;
+        $('#feedSectionWrapper').html('');
+        $('#feedSectionWrapper').html(content);
+    }
+});
+
+function renderSearchResults(hatts) {
+    //alert("rendering search results");
+    let content = '';
+    hatts.forEach(element => {
+        // console.log(element.hatt_id);
+        // console.log(commentsPerHatt.get(element.hatt_id));
+        // let day = moment(element.tweet_time);
+        // console.log(moment(element.tweet_time).startOf('day').fromNow());
+        content += `<div data-userid="${element.user_id}" data-hattid="${element.id}" class="card card-post">
+        <div class="card-body">
+            <div class="row">
+                <!-- hatt starts picture -->
+                <div class="postPicContainer col-lg-2 col-sm-12">
+                    <div class="postPic"></div>
+                </div>
+                <!-- pciture ends -->
+                <!-- hatt contents -->
+                <div class="cardContent col-lg-10 col-sm-12">
+                    <div class="row">
+                        <div class="titleContainer">
+                            <h5 class="card-title">${element.username}</h5>
+                            <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card-text">
+                        <p>${element.text}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row row-metrics">
+                        <div class="commentsContainer">
+                            <a onclick="updateModal(event)" data-hattid=${element.id} data-user_id=${element.user_id} data-username=${element.username} class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                                <img data-username="${element.username}" data-userid="${element.user_id}" data-hattid="${element.id}" src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                            </a>
+                            <div class="counter">
+                                <h5 id="commentsNum">${element.comments}</h5>
+                            </div>
+                        </div>
+                        <div class="hattsOffContainer">
+                            <a class="image" href="" id="hattsOffIcon">
+                                <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                            </a>
+                            <div class="counter">
+                                <h5 id="hattsOffNum">25</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`
+    });
+    // console.log(content);
+    $('#feedSectionWrapper').html('');
+    $('#feedSectionWrapper').html(content);
+
+    
+}
+
 $("#loginBtn").click(async function(event){
         event.preventDefault();
         const email = $('#loginEmail').val();
@@ -92,7 +180,83 @@ function setHatts(){
     const hatts = localStorage.getItem('hatts');
     document.getElementById('hattsSentNum').innerHTML = hatts;
 }
+async function showComments(event){
+    if (event.target.id == 53){
+        // console.log(event);
+        const postData = {
+            id:event.target.dataset.hattid
+        }
+        const resultSingle = await $.post('/api/getSingleHatt',postData);
+        console.log(resultSingle);
+        const result = await $.post('/api/getComments',postData);
+        console.log(result);
+        if (result.length > 0){
+        let contentMain = `<!-- comment card -->
+        <div class="card card-post card-comment">
+            <div class="card-body">
+                <div class="row">
+                    <!-- hatt starts picture -->
+                    <div class="postPicContainer col-lg-2 col-sm-12">
+                        <div class="postPic"></div>
+                    </div>
+                    <!-- pciture ends -->
+                    <!-- hatt contents -->
+                    <div class="cardContent col-lg-10 col-sm-12">
+                        <div class="row">
+                            <div class="titleContainer">
+                                <h5 class="card-title">${resultSingle[0].name}</h5>
+                                <h6 class="timeSince">${moment(resultSingle[0].tweet_time).startOf('minute').fromNow()}</h6>
+                            </div>
+                        </div>
+                        <div class="row row-content">
+                            <p class="card-text">${resultSingle[0].text}</p>
+                        </div>
+                        <div class="row row-metrics">
+                            <div class="commentsContainer">
+                                <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                                    <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                </a>
+                                <div class="counter">
+                                    <h5 id="commentsNum">4</h5>
+                                </div>
+                            </div>
+                            <div class="hattsOffContainer">
+                                <a class="image" href="" id="hattsOffIcon">
+                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                </a>
+                                <div class="counter">
+                                    <h5 id="hattsOffNum">25</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="commentsSection-container">`;
+            let content = '';
+        result.forEach(element =>{
+            content += `
+                
+                    <div class="commentPost">
+                        <div class="row row-comment-header">
+                            <div class="poster-username">${element.name}</div>
+                            <div class="timeSince timeSince-comment">${moment(element.comment_time).startOf('minute').fromNow()}</div>
+                        </div>
+                        <div class="comment-text">
+                            ${element.comment}
+                        </div>
+                    </div>
 
+            `
+        })
+        $('#feedSectionWrapper').html('');
+        $('#feedSectionWrapper').html(contentMain+content + "</div>");
+        }
+
+        
+    }
+    // console.log(event.target.id);
+    // console.log(event.target.dataset.id);
+}
 async function populateHatts(){
     let recentHatts = '';
     let commentsPerHatt = new Map();
@@ -114,9 +278,9 @@ async function populateHatts(){
                         // console.log(commentsPerHatt.get(element.hatt_id));
                         // let day = moment(element.tweet_time);
                         // console.log(moment(element.tweet_time).startOf('day').fromNow());
-                        content += `<div data-userid="${element.user_id}" data-hattid="${element.id}" class="card card-post">
+                        content += `<div onclick="showComments(event);" data-userid="${element.user_id}" data-hattid="${element.id}" class="card card-post">
             <div class="card-body">
-                <div class="row">
+                <div class="row" data-userid="${element.user_id}" data-hattid="${element.id}">
                     <!-- hatt starts picture -->
                     <div class="postPicContainer col-lg-2 col-sm-12">
                         <div class="postPic"></div>
@@ -130,7 +294,7 @@ async function populateHatts(){
                                 <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" id="53" data-userid="${element.user_id}" data-hattid="${element.id}">
                             <div class="card-text">
                             <p>${element.text}</p>
                             </div>
@@ -255,32 +419,14 @@ async function renderUserHatts(){
     // console.log(result);
     if (result.length === 0){
         console.log('no user hats to display!');
-        let content = `<div class="card card-post">
-            <div class="card-body">
-                <div class="row">
-                    <!-- hatt starts picture -->
-                    <div class="postPicContainer col-lg-2 col-sm-12">
-                        <div class="postPic"></div>
-                    </div>
-                    <!-- pciture ends -->
-                    <!-- hatt contents -->
-                    <div class="cardContent col-lg-10 col-sm-12">
-                        <div class="row">
-                            <div class="titleContainer">
-                                <h5 class="card-title">${localStorage.getItem('username')}</h5>
-                                
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="card-text">
-                            <p>Hello! It is empty here! Why don't you post something?</p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
+        let content = `<div id="noHatts" class="card card-body card-noHatts">
+        <div class="row row-noHatts">
+            <div class="noHatts-heading col-7">You have not created any Hatts yet.</div>
+            <div class="noHatts-button col-5">
+                 <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-sm btn-primary">Create Hatt</button>
             </div>
-        </div>`;
+        </div>
+     </div>`;
         $('#feedSectionWrapper').html('');
         $('#feedSectionWrapper').html(content);
         return;

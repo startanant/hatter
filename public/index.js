@@ -188,8 +188,9 @@ function setHatts(){
     document.getElementById('hattsSentNum').innerHTML = hatts;
 }
 async function showComments(event){
+    // console.log(event.target);
     if (event.target.id == 53){
-        // console.log(event);
+        console.log(event.target.dataset.hattid);
         const postData = {
             id:event.target.dataset.hattid
         }
@@ -440,20 +441,20 @@ async function renderUserHatts(){
     }
     let content = '';
     result.forEach(element=>{
-        content += `<div class="card card-post card-delete">
+        content += `<div onclick="showComments(event);" class="card card-post card-delete">
             <div class="card-body">
-                <div class="row">
+                <div  class="row" data-hattid="${element.id}" id="53">
                     <div class="postPicContainer col-lg-2 col-sm-12">
                         <div class="postPic"></div>
                     </div>
                     <div class="cardContent col-lg-10 col-sm-12">
-                        <div class="row">
+                        <div class="row" data-hattid="${element.id}" id="53">
                             <div class="titleContainer">
                                 <h5 class="card-title">${element.name}</h5>
                                 <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
                             </div>
                         </div>
-                        <div class="row row-content">
+                        <div  class="row  row-content" data-hattid="${element.id}" id="53">
                             <p class="card-text">${element.text}</p>
                         </div>
                         <div class="row row-metrics">

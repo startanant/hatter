@@ -136,10 +136,15 @@ async function populateHatts(){
 
 }
 function updateModal(event){
-    console.log(event.target.dataset);
-    $('#postFormComment').val(event.target.dataset.hattid);
-    $('#postModalBtnComment').attr(`data-hattid="${event.target.dataset.hattid}"`);
-    $('#commentTo').val(event.target.dataset.username);
+    // console.log(event.target.dataset);
+    // $('#postFormComment').val(event.target.dataset.hattid);
+    $('#postModalBtnComment').data("hattid",event.target.dataset.hattid);
+    $('#postModalBtnComment').data("userid",event.target.dataset.user_id);
+    $('#commentTo').text(`@${event.target.dataset.username}`);
+    // $('#postModalBtnComment').val('test');
+    // let value = $('#postModalBtnComment').data("hattid");
+    // $('#postFormComment').val(value);
+
 }
 async function populateFollowSection(){
     $.get('/api/getTop5Followed')
@@ -312,10 +317,10 @@ async function deleteHatt(event){
 
 
 async function createHatt(event){
-    // console.log('create hatt clicked');
+    console.log('create hatt clicked');
     console.log($('#postForm').val());
     // console.log(localStorage.getItem('userId'));
-    postData = {
+    const postData = {
         user_id:localStorage.getItem('userId'),
         text:$('#postForm').val()
     }
@@ -325,6 +330,18 @@ async function createHatt(event){
     window.location.href = '/index.html';
 
     // $('#postForm')
+}
+
+async function createComment(event){
+    console.log('create comment button clicked!');
+    const postData = {
+        user_id:localStorage.getItem('userId'),
+        hatt_id:('#postModalBtnComment').data("hattid"),
+        comment:$('#postFormComment').val()
+    }
+    console.log(postData);
+    const result = await $.post('/api/addComment',postData);
+    window.location.href = '/index.html';
 }
 
 $(document).ready(function() {

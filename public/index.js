@@ -4,7 +4,6 @@ $('#postModal').on('shown.bs.modal', function () {
 
  //! !!!!!!! for UI testing >>>>> remove this code 
  
- 
 
 $("#logoutBtn").click( function() {
     localStorage.clear();
@@ -140,7 +139,7 @@ async function populateHatts(){
                         <div class="row row-metrics">
                             <div class="commentsContainer">
                                 <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
-                                    <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                    <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                 </a>
                                 <div class="counter">
                                     <h5 id="commentsNum">${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0}</h5>
@@ -148,7 +147,7 @@ async function populateHatts(){
                             </div>
                             <div class="hattsOffContainer">
                                 <a class="image" href="" id="hattsOffIcon">
-                                    <img src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
                                     <h5 id="hattsOffNum">25</h5>
@@ -180,10 +179,9 @@ async function populateFollowSection(){
                     <div class="followPicContainer col-3">
                         <div class="followPic"></div>
                     </div>
-                    <div class="col-9">
-                        <h5 class="followAccount">${element.name}<span id="followBTn" data-id="${element.user}" data-name="${element.name}"class="badge badge-pill badge-primary" onClick="follow(event);">follow</span></h5>
-                       <!-- confirm that new follow button works -->
-                        <!-- <button id="followBTn" type="submit" class="btn btn-sm btn-outline-secondary">Follow</button> -->
+                    <div class="follow-card-body col-9">
+                        <h5 class="followAccount">${element.name}</h5>
+                        <button id="followBtn"data-id="${element.user}"data-name="${element.name}"class="btn btn-primary btn-sm"onClick="follow(event);">follow</button>
                     </div>
                 </div>
             </div>
@@ -297,7 +295,7 @@ async function renderUserHatts(){
                         <div class="row row-metrics">
                             <div class="commentsContainer">
                                 <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
-                                    <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                    <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                 </a>
                                 <div class="counter">
                                     <h5 id="commentsNum">${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0}</h5>
@@ -305,7 +303,7 @@ async function renderUserHatts(){
                             </div>
                             <div class="hattsOffContainer">
                                 <a class="image" href="" id="hattsOffIcon">
-                                    <img src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
                                     <h5 id="hattsOffNum">25</h5>

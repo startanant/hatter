@@ -39,11 +39,11 @@ class Database {
 
 
 const db = new Database({
-    host: "localhost",
+    host: process.env.DB_HOST,
     port: 3306,
-    user: "root",
+    user: process.env.DB_USER,
     password: process.env.DB_PWD,
-    database: "hatter"
+    database: process.env.DB_NAME
 });
 
 async function addHatt(data){

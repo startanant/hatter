@@ -83,10 +83,11 @@ async function searchTerm(data){
     left join users u on t.user_id=u.id 
     left join comments c on t.id = c.hatt_id 
     where t.text like '%${data.searchTerm}%' 
-    group by t.id;`
-    console.log(query);
+    group by t.id
+    order by t.tweet_time DESC;`
+    //console.log(query);
     const result = await db.query(query);
-    console.log(result);
+    //console.log(result);
     return result;
 }
 

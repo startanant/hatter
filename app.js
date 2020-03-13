@@ -126,6 +126,33 @@ app.post('/api/auth', async( req, res ) => {
     
 });
 
+app.post('/api/update', async( req, res ) => {
+    console.log('calling api/update');
+    //console.log(req.body);
+    const user = await orm.authUser(req.body);
+    //console.log(user);
+    if (user[0]) {
+        const followers = await orm.getFollowers(user[0].id);
+        const following = await orm.getFollowing(user[0].id);
+        const hatts = await orm.getHatts(user[0].id);
+
+        const userInfo = {
+            id: user[0].id,
+            name: user[0].name,
+            email: user[0].email,
+            password: user[0].password,
+            location: user[0].location,
+            picture_path: user[0].picture_path,
+            followers: followers[0].numOfFollowers,
+            following: following[0].numFollowing,
+            hatts: hatts[0].numOfHatts
+        };
+        res.json({response:"OK", user: userInfo});
+    } else {
+        res.json({response: "Unable to update. Try again?"});
+    }
+});
+
 
 app.delete('/api/deleteUser',async ( req,res )=>{
     // console.log('api deleteUser called...');

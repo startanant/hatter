@@ -138,8 +138,8 @@ async function populateHatts(){
                         
                         <div class="row row-metrics">
                             <div class="commentsContainer">
-                                <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
-                                    <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                <a onclick="updateModal(event)" data-hattid=${element.id} data-user_id=${element.user_id} data-username=${element.name} class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                                    <img data-username="${element.name}" data-userid="${element.user_id}" data-hattid="${element.id}" src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                 </a>
                                 <div class="counter">
                                     <h5 id="commentsNum">${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0}</h5>
@@ -167,7 +167,7 @@ async function populateHatts(){
 
 }
 function updateModal(event){
-    // console.log(event.target.dataset);
+    console.log(event.target.dataset);
     // $('#postFormComment').val(event.target.dataset.hattid);
     $('#postModalBtnComment').data("hattid",event.target.dataset.hattid);
     $('#postModalBtnComment').data("userid",event.target.dataset.user_id);
@@ -305,8 +305,8 @@ async function renderUserHatts(){
                         </div>
                         <div class="row row-metrics">
                             <div class="commentsContainer">
-                                <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
-                                    <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                <a onclick="updateModal(event)" class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                                    <img data-username="${element.name}" data-userid="${element.user_id}" data-hattid="${element.id}"  src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                 </a>
                                 <div class="counter">
                                     <h5 id="commentsNum">${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0}</h5>

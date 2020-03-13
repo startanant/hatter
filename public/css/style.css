@@ -3,15 +3,16 @@ h1 {
 }
 
 #loginHeader {
-    height: 20vh;
+    height: 18vh;
 }
 
 #welcome {
     width: 100%;
     text-align: center;
-    height: 80vh;
+    height: 82vh;
     background-image: linear-gradient(#000046, #1cb5e0);
     background-image: linear-gradient(#4286f4, #373b44);
+    background-image: linear-gradient(#1488cc, #2b32b2);
     padding: 0px;
     padding-top: 140px; 
 }
@@ -162,8 +163,6 @@ h1 {
     margin: 10px 20px 10px 20px;
     font-family: 'Baloo Thambi 2', cursive;
 }
-
-
 
 .metrics {
     /* min-height: 100px; */

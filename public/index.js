@@ -141,6 +141,7 @@ function updateModal(event){
     $('#postModalBtnComment').data("hattid",event.target.dataset.hattid);
     $('#postModalBtnComment').data("userid",event.target.dataset.user_id);
     $('#commentTo').text(`@${event.target.dataset.username}`);
+    $('#postFormComment').val('say something ')
     // $('#postModalBtnComment').val('test');
     // let value = $('#postModalBtnComment').data("hattid");
     // $('#postFormComment').val(value);
@@ -332,14 +333,15 @@ async function createHatt(event){
     // $('#postForm')
 }
 
-async function createComment(event){
+async function createComment2(){
     console.log('create comment button clicked!');
     const postData = {
         user_id:localStorage.getItem('userId'),
-        hatt_id:('#postModalBtnComment').data("hattid"),
+        hatt_id:$('#postModalBtnComment').data("hattid"),
         comment:$('#postFormComment').val()
     }
-    console.log(postData);
+    
+    // console.log(postData);
     const result = await $.post('/api/addComment',postData);
     window.location.href = '/index.html';
 }

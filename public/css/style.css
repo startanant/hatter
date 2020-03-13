@@ -113,6 +113,26 @@ h1 {
     padding-top: 30px;
 }
 
+.card-interval-container {
+    text-align: center;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.card-interval {
+    display: inline-block;
+    width: 300px;
+    height: auto;
+    line-height: 24px;
+    background-color: #4286f4;
+    padding: 2px;
+    border-radius: 20px;
+    box-shadow: 2px 2px lightsteelblue;
+    font-weight: bolder;
+    color: white;
+    font-size: 20px;
+}
+
 .card.card-body.card-noHatts {
     text-align: center;
     min-height: 10px;
@@ -127,24 +147,6 @@ h1 {
     padding-top: 3px;
     text-align: center;
 }
-
-.card {
-    border-radius: 20px;
-    box-shadow: 2px 2px lightsteelblue;
-    background-color: #ecf0f1;
-    padding-right: 35px;
-}
-
-@media screen and (max-width: 1100px) {
-    .card {
-      padding: 10px 20px 10px 20px;
-      margin: 10px 0px 10px 0px;
-    }
-    .metrics {
-        margin-left: 70px;
-        margin-right: 70px;
-    }
-  }
 
 .wrapper {
     display: flex;
@@ -189,6 +191,13 @@ h1 {
     border-radius: 20px;
 }
 
+@media screen and (max-width: 1100px) {
+    .metrics {
+        margin-left: 70px;
+        margin-right: 70px;
+    }
+  }
+
 .metrics-following {
     /* min-height: 60px; */
     /* line-height: 60px; */
@@ -227,6 +236,20 @@ h1 {
     padding: 20px;
 }
 
+.card {
+    border-radius: 20px;
+    box-shadow: 2px 2px lightsteelblue;
+    background-color: #ecf0f1;
+    padding-right: 35px;
+}
+
+@media screen and (max-width: 1100px) {
+    .card {
+      padding: 10px 20px 10px 20px;
+      margin: 10px 0px 10px 0px;
+    }
+  }
+
 .card-post {
     margin: 20px 10px 5px 10px;
     padding-top: 10px;
@@ -235,6 +258,7 @@ h1 {
 .card-body {
     padding-top: 20px;
 }
+
 
 
 .postPic {

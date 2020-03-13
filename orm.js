@@ -98,7 +98,7 @@ async function deleteComment(data){
 
 async function getUserHatts(data){
     // console.log(' getting user hatts from db ... ');
-    result = await db.query('select a.id,a.user_id,b.name ,a.text,a.tweet_time from hatts a left join users b on a.user_id = b.id where a.user_id = ?;',[data.user_id]);
+    result = await db.query('select a.id,a.user_id,b.name ,a.text,a.tweet_time from hatts a left join users b on a.user_id = b.id where a.user_id = ? order by a.tweet_time desc',[data.user_id]);
     return result;
 }
 

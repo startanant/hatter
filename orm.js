@@ -2,7 +2,13 @@ const mysql = require( 'mysql' );
 
 class Database {
     constructor( config ) {
-        this.connection = mysql.createConnection( config );
+        if (process.env.JAWSDB_URL) {
+            // Database is JawsDB on Heroku
+            this.connection = mysql.createConnection(process.env.JAWSDB_URL);
+        } else {
+            this.connection = mysql.createConnection( config );
+        }
+        
         this.connection ? console.log('db connection established'):process.exit(0);
     }
     query( sql, args=[] ) {

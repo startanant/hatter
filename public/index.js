@@ -307,16 +307,17 @@ async function deleteHatt(event){
 
 
 async function createHatt(event){
-    console.log('create hatt clicked');
+    // console.log('create hatt clicked');
     console.log($('#postForm').val());
-    console.log(localStorage.getItem('userId'));
+    // console.log(localStorage.getItem('userId'));
     postData = {
         user_id:localStorage.getItem('userId'),
         text:$('#postForm').val()
     }
-    console.log(postData);
+    // console.log(postData);
     const result = await $.post('/api/addHatt',postData);
-    console.log(result);
+    // console.log(result);
+    window.location.href = '/index.html';
 
     // $('#postForm')
 }

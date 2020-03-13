@@ -44,13 +44,6 @@ h1 {
     }
 } */
 
-.login {
-    width: 600px;
-    margin-left: 100px;
-    margin-right: 100px;
-    height: auto;
-}
-
 .inlineForm {
     width: auto;
     margin: 50px 30px 30px 30px;
@@ -259,8 +252,6 @@ h1 {
     padding-top: 20px;
 }
 
-
-
 .postPic {
     background-color: slategray;
     margin: 0px 0px 0px 15px;
@@ -376,6 +367,70 @@ h1 {
     display: inline-block;
     text-align: center;
 }
+
+/* Signup Page */
+
+.signup-main {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(#1488cc, #2b32b2);
+}
+
+.signup-header {
+    margin-bottom: 40px;
+    font-size: 50px;
+    font-family: 'Baloo Thambi 2', cursive;
+}
+
+.signup-container {
+    width: 200px;
+    height: 600px;
+    margin: 100px 50px 100px 100px;
+    background-color: #ecf0f1;
+    border-radius: 20px;
+    padding: 50px;
+    box-shadow: 2px 2px lightsteelblue;
+
+}
+
+.signup-logo-container {
+    width: 260px;
+    height: 600px;
+    margin: 100px 150px 100px 50px;
+    padding: 30px;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.signup-hat-icon{
+    height: 200px;
+}
+.signup-welcome-heading-text {
+    font-family: 'Prompt', sans-serif;
+    font-family: 'Baloo Thambi 2', cursive;
+    font-size: 180px;
+    line-height: 90px;
+    color: white;
+    margin-top: 0px;
+}
+
+@media screen and (max-width: 1100px) {
+    .signup-logo-container {
+        display: none;
+    }
+    .signup-logo-container {
+        width: auto;
+        height: 600px;
+        margin: 50px 50px 100px 50px;
+        padding: 5px;
+        text-align: center;
+        background-color: springgreen;
+    }
+  }
+
+
+
+
 
 
 

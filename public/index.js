@@ -212,19 +212,52 @@ function follow(event){
 }
 async function renderUserHatts(){
     // let userId = localStorage.getItem('userId');
-    let userId=1;
+    let userId=localStorage.getItem('userId');
     let getData = {
         user_id:userId
     }
     // console.log(getData);
     let commentsPerHatt = new Map();
     let result = await $.get('/api/getNoOfCommentsPerHatt');
+    // console.log(result);
     result.forEach(element => {
                         commentsPerHatt.set(element.hatt_id, element.num);
     })
     // console.log(commentsPerHatt);
     result = await $.post('/api/getUserHatts',getData);
     // console.log(result);
+    if (result.length === 0){
+        console.log('no user hats to display!');
+        let content = `<div class="card card-post">
+            <div class="card-body">
+                <div class="row">
+                    <!-- hatt starts picture -->
+                    <div class="postPicContainer col-lg-2 col-sm-12">
+                        <div class="postPic"></div>
+                    </div>
+                    <!-- pciture ends -->
+                    <!-- hatt contents -->
+                    <div class="cardContent col-lg-10 col-sm-12">
+                        <div class="row">
+                            <div class="titleContainer">
+                                <h5 class="card-title">${localStorage.getItem('username')}</h5>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card-text">
+                            <p>Hello! It is empty here! Why don't you post something?</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>`;
+        $('#feedSectionWrapper').html('');
+        $('#feedSectionWrapper').html(content);
+        return;
+    }
     let content = '';
     result.forEach(element=>{
         content += `<div class="card card-post card-delete">

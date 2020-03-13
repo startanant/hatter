@@ -100,8 +100,13 @@ h1 {
     padding: 20px 30px 50px 30px;
     border-right: 3px solid #7F818F;
     border-left: 3px solid #7F818F;
-
 }
+
+@media screen and (max-width: 1100px) {
+    .section-feed {
+        padding: 20px 2px 50px 2px;
+    }
+  }
 
 .section-follow {
     background-color: #51555C;
@@ -132,7 +137,8 @@ h1 {
 
 @media screen and (max-width: 1100px) {
     .card {
-      padding: 10px 30px 10px 30px;
+      padding: 10px 20px 10px 20px;
+      margin: 10px 0px 10px 0px;
     }
     .metrics {
         margin-left: 70px;
@@ -298,7 +304,15 @@ h1 {
     border-radius: 20px;
     padding: 20px;
     margin-left: 16px;
+    margin-bottom: 20px;
 }
+
+@media screen and (max-width: 1100px) {
+    .commentsSection-container {
+        margin: 0px 2px 20px 2px;
+        padding: 6px;
+    }
+  }
 
 .commentPost {
     background-color: #ecf0f1;

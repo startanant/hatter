@@ -211,10 +211,8 @@ function follow(event){
     })
 }
 async function renderUserHatts(){
-    // let userId = localStorage.getItem('userId');
-    let userId=localStorage.getItem('userId');
     let getData = {
-        user_id:userId
+        user_id:localStorage.getItem('userId')
     }
     // console.log(getData);
     let commentsPerHatt = new Map();
@@ -321,15 +319,20 @@ async function deleteHatt(event){
 }
 
 
-// $(document).ready(function(){
-//     if (localStorage.key('userId')){
-//     $("#loginHeader").hide();
-//     populateHatts();
-//     populateFollowSection();
-//     getProfilePic();
-//     }
-// })
-// renderUserHatts();
+async function createHatt(event){
+    console.log('create hatt clicked');
+    console.log($('#postForm').val());
+    console.log(localStorage.getItem('userId'));
+    postData = {
+        user_id:localStorage.getItem('userId'),
+        text:$('#postForm').val()
+    }
+    console.log(postData);
+    const result = await $.post('/api/addHatt',postData);
+    console.log(result);
+
+    // $('#postForm')
+}
 
 $(document).ready(function() {
     if (localStorage.key('userId')){

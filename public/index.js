@@ -198,8 +198,8 @@ function follow(event){
     // console.log('btn follow clicked');
     // console.log(event.target.dataset.id);
     postData = {
-        user:localStorage.getItem('userId'),
-        follower:event.target.dataset.id
+        user:event.target.dataset.id,
+        follower:localStorage.getItem('userId')
     }
     // console.log(postData);
     $.post('/api/addFollower',postData)
@@ -332,6 +332,19 @@ async function deleteHatt(event){
 // renderUserHatts();
 
 $(document).ready(function() {
-    $("#main").hide();
-    console.log('test');
+    if (localStorage.key('userId')){
+        console.log('key exists!');
+        $("#loginHeader").hide();
+        $("#welcome").hide();
+        $("#main").show();
+        populateHatts();
+        populateFollowSection();
+        getProfilePic();
+        setFollowers();
+        setFollowing();
+        setHatts();
+    } else {
+        $("#main").hide();
+    }
+    // console.log('test');
 });

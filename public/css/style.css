@@ -101,7 +101,7 @@ h1 {
 
 .section-feed {
     background-color: #51555C;
-    padding: 20px 30px 10px 30px;
+    padding: 20px 30px 50px 30px;
     border-right: 3px solid #7F818F;
     border-left: 3px solid #7F818F;
 
@@ -110,6 +110,21 @@ h1 {
 .section-follow {
     background-color: #51555C;
     padding-top: 30px;
+}
+
+.card.card-body.card-noHatts {
+    text-align: center;
+    min-height: 10px;
+    line-height: 20px;
+    font-size: 18px;
+}
+
+.row-noHatts {
+    line-height: 20px;
+}
+.noHatts-heading {
+    padding-top: 3px;
+    text-align: center;
 }
 
 .card {
@@ -121,7 +136,6 @@ h1 {
 
 @media screen and (max-width: 1100px) {
     .card {
-      background-color: lightgreen;
       padding: 10px 30px 10px 30px;
     }
     .metrics {
@@ -213,7 +227,7 @@ h1 {
 
 .card-post {
     margin: 20px 10px 5px 10px;
-    min-height: 200px;
+    padding-top: 10px;
 }
 
 .card-body {

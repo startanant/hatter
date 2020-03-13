@@ -4,7 +4,6 @@ $('#postModal').on('shown.bs.modal', function () {
 
  //! !!!!!!! for UI testing >>>>> remove this code 
  
- 
 
 $("#logoutBtn").click( function() {
     localStorage.clear();
@@ -30,6 +29,7 @@ $("#loginBtn").click(async function(event){
             console.log(auth.user.id);
             localStorage.setItem("userId", auth.user.id);
             localStorage.setItem("username", auth.user.name);
+            localStorage.setItem("email", auth.user.email);
             localStorage.setItem("followers", auth.user.followers);
             localStorage.setItem("following", auth.user.following);
             localStorage.setItem("hatts", auth.user.hatts);
@@ -45,6 +45,37 @@ $("#loginBtn").click(async function(event){
         }
     })
 
+window.onload = function() {
+    updateLocalStorage();
+};
+
+async function updateLocalStorage(){
+    const email = localStorage.getItem('email');
+    const update = await $.post("/api/update", {email});
+    console.log(update);
+    if(update.response == 'OK') {
+        // alert("login successful")
+        $("#loginHeader").hide();
+        $("#welcome").hide();
+        $("#main").show();
+        console.log(update.user.id);
+        localStorage.setItem("username", update.user.name);
+        localStorage.setItem("email", update.user.email);
+        localStorage.setItem("followers", update.user.followers);
+        localStorage.setItem("following", update.user.following);
+        localStorage.setItem("hatts", update.user.hatts);
+        // window.location.href = '/index.html';
+        populateHatts();
+        populateFollowSection();
+        getProfilePic();
+        setFollowers();
+        setFollowing();
+        setHatts();
+    } else {
+        alert(auth.response);
+    }
+
+}
 
 //populating hatts section
 
@@ -107,8 +138,8 @@ async function populateHatts(){
                         
                         <div class="row row-metrics">
                             <div class="commentsContainer">
-                                <a onclick="updateModal(event);" data-username="${element.name}" data-userid="${element.user_id}" data-hattid="${element.id}" class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
-                                    <img data-username="${element.name}" data-userid="${element.user_id}" data-hattid="${element.id}" src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                                    <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                 </a>
                                 <div class="counter">
                                     <h5 id="commentsNum">${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0}</h5>
@@ -116,7 +147,7 @@ async function populateHatts(){
                             </div>
                             <div class="hattsOffContainer">
                                 <a class="image" href="" id="hattsOffIcon">
-                                    <img data-username="${element.name}" data-userid="${element.user_id}" data-hattid="${element.id}" src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
                                     <h5 id="hattsOffNum">25</h5>
@@ -159,10 +190,9 @@ async function populateFollowSection(){
                     <div class="followPicContainer col-3">
                         <div class="followPic"></div>
                     </div>
-                    <div class="col-9">
-                        <h5 class="followAccount">${element.name}<span id="followBTn" data-id="${element.user}" data-name="${element.name}"class="badge badge-pill badge-primary" onClick="follow(event);">follow</span></h5>
-                       <!-- confirm that new follow button works -->
-                        <!-- <button id="followBTn" type="submit" class="btn btn-sm btn-outline-secondary">Follow</button> -->
+                    <div class="follow-card-body col-9">
+                        <h5 class="followAccount">${element.name}</h5>
+                        <button id="followBtn"data-id="${element.user}"data-name="${element.name}"class="btn btn-primary btn-sm"onClick="follow(event);">follow</button>
                     </div>
                 </div>
             </div>
@@ -202,6 +232,7 @@ function follow(event){
     // console.log(postData);
     $.post('/api/addFollower',postData)
     .then(result => {
+        updateLocalStorage();
         alert(`You are now following ${event.target.dataset.name}`);
     })
     .catch(error=>{
@@ -275,7 +306,7 @@ async function renderUserHatts(){
                         <div class="row row-metrics">
                             <div class="commentsContainer">
                                 <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
-                                    <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                    <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                 </a>
                                 <div class="counter">
                                     <h5 id="commentsNum">${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0}</h5>
@@ -283,7 +314,7 @@ async function renderUserHatts(){
                             </div>
                             <div class="hattsOffContainer">
                                 <a class="image" href="" id="hattsOffIcon">
-                                    <img src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
                                     <h5 id="hattsOffNum">25</h5>
@@ -314,6 +345,8 @@ async function deleteHatt(event){
         type:'DELETE',
         data:deleteData});
     renderUserHatts();
+    updateLocalStorage();
+
 }
 
 
@@ -328,6 +361,7 @@ async function createHatt(event){
     // console.log(postData);
     const result = await $.post('/api/addHatt',postData);
     // console.log(result);
+    updateLocalStorage();
     window.location.href = '/index.html';
 
     // $('#postForm')

@@ -42,47 +42,30 @@
 
 <body>
     <div id="loginHeader">
-        <!-- <div class="login">
-            <div class="login-header">
-                <h2>Login to Hatter</h2>
-            </div>
-            <form>
-                <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                  <label for="loginPassword">Password</label>
-                  <input type="password" class="form-control" id="loginPassword" placeholder="Enter Password">
-                </div>
-                <button id='loginBtn' type="submit" class="btn btn-primary">Login</button>
-            </form>
-            <div class="login-footer">
-                <h2>Don't have a Hatter account?</h2>
-                <a href="signup.html" class="btn btn-secondary" role="button">Sign Up</a>
-            </div>
-        </div> -->
         <div class="inlineForm">
             <div class="row row-login">
-                <div class="col-8">
+                <div class="col-lg-8 col-sm-12">
                     <form>
                         <div class="login-title">
                             <h2>Login to Hatter</h2>
                         </div>
                         <div class="row">
-                            <div class="col-5">
+                            <div class="email-container col-lg-5 col-sm-12">
                                 <input type="email" class="form-control" id="loginEmail" placeholder="email">
                             </div>
-                            <div class="col-5">
+                            <div class="password-container col-lg-5 col-sm-12">
                                 <input type="password" class="form-control" id="loginPassword" placeholder="password">
                             </div>
-                            <div class="col-2">
+                            <div class="col-lg-2 col-sm-12">
                                 <button id='loginBtn' type="submit" class="btn btn-primary">Login</button>
+                                <!-- FOR UI TESTING -->
+                                <button id='testBtn' type="submit" class="btn btn-outline-dark btn-sm">Test</button>
+                                <!-- FOR UI TESTING ^^^^^^ -->
                             </div> 
                         </div>
                     </form>
                 </div>
-                <div class="signupContainer col-4">
+                <div class="signupContainer col-lg-4 col-sm-12">
                     <h2>Don't have a Hatter account?</h2>
                 <!-- <button id="signupBtn" type="submit" class="btn btn-secondary">Sign Up</button> -->
                     <a href="signup.html" class="btn btn-secondary" role="button">Sign Up</a>
@@ -101,16 +84,17 @@
         <nav class="navbar sticky-top navbar-dark bg-dark">
             <a class="navbar-brand h1" href="#">
                 <img src="./assets/Lightning.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                Hatter
+                hatter
             </a>
             <form class="form-inline my-2 my-lg-0">
                 <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
             </form>
         </nav>
         
         <div class="container-fluid">
             <div class="row row-main">
+            <!-- profile section -->
             <div class="section-profile col-lg-3 col-md-4">
                 <div class="wrapper-profile">
                     <div class="profilePicContainer">
@@ -121,32 +105,29 @@
                     </div>
                     <div class="row metrics">
                         <div class="metrics-following col-lg-4 col-md-12">
-                            <div class="followingMetric">Following</div>
+                            <div class="followingMetric"><h6>Following</h6></div>
                             <div id="followingNum" class="followingMetric">250</div>
                         </div>
                         <div class="metrics-followers col-lg-4 col-md-12">
-                            <div class="followingMetric">Followers</div>
+                            <div class="followingMetric"><h6>Followers</h6></div>
                             <div id="followersNum" class="followingMetric">100</div>
                         </div>
                         <div class="metrics-hattsSent col-lg-4 col-md-12">
-                            <div class="followingMetric">Sent</div>
+                            <div class="followingMetric"><h6>Sent</h6></div>
                             <div id="hattsSentNum"class="followingMetric">25</div>
                         </div>
-                
-                        
                     </div>
-                    
             
-                    
                 </div>
+                <!-- profile buttons -->
                 <div class="viewHatts">
-                    <button onclick="renderUserHatts()" id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">View Hatts</button>
+                    <button onclick="renderUserHatts()" id="viewHattsBtn" type="submit" class="btn btn-sm btn-secondary">Past Hatts</button>
                 </div>
                 <div class="logout">
                     <button id="logoutBtn" type="submit" class="btn btn-sm btn-secondary">Logout</button>
                 </div>
                 <div class="createPost">
-                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-lg btn-primary">Create Post</button>
+                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-lg btn-outline-primary">Create Post</button>
                 </div>
             </div>
             <!-- main cards -->
@@ -247,12 +228,13 @@
                     <div class="card card-follow">
                         <div class="card-body">
                             <div class="row row-follow-main">
-                                <div class="followPicContainer col-4">
+                                <div class="followPicContainer col-3">
                                     <div class="followPic"></div>
                                 </div>
-                                <div class="col-8">
-                                    <h4 class="followAccount">followAccount</h4>
-                                    <button id="followBTn" type="submit" class="btn btn-sm btn-secondary">Follow</button>
+                                <div class="col-9">
+                                    <h5 class="followAccount">followAccount<span id="followBTn" class="badge badge-pill badge-primary">follow</span></h5>
+                                   <!-- confirm that new follow button works -->
+                                    <!-- <button id="followBTn" type="submit" class="btn btn-sm btn-outline-secondary">Follow</button> -->
                                 </div>
                             </div>
                         </div>
@@ -305,15 +287,22 @@
 
     </div>
     <script>
-        $('#postModal').on('shown.bs.modal', function () {
-            $('#createPostBtn').trigger('focus')
-        }) 
-
-         //! !!!!!!! for UI testing >>>>> remove this code 
-         
-         $(document).ready(function() {
+        
+        $(document).ready(function() {
             $("#main").hide();
         });
+
+         //! !!!!!!! for UI testing >>>>> remove this code 
+
+        $('#testBtn').click( function(ev){
+            ev.preventDefault();
+            $("#loginHeader").hide();
+            $("#welcome").hide();
+            $("#main").show();
+        })
+
+        // !!!!! REMOVE CODE ABOVE ^^^^^^^^
+
 
         $("#logoutBtn").click( function() {
             localStorage.clear();

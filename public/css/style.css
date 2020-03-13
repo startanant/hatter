@@ -40,11 +40,22 @@ h1 {
 
 .inlineForm {
     width: auto;
-    margin-top: 50px;
-    margin-left: 30px;
-    margin-bottom: 30px;
-    
+    margin: 50px 30px 30px 30px;
 }
+
+@media screen and (max-width: 900px) {
+    .inlineForm {
+      background-color: lightgreen;
+      margin: 50px 60px 30px 60px;
+    }
+    .email-container {
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+    
+    
+  }
+
 
 .container{
     min-height: 800px;
@@ -56,23 +67,42 @@ h1 {
 }
 
 .section-profile {
-    background-color: cornflowerblue;
+    background-color: #d62727;
+    background-image: linear-gradient(#4286f4, #373b44);
 }
 
 .section-feed {
-    background-color: royalblue;
-    padding-top: 20px;
+    background-color: #51555C;
+    padding: 20px 30px 10px 30px;
+    border-right: 3px solid #7F818F;
+    border-left: 3px solid #7F818F;
+
 }
 
 .section-follow {
-    background-color: cornflowerblue;
+    background-color: #51555C;
     padding-top: 30px;
 }
 
 .card {
     border-radius: 20px;
-    box-shadow: 3px 3px lightsteelblue;
+    box-shadow: 2px 2px lightsteelblue;
+    background-color: #ecf0f1;
+    padding-right: 35px;
 }
+
+@media screen and (max-width: 1100px) {
+    .card {
+      background-color: lightgreen;
+      padding: 10px 30px 10px 30px;
+    }
+    
+    .metrics {
+        margin-left: 70px;
+        margin-right: 70px;
+    }
+
+  }
 
 .wrapper {
     display: flex;
@@ -105,10 +135,17 @@ h1 {
     margin: 10px 20px 10px 20px;
 }
 
+
+
 .metrics {
     /* min-height: 100px; */
-    margin: 10px 20px 10px 20px;
-    padding: 2px;
+    margin: 20px 20px 10px 20px;
+    min-height: 80px;
+    line-height: 20px;
+    padding: 20px;
+    background-color: #ecf0f1;
+    box-shadow: 1px 1px lightsteelblue;
+    border-radius: 20px;
 }
 
 .metrics-following {
@@ -128,16 +165,25 @@ h1 {
     font-size: 16px;
 }
 
+.row-profile-buttons {
+    padding: 1px;
+    margin: 1px;
+}
+
 .viewHatts {
-    margin: 10px 20px 5px 20px;
+    margin: 10px 1px 10px 1px;
+    text-align: center;
 }
 
 .logout {
-    margin: 5px 20px 10px 20px;
+    margin: 10px 1px 10px 1px;
+    text-align: center;
 }
 
 .createPost {
-    margin: 30px 20px 10px 20px;
+    margin: 30px 50px 10px 50px;
+    text-align: center;
+    padding: 20px;
 }
 
 .card-post {
@@ -212,19 +258,23 @@ h1 {
     line-height: 30px;
 }
 
+.row-follow-main {
+    width: auto;
+}
 
-
+.followAccount {
+    margin-right: 10px;
+}
 .card-follow {
     margin: 5px 10px 0px 10px; 
 }
 
-
 .followPic {
     background-color: slategray;
-    margin: 0px 0px 0px 15px;
+    margin: 0px 0px 0px 2px;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     display: inline-block;
     text-align: center;
 }

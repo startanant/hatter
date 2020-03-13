@@ -284,7 +284,7 @@ async function populateHatts(){
                 <div class="row" data-userid="${element.user_id}" data-hattid="${element.id}">
                     <!-- hatt starts picture -->
                     <div class="postPicContainer col-lg-2 col-sm-12">
-                        <div class="postPic"></div>
+                        <div class="postPic" data-userid="${element.user_id}"></div>
                     </div>
                     <!-- pciture ends -->
                     <!-- hatt contents -->
@@ -387,6 +387,34 @@ async function getProfilePic() {
         }
 }
 
+async function getProfilePic2(usrId) {
+    let userId = '';
+    usrId?userId = usrId:userId=localStorage.getItem('userId');
+        // const userId = localStorage.getItem('userId');
+    // const userId = localStorage.getItem('userId');
+    console.log("u pic 2", userId);
+    const profileImage = await $.get(`/api/getProfilePic/${userId}`);
+    console.log(profileImage);
+        if(profileImage.response == 'OK') {
+            //alert("call successful")
+            //$("#profilePic").attr("src",profileImage.path); 
+            // document.getElementById("profilePic").style.backgroundImage = 'url('+profileImage.path+')';
+            let pics = document.querySelectorAll('.postPic');
+            console.log(pics);
+            pics.forEach(element=>{
+                if (element.dataset.userid == userId)
+                {
+                    console.log('bingo!');
+                    element.style.backgroundImage = 'url('+profileImage.path+')';
+                    element.style.backgroundPosition = 'center';
+                }
+            })
+            // document.getElementById("profilePic").style.backgroundPosition = 'center';
+        } else {
+            alert(profileImage.response);
+        }
+}
+
 function follow(event){
     // console.log('btn follow clicked');
     // console.log(event.target.dataset.id);
@@ -431,14 +459,14 @@ async function renderUserHatts(){
         $('#feedSectionWrapper').html('');
         $('#feedSectionWrapper').html(content);
         return;
-    }
+    } else {
     let content = '';
     result.forEach(element=>{
         content += `<div onclick="showComments(event);" class="card card-post card-delete">
             <div class="card-body">
                 <div  class="row" data-hattid="${element.id}" id="53">
                     <div class="postPicContainer col-lg-2 col-sm-12">
-                        <div class="postPic"></div>
+                        <div class="postPic" data-userid="${element.user_id}"></div>
                     </div>
                     <div class="cardContent col-lg-10 col-sm-12">
                         <div class="row" data-hattid="${element.id}" id="53">
@@ -476,9 +504,13 @@ async function renderUserHatts(){
             </div>
         </div>`;
     })
-    // console.log(content);
     $('#feedSectionWrapper').html('');
     $('#feedSectionWrapper').html(content);
+    getProfilePic2(result[0].user_id);
+}
+    // console.log(content);
+    
+    
 
 }
 async function deleteHatt(event){
@@ -539,6 +571,7 @@ $(document).ready(function() {
         setFollowers();
         setFollowing();
         setHatts();
+        getProfilePic2();
     } else {
         $("#main").hide();
     }

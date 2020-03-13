@@ -83,7 +83,7 @@ async function populateHatts(){
                         // console.log(commentsPerHatt.get(element.hatt_id));
                         // let day = moment(element.tweet_time);
                         // console.log(moment(element.tweet_time).startOf('day').fromNow());
-                        content += `<div data-userid="${element.user_id}" class="card card-post">
+                        content += `<div data-userid="${element.user_id}" data-hattid="${element.id}" class="card card-post">
             <div class="card-body">
                 <div class="row">
                     <!-- hatt starts picture -->
@@ -107,8 +107,8 @@ async function populateHatts(){
                         
                         <div class="row row-metrics">
                             <div class="commentsContainer">
-                                <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
-                                    <img src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                <a onclick="updateModal(event);" data-username="${element.name}" data-userid="${element.user_id}" data-hattid="${element.id}" class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                                    <img data-username="${element.name}" data-userid="${element.user_id}" data-hattid="${element.id}" src="./assets/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                 </a>
                                 <div class="counter">
                                     <h5 id="commentsNum">${commentsPerHatt.get(element.id)?commentsPerHatt.get(element.id):0}</h5>
@@ -116,7 +116,7 @@ async function populateHatts(){
                             </div>
                             <div class="hattsOffContainer">
                                 <a class="image" href="" id="hattsOffIcon">
-                                    <img src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                    <img data-username="${element.name}" data-userid="${element.user_id}" data-hattid="${element.id}" src="./assets/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
                                     <h5 id="hattsOffNum">25</h5>
@@ -135,7 +135,12 @@ async function populateHatts(){
         })
 
 }
-
+function updateModal(event){
+    console.log(event.target.dataset);
+    $('#postFormComment').val(event.target.dataset.hattid);
+    $('#postModalBtnComment').attr(`data-hattid="${event.target.dataset.hattid}"`);
+    $('#commentTo').val(event.target.dataset.username);
+}
 async function populateFollowSection(){
     $.get('/api/getTop5Followed')
     .then(result => {

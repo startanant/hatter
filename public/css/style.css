@@ -79,11 +79,7 @@ h1 {
     .signupContainer {
         margin-top: 40px;
     }
-    
-    
-    
   }
-
 
 .container{
     min-height: 800px;
@@ -295,6 +291,31 @@ h1 {
     margin-right: 20px;
     height: 30px;
     line-height: 30px;
+}
+/* COMMENT CARD */
+.commentsSection-container {
+    background-color: #7F818F;
+    border-radius: 20px;
+    padding: 20px;
+    margin-left: 16px;
+}
+
+.commentPost {
+    background-color: #ecf0f1;
+    margin-bottom: 5px;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.row-comment-header {
+    padding-left: 24px;
+}
+.poster-username {
+    margin-right: 20px;
+    font-weight: bold;
+}
+.timeSince-comment {
+    padding-top: 0px;
 }
 
 .row-follow-main {

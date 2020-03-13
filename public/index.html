@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2|Prompt&display=swap" rel="stylesheet">
     <link rel="icon" 
       type="image/png" 
-      href="./assets/Hat.svg">
+      href="./assets/svg/Hat-small.svg">
 
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" -->
         <!-- integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"> -->
@@ -59,7 +59,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <div id="welcome">
@@ -71,8 +70,6 @@
                 hatter
             </div>
         </div>
-       
-        
     </div>
     <div id="main">
         <nav class="navbar sticky-top navbar-dark bg-dark">
@@ -124,7 +121,7 @@
                     <button id="logoutBtn" type="submit" class="btn btn-sm btn-secondary">Logout</button>
                 </div>
                 <div class="createPost">
-                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-lg btn-outline-primary">Create Hatt</button>
+                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-lg btn-primary">Create Hatt</button>
                 </div>
             </div>
             <!-- main cards -->
@@ -139,6 +136,72 @@
                            </div>
                        </div>
                     </div>
+
+                    <!-- comment card -->
+                    <div class="card card-post card-comment">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- hatt starts picture -->
+                                <div class="postPicContainer col-lg-2 col-sm-12">
+                                    <div class="postPic"></div>
+                                </div>
+                                <!-- pciture ends -->
+                                <!-- hatt contents -->
+                                <div class="cardContent col-lg-10 col-sm-12">
+                                    <div class="row">
+                                        <div class="titleContainer">
+                                            <h5 class="card-title">hatterUsername</h5>
+                                            <h6 class="timeSince">10 m</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row row-content">
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                    </div>
+                                    <div class="row row-metrics">
+                                        <div class="commentsContainer">
+                                            <a class="image" href="" data-toggle="modal" data-target="#commentModal" id="commentsIcon">
+                                                <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
+                                            </a>
+                                            <div class="counter">
+                                                <h5 id="commentsNum">4</h5>
+                                            </div>
+                                        </div>
+                                        <div class="hattsOffContainer">
+                                            <a class="image" href="" id="hattsOffIcon">
+                                                <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                            </a>
+                                            <div class="counter">
+                                                <h5 id="hattsOffNum">25</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="commentsSection-container">
+                            <div class="commentPost">
+                                <div class="row row-comment-header">
+                                    <div class="poster-username">ElonMusk</div>
+                                    <div class="timeSince timeSince-comment">10 m</div>
+                                </div>
+                                <div class="comment-text">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </div>
+                            </div>
+                            <div class="commentPost">
+                                <div class="row row-comment-header">
+                                    <div class="poster-username">Barrack</div>
+                                    <div class="timeSince timeSince-comment">8 minutes ago</div>
+                                </div>
+                                <div class="comment-text">
+                                    Lorem ipsum dolor!!!
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                     <!-- container for hatt -->
                     <div class="card card-post">
                         <div class="card-body">
@@ -265,11 +328,10 @@
                             </div>
                         </div>
                     </div>
-                    end of container for hatt
-
                 </div>
             </div>
 
+            <!-- follow section -->
             <div class="section-follow col-lg-3 col-md-offset-4">
                 <div id="followSection" class="wrapper">
                     <!-- card follow starts -->
@@ -291,6 +353,7 @@
             </div>
             </div>
 
+            <!-- modals -->
             <div id="postModal" class="modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">

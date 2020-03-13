@@ -222,7 +222,17 @@ app.get('/api/getTop5Followed',async (req,res) => {
     res.json(result);
 })
 
+app.post('/api/getComments', async (req,res)=>{
+    console.log('calling api get comments',req.body);
+    const result = await orm.getComments(req.body);
+    res.json(result);
+})
 
+app.post('/api/getSingleHatt', async (req,res) => {
+    console.log('calling api getsinglehatt...');
+    const result = await orm.getSingleHatt(req.body);
+    res.json(result);
+})
 
 app.delete('/api/deleteComment', async ( req, res )=>{
     // console.log(`api deleteComment called...`);

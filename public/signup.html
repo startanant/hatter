@@ -101,50 +101,44 @@ $(document).ready( async function(){
 
     <div class="signup-main">
       <div class="row row-signup">
-        <div class="signup-container col">
-          <div class="signup-header">
-              <h2>Signup for Hatter</h2>
-          </div>
-  
-          <form enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="inputUsername">Username</label>
-                <input type="text" class="form-control" id="inputUsername" placeholder="Enter username">
-              </div>
-  
-              <div class="form-group">
-                  <label for="inputEmail">Email</label>
-                  <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+        <div class="signup-container col-lg-6 col-sm-12">
+          <div class="signup-form col-12 col-sm-12">
+            <div class="signup-header">
+                <h2>Signup for hatter</h2>
+            </div>
+            <form enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="inputUsername">Username</label>
+                  <input type="text" class="form-control" id="inputUsername" placeholder="Enter username">
                 </div>
-    
-              <div class="form-group">
-                <label for="inputPassword">Create Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="Enter Password">
-              </div>
-  
-              <div class="form-group">
-                  <label for="inputLocation">Location</label>
-                  <input type="text" class="form-control" id="inputLocation" placeholder="optional">
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+                  </div>
+                <div class="form-group">
+                  <label for="inputPassword">Create Password</label>
+                  <input type="password" class="form-control" id="inputPassword" placeholder="Enter Password">
                 </div>
-  
-              <div class="form-group">
-                  <label for="inputLocation">Profile Picture</label>
-                  <input type="file" id="file" name="avatar" />
-              </div>  
-          
-              <button id='submitUserBtn' type="submit" class="btn btn-primary">Create Account</button>
-  
-            </form>
-  
+                <div class="form-group">
+                    <label for="inputLocation">Location</label>
+                    <input type="text" class="form-control" id="inputLocation" placeholder="optional">
+                  </div>
+                <div class="form-group">
+                    <label for="inputLocation">Profile Picture</label>
+                    <input type="file" id="file" name="avatar" />
+                </div>  
+                <button id='submitUserBtn' type="submit" class="btn btn-primary">Create Account</button>
+              </form>
+            </div>
         </div>
-        <div class="signup-logo-container col">
-          <div class="welcome-heading">
+        <div class="signup-logo-container col-lg-6 col-sm-12">
+          
             <div class="signup-hat-icon">
                 <img src="./assets/svg/Hat-xl.svg" alt="top-hat">
             </div>
             <div class="signup-welcome-heading-text">
                 hatter
-            </div>
+            
           </div>
         </div>
       </div>

@@ -511,15 +511,29 @@ async function deleteHatt(event){
 
 }
 
+function boldHashTag(text){
+    let indexStart = text.indexOf('#');
+    if ( indexStart != -1){
+        let indexEnd = text.indexOf(' ',indexStart);
+        if (indexEnd != -1) {
+            // console.log('found string to bold it!');
+            let toReplace = text.substring(indexStart,indexEnd);
+            text = text.replace(toReplace,`<b>${toReplace}</b>`);
+        }
+    }
+    return text;
+}
 
 async function createHatt(event){
-    console.log('create hatt clicked');
-    console.log($('#postForm').val());
+    // console.log('create hatt clicked');
+    // console.log($('#postForm').val());
     // console.log(localStorage.getItem('userId'));
-    const postData = {
+    let postData = {
         user_id:localStorage.getItem('userId'),
-        text:$('#postForm').val()
+        text:boldHashTag($('#postForm').val())
     }
+    
+    
     // console.log(postData);
     const result = await $.post('/api/addHatt',postData);
     // console.log(result);

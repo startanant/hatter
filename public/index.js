@@ -154,8 +154,8 @@ async function updateLocalStorage(){
         localStorage.setItem("following", update.user.following);
         localStorage.setItem("hatts", update.user.hatts);
         // window.location.href = '/index.html';
-        populateHatts();
-        populateFollowSection();
+        //populateHatts();
+        //populateFollowSection();
         getProfilePic();
         setFollowers();
         setFollowing();
@@ -540,7 +540,8 @@ async function createComment2(){
     
     // console.log(postData);
     const result = await $.post('/api/addComment',postData);
-    window.location.href = '/index.html';
+    // window.location.href = '/index.html';
+    renderStart();
 }
 
 async function renderStart(){

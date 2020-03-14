@@ -58,7 +58,7 @@ function renderSearchResults(hatts) {
                 <div class="cardContent col-lg-10 col-sm-12">
                     <div class="row">
                         <div class="titleContainer">
-                            <h5 class="card-title">${element.username}</h5>
+                            <h5 class="card-title"><a href="/${element.username}">${element.username}</a></h5>
                             <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
                         </div>
                     </div>
@@ -298,7 +298,7 @@ async function populateHatts(){
                     <div class="cardContent col-lg-10 col-sm-12">
                         <div class="row">
                             <div class="titleContainer">
-                                <h5 class="card-title">${element.name}</h5>
+                                <h5 class="card-title"><a href="/${element.name}">${element.name}</a></h5>
                                 <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
                             </div>
                         </div>

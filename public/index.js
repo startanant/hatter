@@ -403,7 +403,13 @@ function follow(event){
     $.post('/api/addFollower',postData)
     .then(result => {
         updateLocalStorage();
-        alert(`You are now following ${event.target.dataset.name}`);
+        $('#alertMessage').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Thank you! Your messsage has been sent!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+</div>`);
+
+
     })
     .catch(error=>{
         alert('Error! Please try again later!')
@@ -536,7 +542,7 @@ async function createComment2(){
     window.location.href = '/index.html';
 }
 
-$(document).ready(function() {
+function renderStart(){
     if (localStorage.key('userId')){
         console.log('key exists!');
         $("#loginHeader").hide();
@@ -552,5 +558,9 @@ $(document).ready(function() {
     } else {
         $("#main").hide();
     }
+}
+
+$(document).ready(function() {
+    renderStart();
     // console.log('test');
 });

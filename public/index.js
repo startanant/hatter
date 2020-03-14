@@ -128,6 +128,7 @@ $("#loginBtn").click(async function(event){
             setFollowers();
             setFollowing();
             setHatts();
+            setUsername();
         } else {
             alert(auth.response);
         }
@@ -153,12 +154,13 @@ async function updateLocalStorage(){
         localStorage.setItem("following", update.user.following);
         localStorage.setItem("hatts", update.user.hatts);
         // window.location.href = '/index.html';
-        populateHatts();
-        populateFollowSection();
+        //populateHatts();
+        //populateFollowSection();
         getProfilePic();
         setFollowers();
         setFollowing();
         setHatts();
+        setUsername();
     } else {
         alert(auth.response);
     }
@@ -166,6 +168,11 @@ async function updateLocalStorage(){
 }
 
 //populating hatts section
+
+function setUsername() {
+    const username = localStorage.getItem('username');
+    document.getElementById('username').innerHTML = username;
+}
 
 function setFollowers() {
     const followers = localStorage.getItem('followers');
@@ -181,15 +188,16 @@ function setHatts(){
     document.getElementById('hattsSentNum').innerHTML = hatts;
 }
 async function showComments(event){
+    // console.log(event.target);
     if (event.target.id == 53){
-        // console.log(event);
+        // console.log(event.target.dataset.hattid);
         const postData = {
             id:event.target.dataset.hattid
         }
         const resultSingle = await $.post('/api/getSingleHatt',postData);
-        console.log(resultSingle);
+        // console.log(resultSingle);
         const result = await $.post('/api/getComments',postData);
-        console.log(result);
+        // console.log(result);
         if (result.length > 0){
         let contentMain = `<!-- comment card -->
         <div class="card card-post card-comment">
@@ -197,7 +205,7 @@ async function showComments(event){
                 <div class="row">
                     <!-- hatt starts picture -->
                     <div class="postPicContainer col-lg-2 col-sm-12">
-                        <div class="postPic"></div>
+                        <div class="postPic" style="background-image:url('${resultSingle[0].picture_path}');background-size:cover;"></div>
                     </div>
                     <!-- pciture ends -->
                     <!-- hatt contents -->
@@ -217,7 +225,7 @@ async function showComments(event){
                                     <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                 </a>
                                 <div class="counter">
-                                    <h5 id="commentsNum">4</h5>
+                                    <h5 id="commentsNum">${result.length}</h5>
                                 </div>
                             </div>
                             <div class="hattsOffContainer">
@@ -264,7 +272,7 @@ async function populateHatts(){
     $.get('/api/getRecentHatts')
         .then(response => {
             recentHatts = response;
-            // console.log(recentHatts);
+            console.log(recentHatts);
             $.get('/api/getNoOfCommentsPerHatt')
                 .then(result => {
                     // console.log(result);
@@ -276,14 +284,14 @@ async function populateHatts(){
                     recentHatts.forEach(element => {
                         // console.log(element.hatt_id);
                         // console.log(commentsPerHatt.get(element.hatt_id));
-                        // let day = moment(element.tweet_time);
-                        // console.log(moment(element.tweet_time).startOf('day').fromNow());
                         content += `<div onclick="showComments(event);" data-userid="${element.user_id}" data-hattid="${element.id}" class="card card-post">
             <div class="card-body">
                 <div class="row" data-userid="${element.user_id}" data-hattid="${element.id}">
                     <!-- hatt starts picture -->
                     <div class="postPicContainer col-lg-2 col-sm-12">
-                        <div class="postPic"></div>
+                         <div class="postPic" style="background-image:url('${element.picture_path}');background-size:cover;" data-userid="${element.user_id}"></div>
+                         <!-- <img src="${element.picture_path}" style="height:20px;width:20px"> -->
+                        
                     </div>
                     <!-- pciture ends -->
                     <!-- hatt contents -->
@@ -331,28 +339,24 @@ async function populateHatts(){
 
 }
 function updateModal(event){
-    console.log(event.target.dataset);
-    // $('#postFormComment').val(event.target.dataset.hattid);
+    // console.log(event.target.dataset);
     $('#postModalBtnComment').data("hattid",event.target.dataset.hattid);
     $('#postModalBtnComment').data("userid",event.target.dataset.user_id);
     $('#commentTo').text(`@${event.target.dataset.username}`);
     $('#postFormComment').val('say something ')
-    // $('#postModalBtnComment').val('test');
-    // let value = $('#postModalBtnComment').data("hattid");
-    // $('#postFormComment').val(value);
 
 }
 async function populateFollowSection(){
     $.get('/api/getTop5Followed')
     .then(result => {
-        // console.log(result);
+        // console.log('result for top10 followed',result);
         let content = '';
             result.forEach(element=>{
             content += `<div class="card card-follow">
             <div class="card-body">
                 <div class="row row-follow-main">
                     <div class="followPicContainer col-3">
-                        <div class="followPic"></div>
+                        <div class="followPic" style="background-image:url('${element.picture_path}');background-size:cover;"></div>
                     </div>
                     <div class="follow-card-body col-9">
                         <h5 class="followAccount">${element.name}</h5>
@@ -373,18 +377,20 @@ async function populateFollowSection(){
 
 async function getProfilePic() {
     const userId = localStorage.getItem('userId');
-    console.log("u ", userId);
+    // console.log("u ", userId);
     const profileImage = await $.get(`/api/getProfilePic/${userId}`);
-    console.log(profileImage);
+    // console.log(profileImage);
         if(profileImage.response == 'OK') {
             //alert("call successful")
             //$("#profilePic").attr("src",profileImage.path); 
             document.getElementById("profilePic").style.backgroundImage = 'url('+profileImage.path+')';
             document.getElementById("profilePic").style.backgroundPosition = 'center';
+            document.getElementById("profilePic").style.backgroundSize = 'cover';
         } else {
             alert(profileImage.response);
         }
 }
+
 
 function follow(event){
     // console.log('btn follow clicked');
@@ -397,7 +403,13 @@ function follow(event){
     $.post('/api/addFollower',postData)
     .then(result => {
         updateLocalStorage();
-        alert(`You are now following ${event.target.dataset.name}`);
+        $('#alertMessage').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Thank you! Your messsage has been sent!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+</div>`);
+
+
     })
     .catch(error=>{
         alert('Error! Please try again later!')
@@ -430,23 +442,23 @@ async function renderUserHatts(){
         $('#feedSectionWrapper').html('');
         $('#feedSectionWrapper').html(content);
         return;
-    }
+    } else {
     let content = '';
     result.forEach(element=>{
-        content += `<div class="card card-post card-delete">
+        content += `<div onclick="showComments(event);" class="card card-post card-delete">
             <div class="card-body">
-                <div class="row">
+                <div  class="row" data-hattid="${element.id}" id="53">
                     <div class="postPicContainer col-lg-2 col-sm-12">
-                        <div class="postPic"></div>
+                        <div class="postPic" style="background-image:url('${element.picture_path}');background-size:cover;" data-userid="${element.user_id}"></div>
                     </div>
                     <div class="cardContent col-lg-10 col-sm-12">
-                        <div class="row">
+                        <div class="row" data-hattid="${element.id}" id="53">
                             <div class="titleContainer">
                                 <h5 class="card-title">${element.name}</h5>
                                 <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
                             </div>
                         </div>
-                        <div class="row row-content">
+                        <div  class="row  row-content" data-hattid="${element.id}" id="53">
                             <p class="card-text">${element.text}</p>
                         </div>
                         <div class="row row-metrics">
@@ -475,9 +487,13 @@ async function renderUserHatts(){
             </div>
         </div>`;
     })
-    // console.log(content);
     $('#feedSectionWrapper').html('');
     $('#feedSectionWrapper').html(content);
+
+}
+    
+    
+    
 
 }
 async function deleteHatt(event){
@@ -495,20 +511,35 @@ async function deleteHatt(event){
 
 }
 
+function boldHashTag(text){
+    let indexStart = text.indexOf('#');
+    if ( indexStart != -1){
+        let indexEnd = text.indexOf(' ',indexStart);
+        if (indexEnd != -1) {
+            // console.log('found string to bold it!');
+            let toReplace = text.substring(indexStart,indexEnd);
+            text = text.replace(toReplace,`<b>${toReplace}</b>`);
+        }
+    }
+    return text;
+}
 
 async function createHatt(event){
-    console.log('create hatt clicked');
-    console.log($('#postForm').val());
+    // console.log('create hatt clicked');
+    // console.log($('#postForm').val());
     // console.log(localStorage.getItem('userId'));
-    const postData = {
+    let postData = {
         user_id:localStorage.getItem('userId'),
-        text:$('#postForm').val()
+        text:boldHashTag($('#postForm').val())
     }
+    
+    
     // console.log(postData);
     const result = await $.post('/api/addHatt',postData);
     // console.log(result);
     updateLocalStorage();
-    window.location.href = '/index.html';
+    // window.location.href = '/index.html';
+    renderStart();
 
     // $('#postForm')
 }
@@ -523,10 +554,11 @@ async function createComment2(){
     
     // console.log(postData);
     const result = await $.post('/api/addComment',postData);
-    window.location.href = '/index.html';
+    // window.location.href = '/index.html';
+    renderStart();
 }
 
-$(document).ready(function() {
+async function renderStart(){
     if (localStorage.key('userId')){
         console.log('key exists!');
         $("#loginHeader").hide();
@@ -538,8 +570,13 @@ $(document).ready(function() {
         setFollowers();
         setFollowing();
         setHatts();
+        // getProfilePic2();
     } else {
         $("#main").hide();
     }
+}
+
+$(document).ready(async function() {
+    renderStart();
     // console.log('test');
 });

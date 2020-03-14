@@ -195,7 +195,7 @@ async function showComments(event){
             id:event.target.dataset.hattid
         }
         const resultSingle = await $.post('/api/getSingleHatt',postData);
-        console.log(resultSingle);
+        // console.log(resultSingle);
         const result = await $.post('/api/getComments',postData);
         // console.log(result);
         if (result.length > 0){
@@ -225,7 +225,7 @@ async function showComments(event){
                                     <img src="./assets/svg/Chat.svg" width="25" height="25" class="d-inline-block align-top" alt="comment-bubble">
                                 </a>
                                 <div class="counter">
-                                    <h5 id="commentsNum">4</h5>
+                                    <h5 id="commentsNum">${result.length}</h5>
                                 </div>
                             </div>
                             <div class="hattsOffContainer">

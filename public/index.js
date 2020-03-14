@@ -524,7 +524,8 @@ async function createHatt(event){
     const result = await $.post('/api/addHatt',postData);
     // console.log(result);
     updateLocalStorage();
-    window.location.href = '/index.html';
+    // window.location.href = '/index.html';
+    renderStart();
 
     // $('#postForm')
 }
@@ -542,7 +543,7 @@ async function createComment2(){
     window.location.href = '/index.html';
 }
 
-function renderStart(){
+async function renderStart(){
     if (localStorage.key('userId')){
         console.log('key exists!');
         $("#loginHeader").hide();
@@ -560,7 +561,7 @@ function renderStart(){
     }
 }
 
-$(document).ready(function() {
+$(document).ready(async function() {
     renderStart();
     // console.log('test');
 });

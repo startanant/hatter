@@ -190,14 +190,14 @@ function setHatts(){
 async function showComments(event){
     // console.log(event.target);
     if (event.target.id == 53){
-        console.log(event.target.dataset.hattid);
+        // console.log(event.target.dataset.hattid);
         const postData = {
             id:event.target.dataset.hattid
         }
         const resultSingle = await $.post('/api/getSingleHatt',postData);
         console.log(resultSingle);
         const result = await $.post('/api/getComments',postData);
-        console.log(result);
+        // console.log(result);
         if (result.length > 0){
         let contentMain = `<!-- comment card -->
         <div class="card card-post card-comment">
@@ -205,7 +205,7 @@ async function showComments(event){
                 <div class="row">
                     <!-- hatt starts picture -->
                     <div class="postPicContainer col-lg-2 col-sm-12">
-                        <div class="postPic"></div>
+                        <div class="postPic" style="background-image:url('${resultSingle[0].picture_path}');background-size:cover;"></div>
                     </div>
                     <!-- pciture ends -->
                     <!-- hatt contents -->

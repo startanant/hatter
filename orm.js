@@ -185,7 +185,7 @@ async function getHatts(data){
 
 async function getSingleHatt(data){
     // console.log(' getting user hatts from db ... ');
-    result = await db.query(`select a.id,a.user_id,a.text,a.tweet_time,b.name from hatts a left join users b on a.user_id=b.id where a.id=${data.id}`);
+    result = await db.query(`select a.id,a.user_id,a.text,a.tweet_time,b.name,b.picture_path from hatts a left join users b on a.user_id=b.id where a.id=${data.id}`);
     return result;
 }
 

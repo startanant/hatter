@@ -272,7 +272,7 @@ async function populateHatts(){
     $.get('/api/getRecentHatts')
         .then(response => {
             recentHatts = response;
-            // console.log(recentHatts);
+            console.log(recentHatts);
             $.get('/api/getNoOfCommentsPerHatt')
                 .then(result => {
                     // console.log(result);
@@ -284,14 +284,14 @@ async function populateHatts(){
                     recentHatts.forEach(element => {
                         // console.log(element.hatt_id);
                         // console.log(commentsPerHatt.get(element.hatt_id));
-                        // let day = moment(element.tweet_time);
-                        // console.log(moment(element.tweet_time).startOf('day').fromNow());
                         content += `<div onclick="showComments(event);" data-userid="${element.user_id}" data-hattid="${element.id}" class="card card-post">
             <div class="card-body">
                 <div class="row" data-userid="${element.user_id}" data-hattid="${element.id}">
                     <!-- hatt starts picture -->
                     <div class="postPicContainer col-lg-2 col-sm-12">
-                        <div class="postPic" data-userid="${element.user_id}"></div>
+                         <div class="postPic" style="background-image:url('${element.picture_path}');background-size:cover;" data-userid="${element.user_id}"></div>
+                         <!-- <img src="${element.picture_path}" style="height:20px;width:20px"> -->
+                        
                     </div>
                     <!-- pciture ends -->
                     <!-- hatt contents -->
@@ -339,28 +339,24 @@ async function populateHatts(){
 
 }
 function updateModal(event){
-    console.log(event.target.dataset);
-    // $('#postFormComment').val(event.target.dataset.hattid);
+    // console.log(event.target.dataset);
     $('#postModalBtnComment').data("hattid",event.target.dataset.hattid);
     $('#postModalBtnComment').data("userid",event.target.dataset.user_id);
     $('#commentTo').text(`@${event.target.dataset.username}`);
     $('#postFormComment').val('say something ')
-    // $('#postModalBtnComment').val('test');
-    // let value = $('#postModalBtnComment').data("hattid");
-    // $('#postFormComment').val(value);
 
 }
 async function populateFollowSection(){
     $.get('/api/getTop5Followed')
     .then(result => {
-        // console.log(result);
+        // console.log('result for top10 followed',result);
         let content = '';
             result.forEach(element=>{
             content += `<div class="card card-follow">
             <div class="card-body">
                 <div class="row row-follow-main">
                     <div class="followPicContainer col-3">
-                        <div class="followPic"></div>
+                        <div class="followPic" style="background-image:url('${element.picture_path}');background-size:cover;"></div>
                     </div>
                     <div class="follow-card-body col-9">
                         <h5 class="followAccount">${element.name}</h5>
@@ -381,46 +377,20 @@ async function populateFollowSection(){
 
 async function getProfilePic() {
     const userId = localStorage.getItem('userId');
-    console.log("u ", userId);
+    // console.log("u ", userId);
     const profileImage = await $.get(`/api/getProfilePic/${userId}`);
-    console.log(profileImage);
+    // console.log(profileImage);
         if(profileImage.response == 'OK') {
             //alert("call successful")
             //$("#profilePic").attr("src",profileImage.path); 
             document.getElementById("profilePic").style.backgroundImage = 'url('+profileImage.path+')';
             document.getElementById("profilePic").style.backgroundPosition = 'center';
+            document.getElementById("profilePic").style.backgroundSize = 'cover';
         } else {
             alert(profileImage.response);
         }
 }
 
-async function getProfilePic2(usrId) {
-    let userId = '';
-    usrId?userId = usrId:userId=localStorage.getItem('userId');
-        // const userId = localStorage.getItem('userId');
-    // const userId = localStorage.getItem('userId');
-    console.log("u pic 2", userId);
-    const profileImage = await $.get(`/api/getProfilePic/${userId}`);
-    console.log(profileImage);
-        if(profileImage.response == 'OK') {
-            //alert("call successful")
-            //$("#profilePic").attr("src",profileImage.path); 
-            // document.getElementById("profilePic").style.backgroundImage = 'url('+profileImage.path+')';
-            let pics = document.querySelectorAll('.postPic');
-            console.log(pics);
-            pics.forEach(element=>{
-                if (element.dataset.userid == userId)
-                {
-                    console.log('bingo!');
-                    element.style.backgroundImage = 'url('+profileImage.path+')';
-                    element.style.backgroundPosition = 'center';
-                }
-            })
-            // document.getElementById("profilePic").style.backgroundPosition = 'center';
-        } else {
-            alert(profileImage.response);
-        }
-}
 
 function follow(event){
     // console.log('btn follow clicked');
@@ -473,7 +443,7 @@ async function renderUserHatts(){
             <div class="card-body">
                 <div  class="row" data-hattid="${element.id}" id="53">
                     <div class="postPicContainer col-lg-2 col-sm-12">
-                        <div class="postPic" data-userid="${element.user_id}"></div>
+                        <div class="postPic" style="background-image:url('${element.picture_path}');background-size:cover;" data-userid="${element.user_id}"></div>
                     </div>
                     <div class="cardContent col-lg-10 col-sm-12">
                         <div class="row" data-hattid="${element.id}" id="53">
@@ -513,9 +483,9 @@ async function renderUserHatts(){
     })
     $('#feedSectionWrapper').html('');
     $('#feedSectionWrapper').html(content);
-    getProfilePic2(result[0].user_id);
+
 }
-    // console.log(content);
+    
     
     
 
@@ -578,7 +548,7 @@ $(document).ready(function() {
         setFollowers();
         setFollowing();
         setHatts();
-        getProfilePic2();
+        // getProfilePic2();
     } else {
         $("#main").hide();
     }

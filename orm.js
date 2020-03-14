@@ -119,12 +119,12 @@ async function deleteComment(data){
 
 async function getUserHatts(data){
     // console.log(' getting user hatts from db ... ');
-    result = await db.query('select a.id,a.user_id,b.name ,a.text,a.tweet_time from hatts a left join users b on a.user_id = b.id where a.user_id = ? order by a.tweet_time desc',[data.user_id]);
+    result = await db.query('select a.id,a.user_id,b.name ,a.text,a.tweet_time,b.picture_path from hatts a left join users b on a.user_id = b.id where a.user_id = ? order by a.tweet_time desc',[data.user_id]);
     return result;
 }
 
 async function getRecentHatts(data){
-    result = await db.query('select a.id,a.user_id,a.text,a.tweet_time,b.name from hatts a left join users b on a.user_id = b.id order by tweet_time desc');
+    result = await db.query('select a.id,a.user_id,a.text,a.tweet_time,b.name,b.picture_path from hatts a left join users b on a.user_id = b.id order by tweet_time desc');
     return result;
 }
 
@@ -134,7 +134,7 @@ async function getNoOfCommentsPerHatt(){
 }
 
 async function getTop10Followed(){
-    result = await db.query('select a.user, b.name, count(*) as num from followers a left join users b on a.user=b.id group by a.user order by num desc limit 10;')
+    result = await db.query('select a.user, b.name, b.picture_path,count(*) as num from followers a left join users b on a.user=b.id group by a.user order by num desc limit 10;')
     return result;
 }
 

@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <div id="alertMessage"></div>
+    
     <div id="loginHeader">
         <div class="inlineForm">
             <div class="row row-login">
@@ -127,8 +127,11 @@
             </div>
             <!-- main cards -->
             <div class="section-feed col-lg-6 col-md-8">
+                <!-- alert boxes -->
+                <div id="alertMessage"></div>
                
                 <div id="feedSectionWrapper" class="wrapper">
+                
                     <!-- interval counter -->
                     <div class="card-interval-container">
                         <a class="card-interval" href="index.html">
@@ -415,12 +418,15 @@
 
         </div>
 
+        
+
     </div>
     <script>
 
          //! !!!!!!! for UI testing >>>>> remove this code 
         $(document).ready(function() {
             $("#main").hide();
+            $("#success-alert").hide();
         });
 
         $('#testBtn').click( function(ev){

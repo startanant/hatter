@@ -52,6 +52,7 @@ const db = new Database({
     database: process.env.DB_NAME
 });
 
+
 async function addHatt(data){
     // console.log(`adding hatt`,data);
     const result = await db.query(`insert into hatts (user_id,text) values (? ,?)`, [data.user_id,data.text]);

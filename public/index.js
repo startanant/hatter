@@ -403,18 +403,21 @@ function follow(event){
     $.post('/api/addFollower',postData)
     .then(result => {
         updateLocalStorage();
+        console.log("following", event.target.dataset.name)
         $('#alertMessage').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
-  Thank you! Your messsage has been sent!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-</div>`);
-
+        Following ${event.target.dataset.name}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+        window.setTimeout(function(){
+            $('#alertMessage').remove()}, 3000)
 
     })
     .catch(error=>{
         alert('Error! Please try again later!')
     })
 }
+
+   
+
+
 async function renderUserHatts(){
     let getData = {
         user_id:localStorage.getItem('userId')

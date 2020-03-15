@@ -542,7 +542,11 @@ async function createHatt(event){
     updateLocalStorage();
     // window.location.href = '/index.html';
     renderStart();
-    
+    console.log("new hatt posted")
+    $('#alertMessage').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
+        New hatt posted!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+        window.setTimeout(function(){
+            $('#alertMessage').remove()}, 2000)
 
     // $('#postForm')
 }

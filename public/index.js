@@ -38,6 +38,34 @@ $("#searchBtn").click(async function(event){
     }
 });
 
+$("#searchBtnMobile").click(async function(event){
+    //alert("search");
+    event.preventDefault();
+    const searchTerm = $('#searchBarMobile').val();
+    //alert(searchTerm);
+
+    const search = await $.post("/api/search", {searchTerm})
+    console.log(search);
+    if (search.response == 'OK') {
+        //console.log('search ok');
+        renderSearchResults(search.searchResults)
+    } else {
+        console.log('search not found');
+        console.log(search.response);
+        let content = '';
+        content += `<div id="noHatts" class="card card-body card-noHatts">
+            <div class="row row-noHatts">
+            <div class="noHatts-heading col-7">No results found for search term "${searchTerm}".</div>
+            <div class="noHatts-button col-5">
+                 <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-sm btn-primary">Create Hatt</button>
+            </div>
+            </div>
+            </div>`;
+        $('#feedSectionWrapper').html('');
+        $('#feedSectionWrapper').html(content);
+    }
+});
+
 function renderSearchResults(hatts) {
     //alert("rendering search results");
     let content = '';

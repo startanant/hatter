@@ -72,7 +72,30 @@ h1 {
     .signupContainer {
         margin-top: 40px;
     }
+   
   }
+
+/* FOR MOBILE */
+
+
+.navbar-toggler {
+    display: none;
+}
+
+@media screen and (max-width: 1200px) {
+    #searchBarContainer {
+        display: none;
+    }
+    .navbar-toggler {
+        display: block;
+    }
+    .section-profile {
+        display: none;
+    }
+
+}
+
+
 
 .container{
     min-height: 800px;
@@ -83,9 +106,7 @@ h1 {
     min-height: 800px;
 }
 
-/* .navbar-collapse.in {
-    display: block !important;
-} */
+
 
 .section-profile {
     background-color: #d62727;

@@ -542,7 +542,6 @@ async function createHatt(event){
     updateLocalStorage();
     // window.location.href = '/index.html';
     renderStart();
-    console.log("new hatt posted")
     $('#alertMessage').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
         New hatt posted!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
         window.setTimeout(function(){
@@ -563,6 +562,10 @@ async function createComment2(){
     const result = await $.post('/api/addComment',postData);
     // window.location.href = '/index.html';
     renderStart();
+    $('#alertMessage').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
+        New comment added!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+        window.setTimeout(function(){
+            $('#alertMessage').remove()}, 3000)
 }
 
 async function renderStart(){

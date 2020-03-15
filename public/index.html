@@ -87,6 +87,9 @@
                     <img src="./assets/svg/Hat-small.svg" alt="top-hat">
                     hatter
                 </a>
+                <div class="createHattContainer">
+                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-outline-primary">Create Hatt</button>
+                </div>
                 <form class="form-inline my-2 my-lg-0" id="searchBarContainer">
                     <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button id="searchBtn" class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -138,16 +141,12 @@
                     <button id="logoutBtn" type="submit" class="btn btn-sm btn-secondary">Logout</button>
                 </div>
                 <div class="createPost">
-                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-lg btn-primary">Create Hatt</button>
+                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="profileCreateHatt btn btn-lg btn-primary">Create Hatt</button>
                 </div>
             </div>
             <!-- main cards -->
             <div class="section-feed col-lg-6 col-md-8">
                 
-                <div class="createHattBanner">
-                    Add new createHatt button here
-                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-outline-primary">Create Hatt</button>
-                </div>
                 <!-- alert boxes -->
                 <div id="alertMessage"></div>
 

@@ -63,6 +63,9 @@ h1 {
     }
    
   }
+.createHattContainer {
+    display: none;
+}  
 
 /* FOR MOBILE */
 .navbar-toggler {
@@ -89,6 +92,12 @@ h1 {
     .closeBtnBanner {
         display: block;
     }
+    .createHattContainer {
+        display: block;
+    }
+    .profileCreateHatt {
+        display: none;
+    } 
 
 }
 
@@ -102,7 +111,6 @@ h1 {
 }
 
 .section-profile {
-    background-color: #d62727;
     background-image: linear-gradient(#4286f4, #373b44);
     height: auto;
 }
@@ -112,8 +120,8 @@ h1 {
     padding: 20px 30px 50px 30px;
     border-right: 3px solid #7F818F;
     border-left: 3px solid #7F818F;
-    height: auto;
-    /* overflow-y: scroll; */
+    height: 100vh;
+    overflow-y: scroll;
    
 }
 
@@ -123,24 +131,15 @@ h1 {
     }
   }
 
-.createHattBanner {
-    background-color: salmon;
-    height: auto;
-    width: 100%;
-    position: fixed;
-}
 
 #feedSectionWrapper {
-    background-color: blue;
-    margin-top: 70px;
-    overflow-y: scroll;
     height: 100vh;
 }
 
 .section-follow {
     background-color: #51555C;
     padding-top: 30px;
-    height: auto;
+    height: 100vh;
 }
 
 .card.card-follow {
@@ -234,6 +233,23 @@ h1 {
     .metrics {
         margin-left: 70px;
         margin-right: 70px;
+    }
+    .followingMetric{
+        margin-bottom: 0px;
+    }
+    #followingNum{
+        line-height: 10px;
+        margin-bottom: 15px;
+        font-size: larger;
+    }
+    #followersNum{
+        line-height: 10px;
+        margin-bottom: 15px;
+        font-size: larger;
+    }
+    #hattsSentNum{
+        line-height: 15px;
+        font-size: larger;
     }
   }
 

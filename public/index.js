@@ -1,9 +1,3 @@
-$('#postModal').on('shown.bs.modal', function () {
-    $('#createPostBtn').trigger('focus')
-}) 
-
- //! !!!!!!! for UI testing >>>>> remove this code 
- 
 
 $("#logoutBtn").click( function() {
     localStorage.clear();

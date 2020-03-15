@@ -33,17 +33,6 @@ h1 {
 }
 
 
-/* need to add media query */
-/* @ media screen {
-    #loginHeader {
-        height: 100vh;
-    }
-
-    #welcome {
-        display: none;
-    }
-} */
-
 .inlineForm {
     width: auto;
     margin: 50px 30px 30px 30px;
@@ -76,8 +65,6 @@ h1 {
   }
 
 /* FOR MOBILE */
-
-
 .navbar-toggler {
     display: none;
 }
@@ -105,8 +92,6 @@ h1 {
 
 }
 
-
-
 .container{
     min-height: 800px;
     width: 100%;
@@ -116,11 +101,10 @@ h1 {
     min-height: 800px;
 }
 
-
-
 .section-profile {
     background-color: #d62727;
     background-image: linear-gradient(#4286f4, #373b44);
+    height: auto;
 }
 
 .section-feed {
@@ -128,6 +112,8 @@ h1 {
     padding: 20px 30px 50px 30px;
     border-right: 3px solid #7F818F;
     border-left: 3px solid #7F818F;
+    height: auto;
+    /* overflow-y: scroll; */
    
 }
 
@@ -138,17 +124,27 @@ h1 {
   }
 
 .createHattBanner {
-    display: none;
     background-color: salmon;
     height: auto;
     width: 100%;
     position: fixed;
-    
+}
+
+#feedSectionWrapper {
+    background-color: blue;
+    margin-top: 70px;
+    overflow-y: scroll;
+    height: 100vh;
 }
 
 .section-follow {
     background-color: #51555C;
     padding-top: 30px;
+    height: auto;
+}
+
+.card.card-follow {
+    margin-bottom: 10px;
 }
 
 .card-interval-container {
@@ -190,7 +186,6 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    
 }
 
 .wrapper-profile {
@@ -285,6 +280,7 @@ h1 {
     box-shadow: 2px 2px lightsteelblue;
     background-color: #ecf0f1;
     padding-right: 35px;
+    margin-bottom: 15px;
 }
 
 @media screen and (max-width: 1100px) {

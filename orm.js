@@ -203,6 +203,14 @@ async function getNamefromUserID(data){
     return result;
 }
 
+async function getUserEmailfromName(data){
+    //console.log(' getting name from userid ... ');
+    let query = `select id, email from users where name="${data}"`;
+    result = await db.query(query);
+    //console.log(result);
+    return result;
+}
+
 module.exports = {
     addHatt,
     deleteHatt,
@@ -223,5 +231,6 @@ module.exports = {
     getComments,
     getSingleHatt,
     searchTerm,
-    getNamefromUserID
+    getNamefromUserID,
+    getUserEmailfromName
 }

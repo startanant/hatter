@@ -121,6 +121,7 @@ $("#loginBtn").click(async function(event){
             localStorage.setItem("followers", auth.user.followers);
             localStorage.setItem("following", auth.user.following);
             localStorage.setItem("hatts", auth.user.hatts);
+            localStorage.setItem("currentProfile", auth.user.id);
             // window.location.href = '/index.html';
             populateHatts();
             populateFollowSection();
@@ -148,6 +149,7 @@ async function updateLocalStorage(){
         $("#welcome").hide();
         $("#main").show();
         console.log(update.user.id);
+        //localStorage.setItem("userId", update.user.id);
         localStorage.setItem("username", update.user.name);
         localStorage.setItem("email", update.user.email);
         localStorage.setItem("followers", update.user.followers);
@@ -376,7 +378,7 @@ async function populateFollowSection(){
 }
 
 async function getProfilePic() {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('currentProfile');
     // console.log("u ", userId);
     const profileImage = await $.get(`/api/getProfilePic/${userId}`);
     // console.log(profileImage);
@@ -577,6 +579,25 @@ async function renderStart(){
 }
 
 $(document).ready(async function() {
-    renderStart();
+
+    const pathname = window.location.pathname;
+    if(pathname.length > 1) {
+        let username = pathname.substr(1);
+        (async (username) => {
+            //alert(username);
+            const getUserProfile = await $.post('/api/username', {username});
+            //console.log("hey", getUserProfile);
+            if(getUserProfile.response == 'OK') {
+                localStorage.setItem('email', getUserProfile.email);
+                updateLocalStorage();
+                localStorage.setItem('currentProfile', getUserProfile.id);
+                renderStart();
+            }
+        })(username);
+    } else {
+        renderStart();
+    }
+
+    
     // console.log('test');
 });

@@ -91,7 +91,7 @@ function renderSearchResults(hatts) {
                 <div class="cardContent col-lg-10 col-sm-12">
                     <div class="row">
                         <div class="titleContainer">
-                            <h5 class="card-title">${element.username}</h5>
+                            <h5 class="card-title"><a href="/${element.username}">${element.username}</a></h5>
                             <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
                         </div>
                     </div>
@@ -154,6 +154,7 @@ $("#loginBtn").click(async function(event){
             localStorage.setItem("followers", auth.user.followers);
             localStorage.setItem("following", auth.user.following);
             localStorage.setItem("hatts", auth.user.hatts);
+            localStorage.setItem("currentProfile", auth.user.id);
             // window.location.href = '/index.html';
             populateHatts();
             populateFollowSection();
@@ -181,6 +182,7 @@ async function updateLocalStorage(){
         $("#welcome").hide();
         $("#main").show();
         console.log(update.user.id);
+        //localStorage.setItem("userId", update.user.id);
         localStorage.setItem("username", update.user.name);
         localStorage.setItem("email", update.user.email);
         localStorage.setItem("followers", update.user.followers);
@@ -245,7 +247,7 @@ async function showComments(event){
                     <div class="cardContent col-lg-10 col-sm-12">
                         <div class="row">
                             <div class="titleContainer">
-                                <h5 class="card-title">${resultSingle[0].name}</h5>
+                                <h5 class="card-title"><a href="${resultSingle[0].name}">${resultSingle[0].name}</a></h5>
                                 <h6 class="timeSince">${moment(resultSingle[0].tweet_time).startOf('minute').fromNow()}</h6>
                             </div>
                         </div>
@@ -262,11 +264,11 @@ async function showComments(event){
                                 </div>
                             </div>
                             <div class="hattsOffContainer">
-                                <a class="image" href="" id="hattsOffIcon">
-                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                <a class="image" href="" id="hattsOffIcon" onclick="hattLike(event,${resultSingle[0].id});return false;">
+                                    <img data-currentlike=${resultSingle[0].likecount?resultSingle[0].likecount:0} data-clicked=false src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
-                                    <h5 id="hattsOffNum">25</h5>
+                                    <h5 id="hattsOffNum">${resultSingle[0].likecount?resultSingle[0].likecount:0}</h5>
                                 </div>
                             </div>
                         </div>
@@ -279,7 +281,7 @@ async function showComments(event){
                 
                     <div class="commentPost">
                         <div class="row row-comment-header">
-                            <div class="poster-username">${element.name}</div>
+                            <div class="poster-username"><a href="${element.name}">${element.name}</a></div>
                             <div class="timeSince timeSince-comment">${moment(element.comment_time).startOf('minute').fromNow()}</div>
                         </div>
                         <div class="comment-text">
@@ -331,7 +333,7 @@ async function populateHatts(){
                     <div class="cardContent col-lg-10 col-sm-12">
                         <div class="row">
                             <div class="titleContainer">
-                                <h5 class="card-title">${element.name}</h5>
+                                <h5 class="card-title"><a href="/${element.name}">${element.name}</a></h5>
                                 <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
                             </div>
                         </div>
@@ -351,11 +353,11 @@ async function populateHatts(){
                                 </div>
                             </div>
                             <div class="hattsOffContainer">
-                                <a class="image" href="" id="hattsOffIcon">
-                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                <a class="image" href="" id="hattsOffIcon" onclick="hattLike(event,${element.id});return false;">
+                                    <img data-currentLike=${element.likecount?element.likecount:0} data-clicked=false src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
-                                    <h5 id="hattsOffNum">25</h5>
+                                    <h5 id="hattsOffNum" data-likeCount="0">${element.likecount?element.likecount:0}</h5>
                                 </div>
                             </div>
                         </div>
@@ -369,6 +371,21 @@ async function populateHatts(){
                     $('#feedSectionWrapper').html(content);
                 })
         })
+
+}
+
+async function hattLike(...args){
+    // console.log(args);
+    // let currentLike = args[0].dataset.currentlike;
+    // let hatt_id = args[1];
+    const postData = {
+        count:Number(args[0].target.dataset.currentlike)+1,
+        hatt_id:args[1]
+    }
+    // console.log(postData);
+    const result = await $.post('/api/updateLikeCount',postData);
+    renderStart();
+    // console.log(count);
 
 }
 function updateModal(event){
@@ -409,7 +426,7 @@ async function populateFollowSection(){
 }
 
 async function getProfilePic() {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('currentProfile');
     // console.log("u ", userId);
     const profileImage = await $.get(`/api/getProfilePic/${userId}`);
     // console.log(profileImage);
@@ -491,7 +508,7 @@ async function renderUserHatts(){
                     <div class="cardContent col-lg-10 col-sm-12">
                         <div class="row" data-hattid="${element.id}" id="53">
                             <div class="titleContainer">
-                                <h5 class="card-title">${element.name}</h5>
+                                <h5 class="card-title"><a href="${element.name}">${element.name}</a></h5>
                                 <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
                             </div>
                         </div>
@@ -508,11 +525,11 @@ async function renderUserHatts(){
                                 </div>
                             </div>
                             <div class="hattsOffContainer">
-                                <a class="image" href="" id="hattsOffIcon">
-                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                <a class="image" href="" id="hattsOffIcon" onclick="hattLike(event,${element.id});return false;">
+                                    <img data-currentLike=${element.likecount?element.likecount:0} data-clicked=false src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
-                                    <h5 id="hattsOffNum">25</h5>
+                                    <h5 id="hattsOffNum" data-likeCount="0">${element.likecount?element.likecount:0}</h5>
                                 </div>
                             </div>
                         </div>
@@ -638,6 +655,25 @@ async function renderStart(){
 }
 
 $(document).ready(async function() {
-    renderStart();
+
+    const pathname = window.location.pathname;
+    if(pathname.length > 1) {
+        let username = pathname.substr(1);
+        (async (username) => {
+            //alert(username);
+            const getUserProfile = await $.post('/api/username', {username});
+            //console.log("hey", getUserProfile);
+            if(getUserProfile.response == 'OK') {
+                localStorage.setItem('email', getUserProfile.email);
+                updateLocalStorage();
+                localStorage.setItem('currentProfile', getUserProfile.id);
+                renderStart();
+            }
+        })(username);
+    } else {
+        renderStart();
+    }
+
+    
     // console.log('test');
 });

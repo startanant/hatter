@@ -48,6 +48,15 @@ PRIMARY KEY(id));
 
 INSERT INTO comments (hatt_id,user_id,comment) values (1,2,'Hello to you too!'),(1,3,'I dont care!'),(6,1,'You can sign a song!'),(3,3,'I am a pro at JS!');
 
+-- CREATE TABLE `hatter`.`favs` (
+--   `id` INT NOT NULL AUTO_INCREMENT,
+--   `hatt_id` INT NOT NULL,
+--   `likecount` INT NOT NULL,
+--   PRIMARY KEY (`id`));
+
+ALTER TABLE `hatter`.`hatts` ADD COLUMN `likecount` INT NULL AFTER `tweet_time`;
+UPDATE 'hatter'.'hatts' SET likecount=0 WHERE id>0;
+
 -- ### queries ####
 -- QUERIES FOR LEFT SECTION
 ---select user_id, count(*) as numOfHatts from hatts where user_id=3;

@@ -2,6 +2,7 @@ require('dotenv').config(); // --> process.env
 
 const multer  = require('multer');
 const { uuid } = require('uuidv4');
+const fs = require('fs');
 
 const path = require('path');
 let filepath;
@@ -40,10 +41,12 @@ app.use(express.json())
 
 app.use(express.static('public'));
 
-
-
 PORT  = process.env.PORT || 3000;
 
+app.get('/:username/', (req,res) => {   
+    const readFile = fs.readFileSync('./public/index.html', 'utf8');
+    res.end(readFile);
+})
 
 app.post('/api/addHatt',async ( req,res)=>{
     // console.log(req.body);
@@ -234,6 +237,12 @@ app.post('/api/getSingleHatt', async (req,res) => {
     res.json(result);
 })
 
+app.post ('/api/updateLikeCount', async (req,res) => {
+    console.log('calling updateLikeCount api...',req.body);
+    const result = await orm.updateLikeCount(req.body);
+    res.json(result);
+})
+
 app.delete('/api/deleteComment', async ( req, res )=>{
     // console.log(`api deleteComment called...`);
     // console.log(req.body);
@@ -247,6 +256,15 @@ app.post('/api/getUserHatts', async ( req, res)=>{
     console.log(req.body);
     const result = await orm.getUserHatts(req.body);
     res.json(result);
+})
+
+app.post('/api/username', async ( req, res)=>{
+    console.log(`api getProfile called ...`);
+    const username = req.body.username;
+    console.log(username);
+    const result = await orm.getUserEmailfromName(username);
+    console.log("result: ", result)
+    res.json({response: "OK", email: result[0].email, id: result[0].id});
 })
 
 app.get('/api/getProfilePic/:userId', async ( req, res)=>{

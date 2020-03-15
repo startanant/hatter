@@ -449,9 +449,7 @@ function alertBoxFollowing(name){
     $('#alertBox').show();
     setTimeout(function(){
     $('#alertBox').hide()}, 2000)
-    
 }
-
 
 
 async function renderUserHatts(){
@@ -546,12 +544,15 @@ async function deleteHatt(event){
         type:'DELETE',
         data:deleteData});
     renderUserHatts();
-    updateLocalStorage();
-    $('#alertMessage').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Hatt Deleted<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
-        window.setTimeout(function(){
-            $('#alertMessage').hide()}, 3000)
+    alertBoxDelete();
+}
 
+function alertBoxDelete(){
+    $('#alertBox').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Deleted Post!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+    $('#alertBox').show();
+    setTimeout(function(){
+    $('#alertBox').hide()}, 2000)
 }
 
 function boldHashTag(text){
@@ -583,12 +584,16 @@ async function createHatt(event){
     updateLocalStorage();
     // window.location.href = '/index.html';
     renderStart();
-    $('#alertMessage').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
-        New hatt posted!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
-        window.setTimeout(function(){
-            $('#alertMessage').remove()}, 2000)
-
+    alertBoxCreatePost();
     // $('#postForm')
+}
+
+function alertBoxCreatePost(){
+    $('#alertBox').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    New hatt posted!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+    $('#alertBox').show();
+    setTimeout(function(){
+    $('#alertBox').hide()}, 2000)
 }
 
 async function createComment2(){
@@ -603,10 +608,15 @@ async function createComment2(){
     const result = await $.post('/api/addComment',postData);
     // window.location.href = '/index.html';
     renderStart();
-    $('#alertMessage').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
-        New comment added!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
-        window.setTimeout(function(){
-            $('#alertMessage').remove()}, 3000)
+    alertBoxComment();
+}
+
+function alertBoxComment(){
+    $('#alertBox').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    New comment added!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+    $('#alertBox').show();
+    setTimeout(function(){
+    $('#alertBox').hide()}, 2000)
 }
 
 async function renderStart(){

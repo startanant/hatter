@@ -83,6 +83,10 @@ h1 {
     min-height: 800px;
 }
 
+/* .navbar-collapse.in {
+    display: block !important;
+} */
+
 .section-profile {
     background-color: #d62727;
     background-image: linear-gradient(#4286f4, #373b44);
@@ -182,6 +186,7 @@ h1 {
 .username {
     margin: 10px 20px 10px 20px;
     font-family: 'Baloo Thambi 2', cursive;
+    font-size: 36px;
 }
 .location-container {
     color: white;

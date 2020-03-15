@@ -343,7 +343,7 @@ function updateModal(event){
     $('#postModalBtnComment').data("hattid",event.target.dataset.hattid);
     $('#postModalBtnComment').data("userid",event.target.dataset.user_id);
     $('#commentTo').text(`@${event.target.dataset.username}`);
-    $('#postFormComment').val('say something ')
+    $('#postFormComment').val('')
 
 }
 async function populateFollowSection(){
@@ -509,7 +509,7 @@ async function deleteHatt(event){
     $('#alertMessage').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
         Hatt Deleted<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
         window.setTimeout(function(){
-            $('#alertMessage').remove()}, 3000)
+            $('#alertMessage').hide()}, 3000)
 
 }
 

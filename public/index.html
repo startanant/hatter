@@ -4,22 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2|Prompt&display=swap" rel="stylesheet">
     <link rel="icon" 
       type="image/png" 
       href="./assets/svg/Hat-small.svg">
 
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" -->
-        <!-- integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"> -->
-    </script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
 
     <title>Hatter - Home</title>
@@ -73,16 +69,32 @@
         </div>
     </div>
     <div id="main">
-        <nav class="navbar sticky-top navbar-dark bg-dark">
-            <a class="navbar-brand h1" href="#" onclick="renderStart();">
-                <img src="./assets/svg/Hat-small.svg" alt="top-hat">
-                hatter
-            </a>
-            <form class="form-inline my-2 my-lg-0">
-                <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button id="searchBtn" class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </nav>
+
+
+        <div class="pos-f-t">
+            <div class="collapse" id="navbarToggleExternalContent">
+              <div class="bg-dark p-4">
+                <h4 class="text-white">Collapsed content</h4>
+                <span class="text-muted">Toggleable via the navbar brand.</span>
+              </div>
+            </div>
+            <nav class="navbar sticky-top navbar-dark bg-dark">
+                <a class="navbar-brand h1" href="#" onclick="renderStart();">
+                    <img src="./assets/svg/Hat-small.svg" alt="top-hat">
+                    hatter
+                </a>
+                <form class="form-inline my-2 my-lg-0">
+                    <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="searchBtn" class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+        </div>
+
+
+      
         
         <div class="container-fluid">
             <div class="row row-main">

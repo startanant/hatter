@@ -101,6 +101,10 @@ h1 {
 
 }
 
+#alertBox {
+    display: none;
+}
+
 .container{
     min-height: 800px;
     width: 100%;

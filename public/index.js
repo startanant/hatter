@@ -66,15 +66,16 @@ $("#searchBtnMobile").click(async function(event){
     }
 });
 
+// for mobile view
 $('#viewProfileBtn').click( function(event){
     event.preventDefault();
-    console.log("viewProfileBtn clicked!!")
-    $('#section-profile').show();
-    
+    $('#section-profile').show();  
+});
 
-        // Animation complete.
-    
-})
+$('#closeBtn').click( function(event){
+    event.preventDefault();
+    $('#section-profile').hide(); 
+});
 
 function renderSearchResults(hatts) {
     //alert("rendering search results");

@@ -81,6 +81,13 @@ h1 {
 .navbar-toggler {
     display: none;
 }
+.closeBtnBanner {
+    display: none;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding-top: 20px
+}
 
 @media screen and (max-width: 1200px) {
     #searchBarContainer {
@@ -91,6 +98,9 @@ h1 {
     }
     .section-profile {
         display: none;
+    }
+    .closeBtnBanner {
+        display: block;
     }
 
 }

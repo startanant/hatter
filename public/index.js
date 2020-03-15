@@ -214,7 +214,7 @@ async function showComments(event){
                     <div class="cardContent col-lg-10 col-sm-12">
                         <div class="row">
                             <div class="titleContainer">
-                                <h5 class="card-title">${resultSingle[0].name}</h5>
+                                <h5 class="card-title"><a href="${resultSingle[0].name}">${resultSingle[0].name}</a></h5>
                                 <h6 class="timeSince">${moment(resultSingle[0].tweet_time).startOf('minute').fromNow()}</h6>
                             </div>
                         </div>
@@ -248,7 +248,7 @@ async function showComments(event){
                 
                     <div class="commentPost">
                         <div class="row row-comment-header">
-                            <div class="poster-username">${element.name}</div>
+                            <div class="poster-username"><a href="${element.name}">${element.name}</a></div>
                             <div class="timeSince timeSince-comment">${moment(element.comment_time).startOf('minute').fromNow()}</div>
                         </div>
                         <div class="comment-text">
@@ -456,7 +456,7 @@ async function renderUserHatts(){
                     <div class="cardContent col-lg-10 col-sm-12">
                         <div class="row" data-hattid="${element.id}" id="53">
                             <div class="titleContainer">
-                                <h5 class="card-title">${element.name}</h5>
+                                <h5 class="card-title"><a href="${element.name}">${element.name}</a></h5>
                                 <h6 class="timeSince">${moment(element.tweet_time).startOf('minute').fromNow()}</h6>
                             </div>
                         </div>

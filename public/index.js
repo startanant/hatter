@@ -66,6 +66,16 @@ $("#searchBtnMobile").click(async function(event){
     }
 });
 
+$('#viewProfileBtn').click( function(event){
+    event.preventDefault();
+    console.log("viewProfileBtn clicked!!")
+    $('#section-profile').show();
+    
+
+        // Animation complete.
+    
+})
+
 function renderSearchResults(hatts) {
     //alert("rendering search results");
     let content = '';

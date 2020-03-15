@@ -403,20 +403,15 @@ function follow(event){
     $.post('/api/addFollower',postData)
     .then(result => {
         updateLocalStorage();
-        console.log("following", event.target.dataset.name)
-        $('#alertMessage').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+        $('#alertMessage').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
         Following ${event.target.dataset.name}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
         window.setTimeout(function(){
             $('#alertMessage').remove()}, 3000)
-
     })
     .catch(error=>{
         alert('Error! Please try again later!')
     })
 }
-
-   
-
 
 async function renderUserHatts(){
     let getData = {
@@ -511,6 +506,10 @@ async function deleteHatt(event){
         data:deleteData});
     renderUserHatts();
     updateLocalStorage();
+    $('#alertMessage').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Hatt Deleted<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+        window.setTimeout(function(){
+            $('#alertMessage').remove()}, 3000)
 
 }
 
@@ -543,6 +542,7 @@ async function createHatt(event){
     updateLocalStorage();
     // window.location.href = '/index.html';
     renderStart();
+    
 
     // $('#postForm')
 }

@@ -119,12 +119,12 @@ async function deleteComment(data){
 
 async function getUserHatts(data){
     // console.log(' getting user hatts from db ... ');
-    result = await db.query('select a.id,a.user_id,b.name ,a.text,a.tweet_time,b.picture_path from hatts a left join users b on a.user_id = b.id where a.user_id = ? order by a.tweet_time desc',[data.user_id]);
+    result = await db.query('select a.id,a.user_id,a.likecount,b.name ,a.text,a.tweet_time,b.picture_path from hatts a left join users b on a.user_id = b.id where a.user_id = ? order by a.tweet_time desc',[data.user_id]);
     return result;
 }
 
 async function getRecentHatts(data){
-    result = await db.query('select a.id,a.user_id,a.text,a.tweet_time,b.name,b.picture_path from hatts a left join users b on a.user_id = b.id order by tweet_time desc');
+    result = await db.query('select a.id,a.user_id,a.text,a.tweet_time,b.name,b.picture_path,a.likecount from hatts a left join users b on a.user_id = b.id order by tweet_time desc');
     return result;
 }
 
@@ -148,12 +148,18 @@ async function addFollower(data){
 }
 
 async function getProfilePic(data){
-    console.log('logging data for getProfilePic orm function', data);
+    // console.log('logging data for getProfilePic orm function', data);
     // result = await db.query(`insert into followers (user,follower) values (?,?)`,[data.user,data.follower]);
     let query = `select picture_path from users where id=${data}`;
-    console.log(query);
+    // console.log(query);
     result =  await db.query(query);
-    console.log(result);
+    // console.log(result);
+    return result;
+}
+
+async function updateLikeCount(data){
+    let query = `update hatts set likecount=${data.count} where id=${data.hatt_id}`
+    const result = await db.query(query);
     return result;
 }
 
@@ -185,7 +191,7 @@ async function getHatts(data){
 
 async function getSingleHatt(data){
     // console.log(' getting user hatts from db ... ');
-    result = await db.query(`select a.id,a.user_id,a.text,a.tweet_time,b.name,b.picture_path from hatts a left join users b on a.user_id=b.id where a.id=${data.id}`);
+    result = await db.query(`select a.id,a.user_id,a.text,a.tweet_time,a.likecount,b.name,b.picture_path from hatts a left join users b on a.user_id=b.id where a.id=${data.id}`);
     return result;
 }
 
@@ -223,5 +229,6 @@ module.exports = {
     getComments,
     getSingleHatt,
     searchTerm,
-    getNamefromUserID
+    getNamefromUserID,
+    updateLikeCount
 }

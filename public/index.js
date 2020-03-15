@@ -229,11 +229,11 @@ async function showComments(event){
                                 </div>
                             </div>
                             <div class="hattsOffContainer">
-                                <a class="image" href="" id="hattsOffIcon">
-                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                <a class="image" href="" id="hattsOffIcon" onclick="hattLike(event,${resultSingle[0].id});return false;">
+                                    <img data-currentlike=${resultSingle[0].likecount?resultSingle[0].likecount:0} data-clicked=false src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
-                                    <h5 id="hattsOffNum">25</h5>
+                                    <h5 id="hattsOffNum">${resultSingle[0].likecount?resultSingle[0].likecount:0}</h5>
                                 </div>
                             </div>
                         </div>
@@ -318,11 +318,11 @@ async function populateHatts(){
                                 </div>
                             </div>
                             <div class="hattsOffContainer">
-                                <a class="image" href="" id="hattsOffIcon">
-                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                <a class="image" href="" id="hattsOffIcon" onclick="hattLike(event,${element.id});return false;">
+                                    <img data-currentLike=${element.likecount?element.likecount:0} data-clicked=false src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
-                                    <h5 id="hattsOffNum">25</h5>
+                                    <h5 id="hattsOffNum" data-likeCount="0">${element.likecount?element.likecount:0}</h5>
                                 </div>
                             </div>
                         </div>
@@ -336,6 +336,21 @@ async function populateHatts(){
                     $('#feedSectionWrapper').html(content);
                 })
         })
+
+}
+
+async function hattLike(...args){
+    // console.log(args);
+    // let currentLike = args[0].dataset.currentlike;
+    // let hatt_id = args[1];
+    const postData = {
+        count:Number(args[0].target.dataset.currentlike)+1,
+        hatt_id:args[1]
+    }
+    // console.log(postData);
+    const result = await $.post('/api/updateLikeCount',postData);
+    renderStart();
+    // console.log(count);
 
 }
 function updateModal(event){
@@ -471,11 +486,11 @@ async function renderUserHatts(){
                                 </div>
                             </div>
                             <div class="hattsOffContainer">
-                                <a class="image" href="" id="hattsOffIcon">
-                                    <img src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
+                                <a class="image" href="" id="hattsOffIcon" onclick="hattLike(event,${element.id});return false;">
+                                    <img data-currentLike=${element.likecount?element.likecount:0} data-clicked=false src="./assets/svg/Heart-Empty.svg" width="25" height="25" class="d-inline-block align-top" alt="heart">
                                 </a>
                                 <div class="counter">
-                                    <h5 id="hattsOffNum">25</h5>
+                                    <h5 id="hattsOffNum" data-likeCount="0">${element.likecount?element.likecount:0}</h5>
                                 </div>
                             </div>
                         </div>

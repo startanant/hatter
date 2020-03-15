@@ -234,6 +234,12 @@ app.post('/api/getSingleHatt', async (req,res) => {
     res.json(result);
 })
 
+app.post ('/api/updateLikeCount', async (req,res) => {
+    console.log('calling updateLikeCount api...',req.body);
+    const result = await orm.updateLikeCount(req.body);
+    res.json(result);
+})
+
 app.delete('/api/deleteComment', async ( req, res )=>{
     // console.log(`api deleteComment called...`);
     // console.log(req.body);

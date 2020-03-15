@@ -5,7 +5,9 @@ h1 {
 #loginHeader {
     height: 18vh;
 }
-
+#testBtn {
+    display: none;
+}
 #welcome {
     width: 100%;
     text-align: center;

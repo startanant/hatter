@@ -228,7 +228,9 @@ function setHatts(){
 }
 function setLocation(){
     const location = localStorage.getItem('location');
-    document.getElementById('location').innerHTML = `<h4>${location}</h4>`;
+    if(location != null) {
+        document.getElementById('location').innerHTML = `<h4>${location}</h4>`;
+    }
 }
 async function showComments(event){
     // console.log(event.target);

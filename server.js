@@ -264,7 +264,11 @@ app.post('/api/username', async ( req, res)=>{
     console.log(username);
     const result = await orm.getUserEmailfromName(username);
     console.log("result: ", result)
-    res.json({response: "OK", email: result[0].email, id: result[0].id});
+    if(Array.isArray(result) && result.length) {
+        res.json({response: "OK", email: result[0].email, id: result[0].id});
+    } else {
+        res.json({response: "User not found."});
+    }
 })
 
 app.get('/api/getProfilePic/:userId', async ( req, res)=>{

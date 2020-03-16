@@ -128,8 +128,12 @@ h1 {
     border-left: 3px solid #7F818F;
     height: 100vh;
     overflow-y: scroll;
-   
+ 
 }
+.section-feed::-webkit-scrollbar {
+    display: none;
+}
+
 
 @media screen and (max-width: 1100px) {
     .section-feed {

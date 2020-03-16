@@ -191,6 +191,7 @@ async function updateLocalStorage(){
         localStorage.setItem("followers", update.user.followers);
         localStorage.setItem("following", update.user.following);
         localStorage.setItem("hatts", update.user.hatts);
+        localStorage.setItem("location", update.user.location);
         // window.location.href = '/index.html';
         //populateHatts();
         //populateFollowSection();

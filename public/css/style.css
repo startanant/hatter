@@ -5,7 +5,9 @@ h1 {
 #loginHeader {
     height: 18vh;
 }
-
+#testBtn {
+    display: none;
+}
 #welcome {
     width: 100%;
     text-align: center;
@@ -32,24 +34,6 @@ h1 {
     margin-top: 0px;
 }
 
-
-/* need to add media query */
-/* @ media screen {
-    #loginHeader {
-        height: 100vh;
-    }
-
-    #welcome {
-        display: none;
-    }
-} */
-
-.login {
-    width: 600px;
-    margin-left: 100px;
-    margin-right: 100px;
-    height: auto;
-}
 
 .inlineForm {
     width: auto;
@@ -79,7 +63,49 @@ h1 {
     .signupContainer {
         margin-top: 40px;
     }
+   
   }
+.createHattContainer {
+    display: none;
+}  
+
+/* FOR MOBILE */
+.navbar-toggler {
+    display: none;
+}
+.closeBtnBanner {
+    display: none;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding-top: 20px
+}
+
+@media screen and (max-width: 1200px) {
+    #searchBarContainer {
+        display: none;
+    }
+    .navbar-toggler {
+        display: block;
+    }
+    .section-profile {
+        display: none;
+    }
+    .closeBtnBanner {
+        display: block;
+    }
+    .createHattContainer {
+        display: block;
+    }
+    .profileCreateHatt {
+        display: none;
+    } 
+
+}
+
+#alertBox {
+    display: none;
+}
 
 .container{
     min-height: 800px;
@@ -91,8 +117,8 @@ h1 {
 }
 
 .section-profile {
-    background-color: #d62727;
     background-image: linear-gradient(#4286f4, #373b44);
+    height: auto;
 }
 
 .section-feed {
@@ -100,7 +126,14 @@ h1 {
     padding: 20px 30px 50px 30px;
     border-right: 3px solid #7F818F;
     border-left: 3px solid #7F818F;
+    height: 100vh;
+    overflow-y: scroll;
+ 
 }
+.section-feed::-webkit-scrollbar {
+    display: none;
+}
+
 
 @media screen and (max-width: 1100px) {
     .section-feed {
@@ -108,9 +141,19 @@ h1 {
     }
   }
 
+
+#feedSectionWrapper {
+    height: 100vh;
+}
+
 .section-follow {
     background-color: #51555C;
     padding-top: 30px;
+    height: 100vh;
+}
+
+.card.card-follow {
+    margin-bottom: 10px;
 }
 
 .card-interval-container {
@@ -178,6 +221,11 @@ h1 {
 .username {
     margin: 10px 20px 10px 20px;
     font-family: 'Baloo Thambi 2', cursive;
+    font-size: 36px;
+}
+.location-container {
+    color: white;
+    font-style: italic;
 }
 
 .metrics {
@@ -195,6 +243,23 @@ h1 {
     .metrics {
         margin-left: 70px;
         margin-right: 70px;
+    }
+    .followingMetric{
+        margin-bottom: 0px;
+    }
+    #followingNum{
+        line-height: 10px;
+        margin-bottom: 15px;
+        font-size: larger;
+    }
+    #followersNum{
+        line-height: 10px;
+        margin-bottom: 15px;
+        font-size: larger;
+    }
+    #hattsSentNum{
+        line-height: 15px;
+        font-size: larger;
     }
   }
 
@@ -241,6 +306,7 @@ h1 {
     box-shadow: 2px 2px lightsteelblue;
     background-color: #ecf0f1;
     padding-right: 35px;
+    margin-bottom: 15px;
 }
 
 @media screen and (max-width: 1100px) {
@@ -258,8 +324,6 @@ h1 {
 .card-body {
     padding-top: 20px;
 }
-
-
 
 .postPic {
     background-color: slategray;
@@ -376,6 +440,110 @@ h1 {
     display: inline-block;
     text-align: center;
 }
+
+/* Signup Page */
+
+.signup-main {
+    width: 100%;
+    height: 100vh;
+    /* background-image: linear-gradient(#1488cc, #2b32b2); */
+}
+
+.signup-header {
+    margin-bottom: 30px;
+    font-size: 60px;
+    font-family: 'Baloo Thambi 2', cursive;
+}
+
+.signup-container {
+    width: 50%;
+    height: 100vh;
+    padding: 10px;
+    
+   
+}
+.signup-form {
+    width: 600px;
+    height: auto;
+    margin: 100px 50px 100px 100px;
+    background-color: #ecf0f1;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 2px 2px lightsteelblue;
+}
+
+.signup-welcome-heading-text {
+    font-family: 'Prompt', sans-serif;
+    font-family: 'Baloo Thambi 2', cursive;
+    font-size: 180px;
+    line-height: 90px;
+    color: #2b32b2;
+    color: #4286f4;
+}
+
+.signup-logo-container {
+    width: 50%;
+    height: 100vh;
+    padding: 100px 100px 30px 30px;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.signup-hat-icon{
+    height: 200px;
+    margin-top: 70px;
+    
+}
+
+
+.form-group {
+    font-family: 'Baloo Thambi 2', cursive;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 1100px) {
+    
+    .signup-container {
+        width: 100%;
+        height: 100vh;
+        padding: 10px;
+        margin: 10px;
+    }
+    .signup-form {
+        width: 400px;
+        height: auto;
+        margin: 10px;
+        background-color: #ecf0f1;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 2px 2px lightsteelblue;
+    }
+    .signup-logo-container {
+        width: 100%;
+        height: 100vh;
+        padding: 10px 10px 10px 10px;
+        text-align: center;
+        padding-top: 10px;
+    }
+    .signup-logo-container {
+        display: none;
+    }
+    .signup-hat-icon{
+        height: 50px;
+        margin-top: 10px;
+    }
+    .signup-welcome-heading-text {
+        font-family: 'Prompt', sans-serif;
+        font-family: 'Baloo Thambi 2', cursive;
+        font-size: 80px;
+        line-height: 40px;
+        color: #2b32b2;
+    }
+  }
+
+
+
+
 
 
 

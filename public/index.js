@@ -1,9 +1,3 @@
-$('#postModal').on('shown.bs.modal', function () {
-    $('#createPostBtn').trigger('focus')
-}) 
-
- //! !!!!!!! for UI testing >>>>> remove this code 
- 
 
 $("#logoutBtn").click( function() {
     localStorage.clear();
@@ -36,6 +30,45 @@ $("#searchBtn").click(async function(event){
         $('#feedSectionWrapper').html('');
         $('#feedSectionWrapper').html(content);
     }
+});
+
+$("#searchBtnMobile").click(async function(event){
+    //alert("search");
+    event.preventDefault();
+    const searchTerm = $('#searchBarMobile').val();
+    //alert(searchTerm);
+
+    const search = await $.post("/api/search", {searchTerm})
+    console.log(search);
+    if (search.response == 'OK') {
+        //console.log('search ok');
+        renderSearchResults(search.searchResults)
+    } else {
+        console.log('search not found');
+        console.log(search.response);
+        let content = '';
+        content += `<div id="noHatts" class="card card-body card-noHatts">
+            <div class="row row-noHatts">
+            <div class="noHatts-heading col-7">No results found for search term "${searchTerm}".</div>
+            <div class="noHatts-button col-5">
+                 <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-sm btn-primary">Create Hatt</button>
+            </div>
+            </div>
+            </div>`;
+        $('#feedSectionWrapper').html('');
+        $('#feedSectionWrapper').html(content);
+    }
+});
+
+// for mobile view
+$('#viewProfileBtn').click( function(event){
+    event.preventDefault();
+    $('#section-profile').show();  
+});
+
+$('#closeBtn').click( function(event){
+    event.preventDefault();
+    $('#section-profile').hide(); 
 });
 
 function renderSearchResults(hatts) {
@@ -137,6 +170,7 @@ $("#loginBtn").click(async function(event){
 
 window.onload = function() {
     updateLocalStorage();
+    renderStart();
 };
 
 async function updateLocalStorage(){
@@ -360,7 +394,7 @@ function updateModal(event){
     $('#postModalBtnComment').data("hattid",event.target.dataset.hattid);
     $('#postModalBtnComment').data("userid",event.target.dataset.user_id);
     $('#commentTo').text(`@${event.target.dataset.username}`);
-    $('#postFormComment').val('say something ')
+    $('#postFormComment').val('')
 
 }
 async function populateFollowSection(){
@@ -420,18 +454,22 @@ function follow(event){
     $.post('/api/addFollower',postData)
     .then(result => {
         updateLocalStorage();
-        $('#alertMessage').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
-  Thank you! Your messsage has been sent!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-</div>`);
-
-
+        alertBoxFollowing(event.target.dataset.name);
     })
     .catch(error=>{
         alert('Error! Please try again later!')
     })
 }
+
+function alertBoxFollowing(name){
+    $('#alertBox').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    Following ${name}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+    $('#alertBox').show();
+    setTimeout(function(){
+    $('#alertBox').hide()}, 2000)
+}
+
+
 async function renderUserHatts(){
     let getData = {
         user_id:localStorage.getItem('userId')
@@ -524,8 +562,15 @@ async function deleteHatt(event){
         type:'DELETE',
         data:deleteData});
     renderUserHatts();
-    updateLocalStorage();
+    alertBoxDelete();
+}
 
+function alertBoxDelete(){
+    $('#alertBox').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Deleted Post!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+    $('#alertBox').show();
+    setTimeout(function(){
+    $('#alertBox').hide()}, 2000)
 }
 
 function boldHashTag(text){
@@ -557,8 +602,16 @@ async function createHatt(event){
     updateLocalStorage();
     // window.location.href = '/index.html';
     renderStart();
-
+    alertBoxCreatePost();
     // $('#postForm')
+}
+
+function alertBoxCreatePost(){
+    $('#alertBox').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    New hatt posted!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+    $('#alertBox').show();
+    setTimeout(function(){
+    $('#alertBox').hide()}, 2000)
 }
 
 async function createComment2(){
@@ -573,6 +626,15 @@ async function createComment2(){
     const result = await $.post('/api/addComment',postData);
     // window.location.href = '/index.html';
     renderStart();
+    alertBoxComment();
+}
+
+function alertBoxComment(){
+    $('#alertBox').html(`<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    New comment added!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`);
+    $('#alertBox').show();
+    setTimeout(function(){
+    $('#alertBox').hide()}, 2000)
 }
 
 async function renderStart(){

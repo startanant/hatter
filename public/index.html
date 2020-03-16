@@ -4,22 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2|Prompt&display=swap" rel="stylesheet">
     <link rel="icon" 
       type="image/png" 
       href="./assets/svg/Hat-small.svg">
 
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" -->
-        <!-- integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"> -->
-    </script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
 
     <title>Hatter - Home</title>
@@ -27,7 +23,7 @@
 </head>
 
 <body>
-    <div id="alertMessage"></div>
+    
     <div id="loginHeader">
         <div class="inlineForm">
             <div class="row row-login">
@@ -73,30 +69,53 @@
         </div>
     </div>
     <div id="main">
-        <nav class="navbar sticky-top navbar-dark bg-dark">
-            <a class="navbar-brand h1" href="#" onclick="renderStart();">
-                <img src="./assets/svg/Hat-small.svg" alt="top-hat">
-                hatter
-            </a>
-            <form class="form-inline my-2 my-lg-0">
-                <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button id="searchBtn" class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </nav>
-        
+
+        <div class="pos-f-t">
+            <div class="collapse" id="navbarToggleExternalContent">
+              <div class="bg-dark p-4">
+                <h4 class="text-white">Search hatts</h4>
+                <form class="form-inline my-2 my-lg-0" id="searchBarContainer2">
+                    <input id="searchBarMobile" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="searchBtnMobile" class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <h5 class="text-white">View Profile</h5>
+                <button id="viewProfileBtn" class="btn btn-primary my-2 my-sm-0" type="submit">Profile</button>
+              </div>
+            </div>
+            <nav class="navbar sticky-top navbar-dark bg-dark">
+                <a class="navbar-brand h1" href="#" onclick="renderStart();">
+                    <img src="./assets/svg/Hat-small.svg" alt="top-hat">
+                    hatter
+                </a>
+                <div class="createHattContainer">
+                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-outline-primary">Create Hatt</button>
+                </div>
+                <form class="form-inline my-2 my-lg-0" id="searchBarContainer">
+                    <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="searchBtn" class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+        </div>
+
         <div class="container-fluid">
             <div class="row row-main">
             <!-- profile section -->
-            <div class="section-profile col-lg-3 col-md-4">
+            <div id="section-profile" class="section-profile col-lg-3 col-md-4">
                 <div class="wrapper-profile">
+                    <div class="closeBtnBanner"> 
+                        <button id="closeBtn" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"  class="btn btn-dark">CLOSE X</button>
+                    </div>
                     <div class="profilePicContainer">
                         <div class="profilePic" id="profilePic"></div>
                     </div>
                     <div id="username" class="username">
                         <h2>dreamTeam</h2>
                     </div>
-                    <div id="location" class="location-containter">
-                        Toronto
+                    <div id="location" class="location-container">
+                        <h4>Toronto</h4>
                     </div>
                     <div class="row metrics">
                         <div class="metrics-following col-lg-4 col-md-12">
@@ -122,13 +141,17 @@
                     <button id="logoutBtn" type="submit" class="btn btn-sm btn-secondary">Logout</button>
                 </div>
                 <div class="createPost">
-                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="btn btn-lg btn-primary">Create Hatt</button>
+                    <button type="button" id="createPostBtn" data-toggle="modal" data-target="#postModal" class="profileCreateHatt btn btn-lg btn-primary">Create Hatt</button>
                 </div>
             </div>
             <!-- main cards -->
             <div class="section-feed col-lg-6 col-md-8">
-               
-                <div id="feedSectionWrapper" class="wrapper">
+                
+                <!-- alert boxes -->
+            
+                <div id="alertBox"></div>
+                <div id="feedSectionWrapper">
+                
                     <!-- interval counter -->
                     <div class="card-interval-container">
                         <a class="card-interval" href="index.html">
@@ -414,7 +437,6 @@
             </div>
 
         </div>
-
     </div>
     <script>
 

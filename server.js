@@ -171,7 +171,8 @@ app.post('/api/search', async( req, res ) => {
                 attachement: result.attachement,
                 tweet_time: result.tweet_time,
                 username: result.name,
-                comments: result.commentCount
+                comments: result.commentCount,
+                picture_path: result.picture_path
             };
             console.log(resultObj);
             resultsArray.push(resultObj)

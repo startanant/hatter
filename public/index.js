@@ -84,7 +84,7 @@ function renderSearchResults(hatts) {
             <div class="row">
                 <!-- hatt starts picture -->
                 <div class="postPicContainer col-lg-2 col-sm-12">
-                    <div class="postPic"></div>
+                        <div class="postPic" style="background-image:url('${element.picture_path}');background-size:cover;"></div>
                 </div>
                 <!-- pciture ends -->
                 <!-- hatt contents -->
@@ -482,7 +482,7 @@ function alertBoxFollowing(name){
 
 async function renderUserHatts(){
     let getData = {
-        user_id:localStorage.getItem('userId')
+        user_id:localStorage.getItem('currentProfile')
     }
     // console.log(getData);
     let commentsPerHatt = new Map();

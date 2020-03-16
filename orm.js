@@ -85,7 +85,7 @@ async function authUser(data){
 
 async function searchTerm(data){
     //const query = `select * from hatts where text LIKE "%${data.searchTerm}%"`;
-    const query = `select t.id, t.user_id, t.text,t.attachement,t.tweet_time, u.name , count(distinct c.id) AS commentCount
+    const query = `select t.id, t.user_id, t.text,t.attachement,t.tweet_time, u.name, u.picture_path, count(distinct c.id) AS commentCount
     from hatts t 
     left join users u on t.user_id=u.id 
     left join comments c on t.id = c.hatt_id 

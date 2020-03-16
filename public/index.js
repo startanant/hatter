@@ -154,6 +154,7 @@ $("#loginBtn").click(async function(event){
             localStorage.setItem("followers", auth.user.followers);
             localStorage.setItem("following", auth.user.following);
             localStorage.setItem("hatts", auth.user.hatts);
+            localStorage.setItem("location", auth.user.location);
             localStorage.setItem("currentProfile", auth.user.id);
             // window.location.href = '/index.html';
             populateHatts();
@@ -163,6 +164,7 @@ $("#loginBtn").click(async function(event){
             setFollowing();
             setHatts();
             setUsername();
+            setLocation();
         } else {
             alert(auth.response);
         }
@@ -197,6 +199,7 @@ async function updateLocalStorage(){
         setFollowing();
         setHatts();
         setUsername();
+        setLocation();
     } else {
         alert(auth.response);
     }
@@ -207,7 +210,7 @@ async function updateLocalStorage(){
 
 function setUsername() {
     const username = localStorage.getItem('username');
-    document.getElementById('username').innerHTML = username;
+    document.getElementById('username').innerHTML = `<h2>${username}</h2>`;
 }
 
 function setFollowers() {
@@ -222,6 +225,10 @@ function setFollowing() {
 function setHatts(){
     const hatts = localStorage.getItem('hatts');
     document.getElementById('hattsSentNum').innerHTML = hatts;
+}
+function setLocation(){
+    const location = localStorage.getItem('location');
+    document.getElementById('location').innerHTML = `<h4>${location}</h4>`;
 }
 async function showComments(event){
     // console.log(event.target);
@@ -649,6 +656,7 @@ async function renderStart(){
         setFollowers();
         setFollowing();
         setHatts();
+        setLocation();
         // getProfilePic2();
     } else {
         $("#main").hide();

@@ -170,6 +170,7 @@ $("#loginBtn").click(async function(event){
 
 window.onload = function() {
     updateLocalStorage();
+    renderStart();
 };
 
 async function updateLocalStorage(){

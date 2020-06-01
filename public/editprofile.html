@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2|Prompt&display=swap" rel="stylesheet">
+    <link rel="icon" 
+      type="image/png" 
+      href="./assets/svg/Hat-small.svg">
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+
+    <title>Hatter - Signup</title>
+</head>
+<script>
+$(document).ready( async function(){
+  let file;
+
+  //file size validation
+  $(':file').on('change', function () {
+    file = this.files[0];
+    if (file.size > 1024 * 1 * 1000) {
+      alert('max upload size is 1k');
+      $(':file').val('');
+    }
+  });
+
+  $('#submitUserBtn').click( async function(event) {
+    event.preventDefault();
+    
+    const username= $('#inputUsername').val();
+    const email = $('#inputEmail').val();
+    const password = $('#inputPassword').val();
+    const location = $('#inputLocation').val();
+  
+    if (username == '' || email == '' || password == '') {
+      alert('missing fields!');
+      return false;
+    }
+
+    let fd = new FormData();
+    fd.append('name', username);
+    fd.append('email', email);
+    fd.append('password', password);
+    fd.append('location', location);
+    fd.append('avatar', file);
+
+
+    //let apiResult = await $.post( '/api/addUser', myUser );
+
+    let apiResult = await $.ajax({
+          // Your server script to process the upload
+          url: '/api/addUser',
+          type: 'POST',
+
+          // Form data
+          data: fd,
+
+          // Tell jQuery not to process data or worry about content-type
+          // You *must* include these options!
+          cache: false,
+          contentType: false,
+          processData: false,
+
+          // Custom XMLHttpRequest
+          xhr: function () {
+            var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) {
+              // For handling the progress of the upload
+              myXhr.upload.addEventListener('progress', function (e) {
+                if (e.lengthComputable) {
+                  $('progress').attr({
+                    value: e.loaded,
+                    max: e.total,
+                  });
+                }
+              }, false);
+            }
+            return myXhr;
+          }
+    });
+    if( apiResult.response == 'OK' ) {
+      // registration worked! redirect to the main page 
+      //alert("user created");
+      window.location.href = '/index.html';
+    } else {
+      alert("email already exists!");
+    }
+  });
+});
+
+</script>
+<body>
+
+    <div class="signup-main">
+      <div class="row row-signup">
+        <div class="signup-container col-lg-6 col-sm-12">
+          <div class="signup-form col-12 col-sm-12">
+            <div class="signup-header">
+                <h2>Signup for hatter</h2>
+            </div>
+            <form enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="inputUsername">Username</label>
+                  <input type="text" class="form-control" id="inputUsername" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+                  </div>
+                <div class="form-group">
+                  <label for="inputPassword">Create Password</label>
+                  <input type="password" class="form-control" id="inputPassword" placeholder="Enter Password">
+                </div>
+                <div class="form-group">
+                    <label for="inputLocation">Location</label>
+                    <input type="text" class="form-control" id="inputLocation" placeholder="optional">
+                  </div>
+                <div class="form-group">
+                    <label for="inputLocation">Profile Picture</label>
+                    <input type="file" id="file" name="avatar" />
+                </div>  
+                <button id='submitUserBtn' type="submit" class="btn btn-primary">Create Account</button>
+              </form>
+            </div>
+        </div>
+        <div class="signup-logo-container col-lg-6 col-sm-12">
+          
+            <div class="signup-hat-icon">
+                <img src="./assets/svg/Hat-xl.svg" alt="top-hat">
+            </div>
+            <div class="signup-welcome-heading-text">
+                hatter
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    
+   
+</body>
+</html>

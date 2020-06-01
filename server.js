@@ -48,6 +48,11 @@ app.get('/:username/', (req,res) => {
     res.end(readFile);
 })
 
+app.get('/edit_profile/:username', (req,res) => {   
+    const readFile = fs.readFileSync('./public/index.html', 'utf8');
+    res.end(readFile);
+})
+
 app.post('/api/addHatt',async ( req,res)=>{
     // console.log(req.body);
     const result = await orm.addHatt(req.body);

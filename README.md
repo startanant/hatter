@@ -1,5 +1,7 @@
 # Hatter
-hatter chatting application
+A social media app that lets you interact with your friends.
+
+![Hatter](/public/assets/hatter.png)
 
 # Installation
 - Run npm install
@@ -7,3 +9,6 @@ hatter chatting application
 DB_PWD=password
 - Run the app 
 ```node app.js```
+
+# Demo
+[Heroku](https://hatter.herokuapp.com/)

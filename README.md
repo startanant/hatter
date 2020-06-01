@@ -8,7 +8,7 @@ A social media app that lets you interact with your friends.
 - Create a .env file with your db password.
 DB_PWD=password
 - Run the app 
-```node app.js```
+```node server.js```
 
 # Demo
-[Heroku](https://hatter.herokuapp.com/)
+The app is deployed to [Heroku](https://hatter.herokuapp.com/).
